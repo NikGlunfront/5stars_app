@@ -1,0 +1,219 @@
+.s5-game {
+    padding: 2.2rem 0.8rem;
+    margin-bottom: 2.3rem;
+
+    &__bets {
+        @include flex_row;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 3.2rem;
+        cursor: pointer;
+
+        &._locked {
+            pointer-events: none;
+        }
+    }
+
+    &__bet {
+        flex: 0 0 calc((100% - 4rem) / 3);
+        border-radius: 0.5rem;
+        background-color: #EFEEF4;
+        color: rgba($color: #000000, $alpha: 0.4);
+        font-weight: 500;
+        font-size: 2.4rem;
+        line-height: 3.4rem;
+        padding: 0 1rem;
+        @include flex_row;
+        align-items: center;
+        justify-content: center;
+        
+        &::before {
+            content: "";
+            display: block;
+            margin-right: 0.5rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            flex: 0 0 2.5rem;
+            background-image: url('../../../assets/img/icons/game/bet.png');
+            background-repeat: no-repeat;
+            background-size: contain;
+            transform: translate(0, -0.1rem);
+            filter: grayscale(1);
+        }
+
+        &._active {
+            background-color: #2CAFFD;
+            color: var(--s5-white-color);
+
+            &::before {
+                background-image: url('../../../assets/img/icons/game/bet_active.png');
+                background-repeat: no-repeat;
+                background-size: contain;
+                filter: unset;
+            }
+        }
+    }
+
+    &__text {
+        font-size: 1.8rem;
+        text-align: center;
+        
+        p {
+            span {
+                margin-left: 1rem;
+                font-weight: 700;
+
+                &::before {
+                    content: "";
+                    display: inline-block;
+                    width: 1.6rem;
+                    height: 1.6rem;
+                    margin-right: 0.2rem;
+                    background-image: url('../../../assets/img/icons/game/bet_active.png');
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    transform: translate(0, 0.1rem);
+                }
+
+                &:not(._win) {
+                    &::before {
+                        filter: grayscale(1);
+                    }
+                }
+            }
+        }
+    
+    }
+
+    &__btn {
+        width: 100%;
+        line-height: 5rem;
+        background-color: #D6D4DF;
+        border-radius: 1.2rem;
+        text-align: center;
+        @include flex_row;
+        justify-content: center;
+        align-items: center;
+        color: var(--s5-white-color);
+        font-weight: 700;
+        cursor: pointer;
+        position: relative;
+        margin-top: 2rem;
+        pointer-events: none;
+
+        &._active {
+            pointer-events: all;
+            background-color: var(--s5-blue-color);
+            box-shadow: 0 0.4rem 1.6rem 0 var(--s5-blue-color);
+        }
+
+        & > div {
+            padding-left: calc(5rem + 2rem);
+        }
+
+        span {
+            @include flex_row;
+            align-items: center;
+            margin-left: 2rem;
+            flex: 0 0 5rem;
+            opacity: 1;
+            visibility: visible;
+
+            &._hidden {
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            svg {
+                width: 1.4rem;
+                height: 1.4rem;
+                margin-right: 0.5rem;
+                transform: translate(0, -0.1rem);
+            }
+        }
+    }
+}
+
+
+.stars-s5-game {
+    margin-bottom: 2.5rem;
+
+    &__bet {
+        @include flex_row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__star {
+        position: relative;
+        flex: 0 0 calc((100% - 2rem) / 5);
+        width: calc((100% - 2rem) / 5);
+        cursor: pointer;
+
+        span {
+            display: none;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            width: 2.8rem;
+            height: 2.8rem;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            color: var(--s5-white-color);
+            background-color: #2CAFFD;
+            font-size: 1.6rem;
+            font-weight: 500;
+            line-height: 1;
+        }
+
+        svg {
+            width: 100%;
+            object-fit: contain;
+        }
+
+        &._active {
+
+            svg {
+                fill: #918F9C;
+                
+                path {
+                    fill: #918F9C;
+                }
+            }
+
+            span {
+                @include flex_row;
+            }
+        }
+
+        &._result {
+            span {
+                @include flex_row;
+                background-color: var(--s5-white-color);
+                color: var(--s5-black-color);
+            }
+
+            &._win {
+                svg {
+                    fill: rgba($color: #FF9306, $alpha: 0.3);
+                    
+                    path {
+                        fill: rgba($color: #FF9306, $alpha: 0.3);
+                    }
+                }
+
+                &._active {
+                    svg {
+                        fill: #FF9306;
+                        
+                        path {
+                            fill: #FF9306;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}

@@ -1,0 +1,46 @@
+// PreBuild
+@import './utils/mixins';
+@import './utils/utils';
+@import './utils/reset';
+@import './utils/fonts';
+@import './common.scss';
+
+html {
+    font-size: 62.5%;
+    // font-size: 2.778vw;
+    @media screen and (min-width: 700px) {
+        font-size: 62.5% !important;
+    }
+}
+
+.s5-app {
+    // height: 100vh;
+    width: 100vw;
+    // height: var(--tg-viewport-height);
+    min-height: 100vh;
+    @include flex_col;
+    // overflow: hidden;
+    background-color: var(--s5-background-color);
+    font-size: 1.6rem;
+    line-height: 1.2;
+    font-family: $font;
+
+    &__container {
+        flex: 1;
+        background-image: url(../assets/img/5s_bckg.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center -7%;
+    }
+
+    &__content {
+        padding: 0 1.5rem;
+    }
+}
+
+
+
+// COMPONENTS
+@import './components/Star/style.scss';
+@import './components/FairGame/style.scss';
+@import './components/Game/style.scss';

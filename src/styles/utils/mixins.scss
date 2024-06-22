@@ -1,0 +1,59 @@
+@mixin mq ($breakpoint) {
+    @if $breakpoint==1200 {
+        @media only screen and (max-width: 1200px) {
+            @content;
+        }
+    }
+    @if $breakpoint==992 {
+        @media only screen and (max-width: 992px) {
+            @content;
+        }
+    }
+    @if $breakpoint==768 {
+        @media only screen and (max-width: 768px) {
+            @content;
+        }
+    }
+    @if $breakpoint==576 {
+        @media only screen and (max-width: 576px) {
+            @content;
+        }
+    }
+}
+
+@mixin flex_row {
+    display: flex;
+}
+@mixin flex_col {
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin hover {
+    @media screen and (min-width: 993px) {
+        &:hover {
+            @content;
+        }
+    }
+}
+
+@mixin track-styles {
+    appearance: none;
+    background: transparent;
+    border: transparent;
+}
+
+@mixin thumb-styles {
+    appearance: none;
+    pointer-events: all;
+    width: 2.2rem;
+    height: 3rem;
+    border-radius: 0px;
+    border: 0 none;
+    cursor: grab;
+    background-color: red;
+
+    &:active {
+        cursor: grabbing;
+    }
+}
