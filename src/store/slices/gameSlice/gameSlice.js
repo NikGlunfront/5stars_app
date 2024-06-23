@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-    betAmount: 0,
+    betAmount: 10,
     betMultiply: 5,
     pickedStars: [],
     isGameFinished: false,

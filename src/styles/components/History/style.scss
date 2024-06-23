@@ -1,0 +1,257 @@
+.history-page {
+    padding: 0 1.5rem;
+
+    .history-list {
+        .history-item {
+            &:last-child {
+                .history-item__info {
+                    border-bottom: none;
+                }
+            }
+        }
+    }
+}
+
+.history-item {
+    @include flex_row;
+    align-items: center;
+    width: 100%;
+
+    &.history-item_game_result {
+        .history-item__spend {
+            .history-game-result-star {
+                &::after {
+                    content: "";
+                    position: absolute;
+                    width: 0.6rem;
+                    height: 0.6rem;
+                    border-radius: 50%;
+                    background-color: var(--s5-blue-color);
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);
+                }
+            }
+        }
+        .history-item__img {
+            & > span {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                border-radius: 50%;
+                border-radius: 2.6rem;
+                height: 2rem;
+                padding: 0 0.3rem;
+                line-height: 2rem;
+                font-size: 1.2rem;
+                font-weight: 500;
+                text-align: center;
+                @include flex_row;
+                align-items: center;
+                min-width: 2rem;
+                justify-content: center;
+                background-color: var(--s5-white-color);
+            }
+
+            &._win {
+                & > svg {
+                    fill: #FF9306;
+
+                    path {
+                        fill: #FF9306;
+                    }
+                }
+            }
+        }
+    }
+
+    &__img {
+        margin-right: 1rem;
+        flex: 0 0 4rem;
+        height: 4rem;
+        width: 4rem;
+        position: relative;
+
+        img, svg {
+            object-fit: contain;
+        }
+    }
+
+    &__info {
+        padding: 0.7rem 0;
+        border-bottom: 0.1rem solid #D9D9D9;
+        flex: 1;
+        @include flex_row;
+        align-items: center;
+    }
+
+    &__left {
+        margin-right: auto;
+    }
+
+    &__topper {
+        margin-bottom: 0.8rem;
+    }
+
+    &__stars {
+        @include flex_row;
+    }
+
+    &__changes {
+        @include flex_row;
+        margin-bottom: 0.8rem;
+        flex-wrap: wrap;
+        align-items: center;
+        font-size: 1.2rem;
+
+        .history-game-result-star {
+            transform: translate(0, -0.2rem);
+        }
+    }
+
+    &__spend {
+        @include flex_row;
+        align-items: center;
+        margin-right: 1rem;
+        font-weight: 500;
+    }
+
+    &__profit {
+        @include flex_row;
+        align-items: center;
+        font-weight: 500;
+
+        svg {
+            margin-right: 0.3rem;
+        }
+    }
+
+    &__date {
+        font-size: 1.2rem;
+        font-weight: 400;
+        line-height: 1.4rem;
+        color: #8F8BA2;
+    }
+
+    &__benefits {
+        @include flex_row;
+        align-items: center;
+        font-size: 1.2rem;
+        color: #918F9C;
+        margin-left: 1rem;
+
+        & > span {
+            margin-right: 0.3rem;
+        }
+    }
+
+    &__right {
+        margin-left: 1rem;
+
+        & > div {
+            @include flex_row;
+            align-items: center;
+            font-size: 1.6rem;
+            line-height: 1.8rem;
+            font-weight: 500;
+            
+            &::after {
+                content: "";
+                display: block;
+                margin-left: 0.5rem;
+                flex: 0 0 1.8rem;
+                width: 1.8rem;
+                height: 1.8rem;
+                background-image: url('../../../assets/img/icons/game/bet_star_orange.svg');
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position: center;
+                transform: translate(0, -0.2rem);
+            }
+        }
+    }
+
+    &__win {
+        color: #65CFA2;
+    }
+    
+    &__lose {
+        color: #CC5C5C;
+    }
+}
+
+.history-game-result-star {
+    @include flex_row;
+    align-items: center;
+    justify-content: center;
+    width: 1.4rem;
+    height: 1.4rem;
+    flex: 0 0 1.4rem;
+    margin-right: 0.3rem;
+    background-image: url('../../../assets/img/icons/game/bet_star.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    opacity: 0.3;
+    position: relative;
+
+    &._active {
+        opacity: 1;
+
+        &._win {
+            opacity: 1;
+        }
+    }
+
+    &._win {
+        opacity: 0.4;
+        background-image: url('../../../assets/img/icons/game/bet_star_orange.svg');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+    }
+}
+
+.affilate-page {
+    padding: 0 1.5rem;
+
+    .history-item {
+        &:last-child {
+            .history-item__info {
+                border-bottom: none;
+            }
+        }
+    }
+    .history-game-result-star._win {
+        background-image: url('../../../assets/img/icons/game/bet_star_green.svg');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+    }
+    .history-item__right > div::after {
+        background-image: url('../../../assets/img/icons/game/bet_star_green.svg');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+    }
+
+    .history-item__benefits {
+        margin-left: 0;
+    }
+
+    .history-item__affilate-profit {
+        @include flex_row;
+        align-items: center;
+        margin-left: 1rem;
+
+        & > span {
+            font-weight: 700;
+            margin-right: 0.3rem;
+        }
+
+        & > div {
+            color: #918F9C;
+        }
+    }
+}

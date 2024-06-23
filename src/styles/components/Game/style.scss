@@ -9,6 +9,17 @@
         margin-bottom: 3.2rem;
         cursor: pointer;
 
+        &:focus, &:focus-visible, &:focus-within, &:active, &:target, &:hover {
+            background: transparent !important;
+            outline: none !important;
+            -webkit-user-select: none; /* Chrome/Safari */ 
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+ */
+            -o-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent; /* for removing the highlight */
+        }
+
         &._locked {
             pointer-events: none;
         }
@@ -26,6 +37,16 @@
         @include flex_row;
         align-items: center;
         justify-content: center;
+
+        &:focus, &:focus-visible, &:focus-within, &:active, &:target, &:hover {
+            outline: none !important;
+            -webkit-user-select: none; /* Chrome/Safari */ 
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+ */
+            -o-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent; /* for removing the highlight */
+        }
         
         &::before {
             content: "";
@@ -104,7 +125,7 @@
         &._active {
             pointer-events: all;
             background-color: var(--s5-blue-color);
-            box-shadow: 0 0.4rem 1.6rem 0 var(--s5-blue-color);
+            // box-shadow: 0 0.4rem 1.6rem 0 var(--s5-blue-color);
         }
 
         & > div {
@@ -148,6 +169,18 @@
         flex: 0 0 calc((100% - 2rem) / 5);
         width: calc((100% - 2rem) / 5);
         cursor: pointer;
+        background: transparent !important;
+        
+        &:focus, &:focus-visible, &:focus-within, &:active, &:target, &:hover {
+            background: transparent !important;
+            outline: none !important;
+            -webkit-user-select: none; /* Chrome/Safari */ 
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* IE10+ */
+            -o-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent; /* for removing the highlight */
+        }
 
         span {
             display: none;

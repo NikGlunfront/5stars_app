@@ -1,11 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import starImageDef from '../../assets/img/logo/5s_logo.png'
+import starImageGreen from '../../assets/img/logo/5s_logo_green.png'
 import Modal from '../UI/Modal/Modal';
+import { useLocation, useNavigate } from 'react-router-dom';
+import TitleAffilate from './Titles/TitleAffilate';
+import TitleHistory from './Titles/TitleHistory';
 
 const Star = ({
 
 }) => {
     const [isModalActive, setIsModalActive] = useState(false)
+    const [isShareActive, setIsShareActive] = useState(false)
+    const navigate = useNavigate()
+    const location = useLocation()
+
+    useEffect(() => {
+        if (location.pathname === '/') {
+            setIsShareActive(true)
+        } else {
+            setIsShareActive(false)
+        }
+    }, [location])
 
     const openModal = () => {
         setIsModalActive(true)
@@ -14,14 +29,20 @@ const Star = ({
     return (
         <div className='star-topper'>
             <div className="star-topper__actions">
-                <div className="star-topper__share">
-                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M12.4615 7.76566V8.68163C12.4615 10.9299 10.9626 12.4288 8.71431 12.4288H4.21773C1.96944 12.4288 0.470581 10.9299 0.470581 8.68163V7.76566" stroke="black" stroke-width="0.923077" stroke-linecap="square" stroke-linejoin="round"/>
-<path d="M3.33191 3.35401L6.07249 0.613432C6.275 0.41092 6.60275 0.41092 6.8046 0.613432L9.54518 3.35401" stroke="black" stroke-width="0.923077" stroke-linecap="square" stroke-linejoin="round"/>
-<path d="M6.43365 1.10403L6.43832 8.30256" stroke="black" stroke-width="0.923077" stroke-linecap="square" stroke-linejoin="round"/>
-</svg>
+                {isShareActive
+                    ?
+                        <div className="star-topper__share">
+                            {/* <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.4615 7.76566V8.68163C12.4615 10.9299 10.9626 12.4288 8.71431 12.4288H4.21773C1.96944 12.4288 0.470581 10.9299 0.470581 8.68163V7.76566" stroke="black" strokeWidth="0.923077" strokeLinecap="square" strokeLinejoin="round"/>
+                                <path d="M3.33191 3.35401L6.07249 0.613432C6.275 0.41092 6.60275 0.41092 6.8046 0.613432L9.54518 3.35401" stroke="black" strokeWidth="0.923077" strokeLinecap="square" strokeLinejoin="round"/>
+                                <path d="M6.43365 1.10403L6.43832 8.30256" stroke="black" strokeWidth="0.923077" strokeLinecap="square" strokeLinejoin="round"/>
+                            </svg> */}
+                            53
+                        </div>
 
-                </div>
+                    :
+                        <div className="star-topper__return" onClick={() => navigate(-1)}>Back</div>
+                }
                 <div className="star-topper__balance" onClick={openModal}>
                     <span>
                         500
@@ -40,38 +61,44 @@ const Star = ({
                     <ul>
                         <li onClick={() => setIsModalActive(false)}><div>
                         <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M13.7886 13.7886C16.3272 11.2499 16.3272 7.13482 13.7886 4.59618C11.2499 2.05755 7.13482 2.05755 4.59619 4.59618C2.05756 7.13482 2.05756 11.2499 4.59619 13.7886C7.13482 16.3272 11.2499 16.3272 13.7886 13.7886Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M7.14969 11.2351H11.2352V7.1496" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M10.7244 10.7245L4.59614 4.59622" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.7886 13.7886C16.3272 11.2499 16.3272 7.13482 13.7886 4.59618C11.2499 2.05755 7.13482 2.05755 4.59619 4.59618C2.05756 7.13482 2.05756 11.2499 4.59619 13.7886C7.13482 16.3272 11.2499 16.3272 13.7886 13.7886Z" stroke="black" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M7.14969 11.2351H11.2352V7.1496" stroke="black" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M10.7244 10.7245L4.59614 4.59622" stroke="black" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
 
                         Add stars
                         </div></li>
                         <li onClick={() => setIsModalActive(false)}><div>
                         <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M13.7886 4.59622C16.3272 7.13486 16.3272 11.25 13.7886 13.7886C11.2499 16.3272 7.13482 16.3272 4.59619 13.7886C2.05756 11.25 2.05756 7.13486 4.59619 4.59622C7.13482 2.05759 11.2499 2.05759 13.7886 4.59622Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M7.14969 7.14969H11.2352V11.2352" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M10.7244 7.66031L4.59614 13.7886" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.7886 4.59622C16.3272 7.13486 16.3272 11.25 13.7886 13.7886C11.2499 16.3272 7.13482 16.3272 4.59619 13.7886C2.05756 11.25 2.05756 7.13486 4.59619 4.59622C7.13482 2.05759 11.2499 2.05759 13.7886 4.59622Z" stroke="black" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M7.14969 7.14969H11.2352V11.2352" stroke="black" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M10.7244 7.66031L4.59614 13.7886" stroke="black" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
 
                         Withdraw
                         </div></li>
                         <li onClick={() => setIsModalActive(false)}><div>
                         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M0.692383 12.0257V2.02571C0.692383 1.28905 1.28905 0.692383 2.02571 0.692383H8.80703C9.16037 0.692383 9.4997 0.833049 9.7497 1.08305L12.3017 3.63504C12.5517 3.88504 12.6924 4.22438 12.6924 4.57771V12.0257C12.6924 12.7624 12.0957 13.359 11.359 13.359H2.02571C1.28905 13.359 0.692383 12.7624 0.692383 12.0257Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M12.6925 4.69243H10.6925C9.9558 4.69243 9.35913 4.09576 9.35913 3.3591V1.3591" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M4.02563 4.69243H6.02563" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M4.02563 7.35903H8.69229" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M4.02563 10.0257H8.69229" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0.692383 12.0257V2.02571C0.692383 1.28905 1.28905 0.692383 2.02571 0.692383H8.80703C9.16037 0.692383 9.4997 0.833049 9.7497 1.08305L12.3017 3.63504C12.5517 3.88504 12.6924 4.22438 12.6924 4.57771V12.0257C12.6924 12.7624 12.0957 13.359 11.359 13.359H2.02571C1.28905 13.359 0.692383 12.7624 0.692383 12.0257Z" stroke="black" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M12.6925 4.69243H10.6925C9.9558 4.69243 9.35913 4.09576 9.35913 3.3591V1.3591" stroke="black" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M4.02563 4.69243H6.02563" stroke="black" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M4.02563 7.35903H8.69229" stroke="black" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M4.02563 10.0257H8.69229" stroke="black" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
 
                         Rules
                         </div></li>
                     </ul>
                 </Modal>
             </div>
-            <div className="intro-star-topper">
-                <img src={starImageDef} alt="5star" />
+            <div className={"intro-star-topper" + (isShareActive ? ' _home' : '')}>
+                <img src={location.pathname.includes('affilate') ? starImageGreen : starImageDef} alt="5star" />
+                {location.pathname.includes('history') &&
+                    <TitleHistory />
+                }
+                {location.pathname.includes('affilate') &&
+                    <TitleAffilate />
+                }
                 <div className="intro-star-topper__title">
                     <span>5</span>
                     <span>STARS</span>

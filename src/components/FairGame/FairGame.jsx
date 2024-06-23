@@ -29,7 +29,7 @@ const FairGame = ({
                 </div>
             </BoxWrapper>
 
-            <BoxWrapper className={'box-btn'}>
+            <BoxWrapper className={'box-btn'} linkPath={'/history'}>
                 <div className="box-btn__img _grey">
                     <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M15.75 7H4.75" stroke="black" strokeLinecap="square" strokeLinejoin="round"/>
@@ -43,7 +43,7 @@ const FairGame = ({
                 <div className="box-btn__text">History</div>
             </BoxWrapper>
 
-            <BoxWrapper className={'box-btn'}>
+            <BoxWrapper className={'box-btn'} linkPath={'/affilate'}>
                 <div className="box-btn__img _orange">20%</div>
                 <div className="box-btn__text">Affiliate program</div>
                 <div className="box-btn__subinfo">
