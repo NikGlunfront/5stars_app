@@ -4,6 +4,7 @@
         color: var(--s5-grey-color);
         text-transform: uppercase;
         padding: 0.5rem 0;
+        padding-left: 1.5rem;
     }
 }
 
@@ -35,6 +36,12 @@
         }
 
         &._result {
+            background-color: #DAF3E1;
+
+            &::after {
+                background-color: #DAF3E1;
+            }
+            
             .hash-box__details {
                 p {
                     color: var(--s5-black-color);

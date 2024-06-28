@@ -1,0 +1,117 @@
+.withdraw-page {
+    .field-withdraw {
+        &:first-child {
+            padding-top: 0;
+        }
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+}
+
+.field-withdraw {
+    border-bottom: 0.2rem solid #D4D3D9;
+    padding: 2.6rem 1.5rem 1rem;
+    width: 100%;
+
+    &__topper {
+        font-size: 1.5rem;
+        @include flex_row;
+        align-items: center;
+
+        & > div {
+            &:first-child {
+                padding-left: 3.5rem;
+                position: relative;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 49%;
+                    left: 0;
+                    width: 2.6rem;
+                    height: 2.6rem;
+                    background-image: url('../../../assets/img/icons/game/bet_star_orange.svg');
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    background-position: center;
+                    transform: translate(0, -50%);
+                }
+            }
+            
+            &:not(:first-child) {
+                margin-left: auto;
+
+                span {
+                    font-size: 1.5rem;
+                    &:first-child {
+                        color: var(--s5-blue-color);
+                    }
+
+                    &:last-child {
+                        position: relative;
+                        display: inline-block;
+                        margin-left: 0.2rem;
+                        color: #8F8BA2;
+
+                        &::before {
+                            content: "";
+                            display: inline-block;
+                            width: 1.4rem;
+                            height: 1.4rem;
+                            background-image: url('../../../assets/img/icons/game/bet_star.svg');
+                            background-repeat: no-repeat;
+                            background-size: contain;
+                            background-position: center;
+                            margin-right: 0.2rem;
+                            transform: translate(0, 0.1rem);
+                        }
+                    }
+                }
+            }
+        }
+        &._ton > div {
+            &:first-child {
+                &::before {
+                    background-image: url('../../../assets/img/icons/ton_coin.svg');
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    background-position: center;
+                    transform: translate(0, -50%);
+                }
+            }
+        }
+    }
+
+    &__input {
+        font-size: 4rem;
+        font-weight: 500;
+        position: relative;
+        margin: 1rem 0 0;
+        @include flex_row;
+        width: 100%;
+
+        input,
+        div.field-withdraw__num {
+            font-size: 4rem;
+            font-weight: 500;
+            padding-right: 10rem;
+            flex: 1;
+            max-width: 100%;
+        }
+
+        & > span {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform: translate(0, -50%);
+            color: #8F8BA2;
+        }
+    }
+
+    &__rate {
+        font-size: 1.3rem;
+        line-height: 1.5rem;
+        color: #8F8BA2;
+    }
+}

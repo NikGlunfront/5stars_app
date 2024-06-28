@@ -3,6 +3,7 @@ import BoxWrapper from '../Wrappers/BoxWrapper';
 import StarsBet from './Stars/StarsBet';
 import { useStarGame } from '../../hooks/useStarGame';
 import StarsResult from './Stars/StarsResult';
+import airdropCoin from '../../assets/img/icons/airdrop_coin.svg'
 
 const bets = [
     {id: 1, val: 10},
@@ -71,7 +72,10 @@ const Game = ({
                     ?
                     <p>Find the Lucky Star</p>
                     :
-                    <p>You won <span className={gameResult > 0 ? '_win' : ''}>{gameResult}</span></p>
+                    <p>You won 
+                        <span className={gameResult > 0 ? '_win' : ''}>{gameResult}</span> 
+                        <span><img src={airdropCoin} alt="" />{gameResult * 5 + betAmount * pickedStars.length}</span>
+                    </p>
                 }
             </div>
             <div className={"s5-game__btn" + (pickedStars.length ? ' _active' : '')} onClick={playButtonHandler}>

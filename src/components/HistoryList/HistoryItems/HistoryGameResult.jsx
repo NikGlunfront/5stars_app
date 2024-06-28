@@ -45,13 +45,17 @@ const HistoryGameResult= ({
                             <div className={"history-game-result-star _active" + (gameResult > 0 ? " _win" : '')}></div>
                             {gameResult}
                         </div>
-                        <div className="history-item__benefits">
-                            <div className="history-game-result-star _active"></div>
-                            <span>{fee}</span>
-                            Service fee
-                        </div>
+                        {gameResult > 0 &&
+                            <div className="history-item__benefits">
+                                <div className="history-game-result-star _active"></div>
+                                <span>{fee}</span>
+                                Service fee
+                            </div>
+                        }
                     </div>
-                    <div className="history-item__date">{date}</div>
+                    <div className="history-item__date">
+                        <div>{date}</div>
+                    </div>
                 </div>
                 <div className="history-item__right">
                     {gameResult > 0
@@ -60,6 +64,7 @@ const HistoryGameResult= ({
                         :
                         <div className="history-item__lose">-{betAmount * bets.length}</div>
                     }
+                    <div className="history-item__airdrop">{'15 285'}</div>
                 </div>
             </div>
         </div>

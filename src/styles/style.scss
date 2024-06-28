@@ -25,6 +25,13 @@ html {
     line-height: 1.2;
     font-family: $font;
 
+    &._withdraw {
+        background-color: var(--s5-white-color);
+        .s5-app__container {
+            background-image: none;
+        }
+    }
+
     &__container {
         flex: 1;
         background-image: url(../assets/img/5s_bckg.png);
@@ -48,3 +55,6 @@ html {
 @import './components/FairGame/style.scss';
 @import './components/Game/style.scss';
 @import './components/History/style.scss';
+@import './components/AddStars/style.scss';
+@import './components/Withdraw/style.scss';
+@import './components/CheckWinNumber/style.scss';

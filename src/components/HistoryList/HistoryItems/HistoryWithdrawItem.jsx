@@ -19,7 +19,7 @@ const HistoryWithdrawItem= ({
             <div className="history-item__info">
                 <div className="history-item__left">
                     <div className="history-item__topper">
-                        Withdraw
+                        Transfer Lucky Stars
                     </div>
                     <div className="history-item__changes">
                         <div className="history-item__spend">

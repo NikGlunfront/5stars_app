@@ -84,17 +84,28 @@
                 margin-left: 1rem;
                 font-weight: 700;
 
-                &::before {
-                    content: "";
-                    display: inline-block;
-                    width: 1.6rem;
-                    height: 1.6rem;
-                    margin-right: 0.2rem;
-                    background-image: url('../../../assets/img/icons/game/bet_active.png');
-                    background-repeat: no-repeat;
-                    background-size: contain;
-                    transform: translate(0, 0.1rem);
+                &:first-child {
+                    &::before {
+                        content: "";
+                        display: inline-block;
+                        width: 1.6rem;
+                        height: 1.6rem;
+                        margin-right: 0.2rem;
+                        background-image: url('../../../assets/img/icons/game/bet_active.png');
+                        background-repeat: no-repeat;
+                        background-size: contain;
+                        transform: translate(0, 0.1rem);
+                    }
                 }
+
+                &:not(:first-child) {
+                    margin-left: 1.5rem;
+                    img {
+                        margin-right: 0.5rem;
+                        transform: translate(0, 0.1rem);
+                    }
+                }
+
 
                 &:not(._win) {
                     &::before {

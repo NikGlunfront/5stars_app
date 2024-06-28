@@ -14,6 +14,19 @@ export function useTelegram() {
         }
     }
 
+    const showTgButton = (text) => {
+        tg.MainButton.show()
+        tg.MainButton.text = text
+        disableTgButton()
+    }
+    const disableTgButton = () => {
+        tg.MainButton.disable()
+    }
+
+    const enableTgButton = () => {
+        tg.MainButton.enable()
+    }
+
     const sendDataToBot = (data) => {
         tg.sendData(data)
     }
@@ -48,6 +61,9 @@ export function useTelegram() {
         sendAlert,
         requestContact,
         requestConfirmation,
+        disableTgButton,
+        showTgButton,
+        enableTgButton,
         tg,
         user: tg.initDataUnsafe?.user,
         queryId: tg.initDataUnsafe?.query_id

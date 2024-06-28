@@ -1,16 +1,25 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setIsApplicationLoaded } from "../store/slices/appSlice/appSlice";
+import { setIsApplicationLoaded, setIsWithdrawPage } from "../store/slices/appSlice/appSlice";
 
 export function useApp() {
     const dispatch = useDispatch()
-    const { isLoaded } = useSelector(state => state.app)
+    const { 
+        isLoaded, 
+        isWithdrawPage 
+    } = useSelector(state => state.app)
 
     const setIsAppLoaded = (isLoaded) => {
         dispatch(setIsApplicationLoaded(isLoaded))
     }
 
+    const setIsWithDraw = (isTrue) => {
+        dispatch(setIsWithdrawPage(isTrue))
+    }
+
     return {
         setIsAppLoaded,
-        isLoaded
+        setIsWithDraw,
+        isLoaded,
+        isWithdrawPage
     }
 }

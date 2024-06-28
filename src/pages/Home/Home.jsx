@@ -6,7 +6,16 @@ import { useApp } from '../../hooks/useApp';
 const Home = ({
 
 }) => {
-    const { isLoaded } = useApp()
+
+    const {
+        setIsWithDraw,
+        isLoaded
+    } = useApp()
+    
+    useEffect(() => {
+        setIsWithDraw(false)
+    }, [])
+
 
     return (
         <div className='homepage'>

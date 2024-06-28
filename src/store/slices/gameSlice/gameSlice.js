@@ -40,19 +40,20 @@ export const gameSlice = createSlice({
             }
         },
         setNewResultNumber: (state, action) => {
+            let newNum = Math.floor(Math.random() * (5000 - 2500) + 2500) % 5
             return {
                 ...state,
-                resultNumber: Math.floor(Math.random() * (5 - 1) + 1)
+                resultNumber: newNum === 0 ? 5 : newNum
             }
         },
         playNewGame: (state, action) => {
-
+            let newNum = Math.floor(Math.random() * (5000 - 2500) + 2500) % 5
             return {
                 ...state,
                 isGameFinished: false,
                 gameResult: 0,
                 pickedStars: [],
-                resultNumber: Math.floor(Math.random() * (5 - 1) + 1)
+                resultNumber: newNum === 0 ? 5 : newNum
             }
         }
     }

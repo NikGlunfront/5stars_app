@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-    isLoaded: false
+    isLoaded: false,
+    isWithdrawPage: false
 }
 
 export const appSlice = createSlice({
@@ -12,11 +13,17 @@ export const appSlice = createSlice({
             return {
                 ...state, isLoaded: action.payload
             }
+        },
+        setIsWithdrawPage: (state, action) => {
+            return {
+                ...state, isWithdrawPage: action.payload
+            }
         }
     }
 })
 
 export const {
+    setIsWithdrawPage,
     setIsApplicationLoaded
 } = appSlice.actions
 

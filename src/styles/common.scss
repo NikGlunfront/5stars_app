@@ -3,13 +3,14 @@
     background-color: var(--s5-white-color);
     padding: 0.8rem;
     margin-bottom: 1.1rem;
+    display: block;
 
 
     &.box-btn {
         @include flex_row;
         align-items: center;
         font-size: 1.5rem;
-        padding-right: 4rem;
+        padding-right: 3rem;
         line-height: 1;
         cursor: pointer;
         background-image: url('../assets/img/icons/expand.svg');
@@ -34,7 +35,7 @@
 
             &._orange {
                 color: var(--s5-white-color);
-                background-color: var(--s5-dark-orange-color);
+                background-color: #918F9C;
             }
             &._grey {
                 background-color: var(--s5-dark-grey-color);
@@ -48,10 +49,15 @@
         &__subinfo {
             margin-left: auto;
             @include flex_row;
+            font-weight: 700;
             align-items: center;
 
-            svg {
-                margin-right: 0.5rem;
+            & > svg, 
+            & > img {
+                margin-left: 0.5rem;
+                width: 1.8rem;
+                height: 1.8rem;
+                transform: translate(0, -0.1rem);
             }
         }
     }

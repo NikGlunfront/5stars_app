@@ -13,6 +13,7 @@
         left: 0;
         width: 100%;
         padding: 1rem 1.5rem;
+        display: none;
     }
 
     &__share {
@@ -27,6 +28,8 @@
         font-weight: 700;
         font-size: 1.4rem;
         line-height: 2.5rem;
+        border-radius: 2rem;
+        background-color: var(--s5-white-color);
 
         svg {
 
@@ -36,15 +39,18 @@
     &__return {
         @include flex_row;
         align-items: center;
-        color: var(--s5-white-color);
+        color: var(--s5-black-color);
         font-weight: 400;
+        padding: 0 1rem;
+        border-radius: 2rem;
+        background-color: var(--s5-white-color);
 
         &::before {
             content: "";
             display: inline-block;
             width: 0.5rem;
             height: 0.9rem;
-            background-image: url('../../../assets/img/icons/expand_left_white.svg');
+            background-image: url('../../../assets/img/icons/expand_left.svg');
             background-repeat: no-repeat;
             background-size: contain;
             margin-right: 0.5rem;
@@ -52,6 +58,34 @@
     }
 
     &__balance {
+        padding: 0 1rem;
+        height: 2.5rem;
+        border-radius: 2rem;
+        background-color: var(--s5-white-color);
+        @include flex_row;
+        align-items: center;
+
+        &._airdrop {
+            & > span {
+                &::before {
+                    background-image: url('../../../assets/img/logo/5s_eye_logo.png');
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    transform: translate(0, 0.2rem);
+                }
+            }
+        }
+        &._affilate {
+            & > span {
+                &::before {
+                    background-image: url('../../../assets/img/logo/5s_logo_green.png');
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    transform: translate(0, 0.2rem);
+                }
+            }
+        }
+
         & > span {
             display: block;
             font-weight: 700;
@@ -62,10 +96,10 @@
                 margin-right: 0.5rem;
                 width: 1.6rem;
                 height: 1.6rem;
-                background-image: url('../../../assets/img/icons/game/bet_active.png');
+                background-image: url('../../../assets/img/icons/airdrop_coin.svg');
                 background-repeat: no-repeat;
                 background-size: contain;
-                transform: translate(0, 0.1rem);
+                transform: translate(0, 0.2rem);
             }
 
             svg {
@@ -79,8 +113,8 @@
     background-color: var(--s5-white-color);
     margin-bottom: auto;
     margin-left: auto;
-    margin-top: 0.7rem;
-    margin-right: 0.7rem;
+    margin-top: 0.9rem;
+    margin-right: 1.7rem;
     border-radius: 1.2rem;
     padding-right: 3rem;
     padding-top: 1.7rem;
@@ -125,7 +159,7 @@
     padding-top: 11.5rem;
     transition: $transition;
     transition-duration: 1s;
-    padding-bottom: 4rem;
+    padding-bottom: 2rem;
     position: relative;
     min-height: 12rem;
     // position: fixed;
@@ -135,6 +169,24 @@
 
     &:not(._home) {
         padding-bottom: 1.3rem;
+    }
+
+    & > p {
+        font-size: 1.3rem;
+        font-weight: 400;
+        color: #63727B;
+        line-height: 1.5rem;
+        padding-top: 1.5rem;
+        display: none;
+        img {
+            width: 1.5rem;
+            height: 1.5rem;
+            margin: 0 0.5rem;   
+        }
+
+        span {
+            color: var(--s5-blue-color);
+        }
     }
 
     img {
@@ -182,8 +234,15 @@
 
 .s5-app {
     &._inited {
+        .star-topper__actions {
+            @include flex_row;
+        }
         .intro-star-topper {
             padding-top: 2rem;
+
+            & > p {
+                display: block;
+            }
 
             &__title {
                 opacity: 0;
@@ -199,6 +258,98 @@
 .title-affilate {
     padding: 0 1.5rem;
     text-align: center;
+}
+
+.title-history {
+    margin-bottom: 1.5rem;
+    width: 100%;
+
+    &__stars {
+        @include flex_row;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 32rem;
+        margin: 1.5rem auto 1.5rem;
+
+        & > div {
+            position: relative;
+            padding-left: 3.2rem;
+            line-height: 2.8rem;
+            font-size: 2rem;
+            font-weight: 500;
+
+            .title-history__starimg {
+                background-image: url('../../../assets/img/icons/game/bet_star_orange.svg');
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position: left top;
+                width: 2.6rem;
+                height: 2.6rem;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+
+            &:nth-child(1) {
+                .title-history__starimg {
+                    background-image: url('../../../assets/img/icons/game/bet_star.svg');
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    background-position: left top;
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        top: 52%;
+                        left: 51%;
+                        border-radius: 50%;
+                        width: 1.2rem;
+                        height: 1.2rem;
+                        background-color: var(--s5-blue-color);
+                        transform: translate(-50%, -50%);
+                    }
+                }
+            }
+            &:nth-child(3) {
+                .title-history__starimg {
+                    background-image: url('../../../assets/img/icons/airdrop_coin.svg');
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    background-position: left top;
+                }
+            }
+        }
+    }
+
+
+    &__ton_btn {
+        width: 100%;
+        line-height: 5rem;
+        background-color: #D6D4DF;
+        border-radius: 1.2rem;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--s5-white-color);
+        font-weight: 700;
+        cursor: pointer;
+        position: relative;
+        margin-top: 2rem;
+        pointer-events: all;
+        background-color: var(--s5-blue-color);
+    }
+}
+
+.title-addstars {
+    text-align: center;
+
+    .intro-star-topper {
+        &__subtitle {
+            margin-bottom: 1rem;
+        }
+    }
 }
 
 .title-affilate {
@@ -227,7 +378,7 @@
         height: 4rem;
         margin: 1rem auto;
         border-radius: 0.8rem;
-        background-color: #FF9306;
+        background-color: #918F9C;
         @include flex_row;
         align-items: center;
         justify-content: center;
