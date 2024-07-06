@@ -2,7 +2,10 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
     isLoaded: false,
-    isWithdrawPage: false
+    isWithdrawPage: false,
+    mainBalance: 0,
+    airdropBalance: 0,
+    partnershipBalance: 0
 }
 
 export const appSlice = createSlice({
@@ -18,13 +21,31 @@ export const appSlice = createSlice({
             return {
                 ...state, isWithdrawPage: action.payload
             }
+        },
+        setMainBalance: (state, action) => {
+            return {
+                ...state, mainBalance: action.payload
+            }
+        },
+        setAirdropBalance: (state, action) => {
+            return {
+                ...state, airdropBalance: action.payload
+            }
+        },
+        setPartnershipBalance: (state, action) => {
+            return {
+                ...state, partnershipBalance: action.payload
+            }
         }
     }
 })
 
 export const {
     setIsWithdrawPage,
-    setIsApplicationLoaded
+    setIsApplicationLoaded,
+    setMainBalance,
+    setAirdropBalance,
+    setPartnershipBalance
 } = appSlice.actions
 
 export default appSlice.reducer

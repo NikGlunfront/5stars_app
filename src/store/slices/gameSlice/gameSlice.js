@@ -7,6 +7,9 @@ const initialState = {
     isGameFinished: false,
     resultNumber: 0,
     gameResult: 0,
+    hash_1: null,
+    hash_2: null,
+    game_id: 0
 }
 
 export const gameSlice = createSlice({
@@ -55,6 +58,21 @@ export const gameSlice = createSlice({
                 pickedStars: [],
                 resultNumber: newNum === 0 ? 5 : newNum
             }
+        },
+        setHash1: (state, action) => {
+            return {
+                ...state, hash_1: action.payload
+            }
+        },
+        setHash2: (state, action) => {
+            return {
+                ...state, hash_2: action.payload
+            }
+        },
+        setGameId: (state, action) => {
+            return {
+                ...state, game_id: action.payload
+            }
         }
     }
 })
@@ -65,7 +83,10 @@ export const {
     setIsGameFinished,
     calculateGameResults,
     playNewGame,
-    setNewResultNumber
+    setNewResultNumber,
+    setHash1,
+    setHash2,
+    setGameId
 } = gameSlice.actions
 
 export default gameSlice.reducer

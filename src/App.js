@@ -1,17 +1,17 @@
+import React, { createRef, useEffect } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.scss';
-import React, { createRef, useEffect, useState } from 'react'
 import Star from './components/Star/Star';
-import FairGame from './components/FairGame/FairGame';
-import Game from './components/Game/Game';
-import { useTelegram } from './hooks/useTelegram';
 import { useApp } from './hooks/useApp';
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
-import Home from './pages/Home/Home';
-import History from './pages/History/History';
-import Affilate from './pages/Affilate/Affilate';
+import { useScroll } from './hooks/useScroll';
+import { useTelegram } from './hooks/useTelegram';
 import AddStars from './pages/AddStars/AddStars';
-import Withdraw from './pages/Withdraw/Withdraw';
+import Affilate from './pages/Affilate/Affilate';
 import CheckWinNumber from './pages/CheckWinNumber/CheckWinNumber';
+import History from './pages/History/History';
+import Home from './pages/Home/Home';
+import Withdraw from './pages/Withdraw/Withdraw';
+import { useLoginUserQuery } from './store/services/starsGame';
 
 const routes = [
     {id: 1, path: '/', name: 'Home', element: <Home />, nodeRef: createRef()},
@@ -22,26 +22,41 @@ const routes = [
     {id: 6, path: '/check-win-num', name: 'CheckWinNumber', element: <CheckWinNumber />, nodeRef: createRef()},
 ]
 
+const telegramId = 658318611
+
 
 function App({
 
 }) {
     const {tg} = useTelegram();
     const { 
-        setIsAppLoaded, 
+        handleInitDataFetch,
         isLoaded,
         isWithdrawPage
     } = useApp();
+
+    const { scrollTop } = useScroll()
+
+    const { data: iniData, isLoading: isInitLoading, isError } = useLoginUserQuery(telegramId)
 
     useEffect(() => {
         tg.ready()
         tg.expand()
         tg.enableClosingConfirmation()
-        
-        setTimeout(() => {
-            setIsAppLoaded(true)
-        }, 2500);
     }, [])
+
+    useEffect(() => {
+        if (!isInitLoading) {
+            handleInitDataFetch(iniData)
+            console.log(iniData)
+        }
+    }, [isInitLoading])
+
+    if (isError) {
+        return (
+            <div>Ошибка подключения к серверу</div>
+        )
+    }
 
     return (
         <div 

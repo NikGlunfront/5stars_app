@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux"
-import { setBetAmount, setPickedStars } from "../store/slices/gameSlice/gameSlice"
+import { setBetAmount, setHash1, setHash2, setPickedStars } from "../store/slices/gameSlice/gameSlice"
 import { playNewGame } from "../store/slices/gameSlice/gameSlice"
 import { setNewResultNumber } from "../store/slices/gameSlice/gameSlice"
 import { calculateGameResults } from "../store/slices/gameSlice/gameSlice"
+import { setAirdropBalance, setIsApplicationLoaded, setMainBalance, setPartnershipBalance } from "../store/slices/appSlice/appSlice"
 
 export function useStarGame() {
     const dispatch = useDispatch()
@@ -13,6 +14,8 @@ export function useStarGame() {
         betMultiply,
         isGameFinished,
         resultNumber,
+        hash_1,
+        hash_2,
         gameResult
     } = useSelector(state => state.stargame)
 
@@ -43,18 +46,29 @@ export function useStarGame() {
         dispatch(playNewGame())
     }
 
+    const updateHash1 = (hash) => {
+        dispatch(setHash1(hash))
+    }
+    const updateHash2 = (hash) => {
+        dispatch(setHash2(hash))
+    }
+
 
     return {
         pickedStars,
         betAmount,
         betMultiply,
         isGameFinished,
+        resultNumber,
+        gameResult,
+        hash_1,
+        hash_2,
         handleStarClick,
         changeBet,
         calculateGame,
         createNewGame,
         initWinNum,
-        resultNumber,
-        gameResult
+        updateHash1,
+        updateHash2,
     }
 }

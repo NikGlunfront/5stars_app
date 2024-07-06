@@ -55,7 +55,7 @@
             width: 2.5rem;
             height: 2.5rem;
             flex: 0 0 2.5rem;
-            background-image: url('../../../assets/img/icons/game/bet.png');
+            background-image: url('../../../assets/img/icons/airdrop_coin.svg');
             background-repeat: no-repeat;
             background-size: contain;
             transform: translate(0, -0.1rem);
@@ -67,9 +67,9 @@
             color: var(--s5-white-color);
 
             &::before {
-                background-image: url('../../../assets/img/icons/game/bet_active.png');
-                background-repeat: no-repeat;
-                background-size: contain;
+                // background-image: url('../../../assets/img/icons/airdrop_coin.svg');
+                // background-repeat: no-repeat;
+                // background-size: contain;
                 filter: unset;
             }
         }

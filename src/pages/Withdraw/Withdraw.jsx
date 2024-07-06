@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { useTelegram } from "../../hooks/useTelegram";
 import { useApp } from "../../hooks/useApp";
+import { useLocation } from "react-router-dom";
+import { useScroll } from "../../hooks/useScroll";
 
 const Withdraw= ({
 
@@ -15,9 +17,16 @@ const Withdraw= ({
         setIsWithDraw,
         isWithdrawPage
     } = useApp()
+    
 
     const [starsAmount, setStarsAmount] = useState('')
     const [tonRate, setTonRate] = useState(0.067656)
+
+    const { scrollTop } = useScroll()
+    const location = useLocation()
+    useEffect(() => {
+        scrollTop()
+    }, [location.pathname])
 
     useEffect(() => {
         showTgButton('CONTINUE')

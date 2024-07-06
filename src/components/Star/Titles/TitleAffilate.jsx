@@ -35,8 +35,8 @@ const TitleAffilate= ({}) => {
             <div className="title-affilate__row">
                 <div>
                     <svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M15 5C15 7.76167 12.7617 10 10 10C7.23833 10 5 7.76167 5 5C5 2.23833 7.23833 0 10 0C12.7617 0 15 2.23833 15 5Z" fill="#2CAFFD"/>
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M20 18.3333C20 12.81 15.5233 10 10 10C4.47667 10 0 12.81 0 18.3333C0 25 20 25 20 18.3333Z" fill="#2CAFFD"/>
+                    <path fillRule="evenodd" clipRule="evenodd" d="M15 5C15 7.76167 12.7617 10 10 10C7.23833 10 5 7.76167 5 5C5 2.23833 7.23833 0 10 0C12.7617 0 15 2.23833 15 5Z" fill="#2CAFFD"/>
+                    <path fillRule="evenodd" clipRule="evenodd" d="M20 18.3333C20 12.81 15.5233 10 10 10C4.47667 10 0 12.81 0 18.3333C0 25 20 25 20 18.3333Z" fill="#2CAFFD"/>
                     </svg>
                     {'348'}
                 </div>

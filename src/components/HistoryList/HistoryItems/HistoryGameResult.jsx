@@ -32,7 +32,7 @@ const HistoryGameResult= ({
                     <div className="history-item__topper">
                         <div className="history-item__stars">
                             {betStars.map(star => (
-                                <div className={"history-game-result-star" + (bets.includes(star.id) ? ' _active' : '') + (star.id === winNumber ? ' _win' : '')}></div>
+                                <div key={star.id} className={"history-game-result-star" + (bets.includes(star.id) ? ' _active' : '') + (star.id === winNumber ? ' _win' : '')}></div>
                             ))}
                         </div>
                     </div>

@@ -1,7 +1,9 @@
-import React from "react"
+import React, { useEffect } from "react"
 import winNumber from '../../assets/img/icons/win_star.svg'
 import { useApp } from "../../hooks/useApp";
 import { useStarGame } from "../../hooks/useStarGame";
+import { useScroll } from "../../hooks/useScroll";
+import { useLocation } from "react-router-dom";
 
 const hashBits = [
     {bitName: 'B5', val: 181},
@@ -59,6 +61,12 @@ const CheckWinNumber= ({
         isGameFinished,
         resultNumber
     } = useStarGame()
+
+    const { scrollTop } = useScroll()
+    const location = useLocation()
+    useEffect(() => {
+        scrollTop()
+    }, [location.pathname])
 
     if (!isGameFinished) {
         return
@@ -137,12 +145,13 @@ const CheckWinNumber= ({
                     <span>ТАБЛИЦА</span>
                     {starTable.map(starRow => (
                         <div 
+                            key={starRow.number}
                             className={
                                 "table-win-number__row" + 
                                 (hashSum % 5 === starRow.number ? " _active" : "") +
                                 (hashSum % 5 - 1 === starRow.number ? " _active_prev" : "")
                             }
-                        Q>
+                        >
                             <span>{starRow.number} = </span>
                             <span>{starRow.winNumber}</span>
                         </div>
