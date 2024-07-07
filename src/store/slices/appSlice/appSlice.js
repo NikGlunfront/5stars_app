@@ -5,7 +5,8 @@ const initialState = {
     isWithdrawPage: false,
     mainBalance: 0,
     airdropBalance: 0,
-    partnershipBalance: 0
+    partnershipBalance: 0,
+    isPremium: false
 }
 
 export const appSlice = createSlice({
@@ -36,6 +37,11 @@ export const appSlice = createSlice({
             return {
                 ...state, partnershipBalance: action.payload
             }
+        },
+        setIsPremium: (state, action) => {
+            return {
+                ...state, isPremium: action.payload
+            }
         }
     }
 })
@@ -45,7 +51,8 @@ export const {
     setIsApplicationLoaded,
     setMainBalance,
     setAirdropBalance,
-    setPartnershipBalance
+    setPartnershipBalance,
+    setIsPremium
 } = appSlice.actions
 
 export default appSlice.reducer

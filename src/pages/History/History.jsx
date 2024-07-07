@@ -24,6 +24,7 @@ const History= ({
 
     return (
         <div className="history-page">
+            <div className="history-list-title">Full History</div>
             <HistoryList />
         </div>
     )

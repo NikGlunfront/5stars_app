@@ -1,8 +1,10 @@
 import React from "react"
+import { useApp } from "../../../hooks/useApp";
 
 const AffilateItemAdd= ({
     addStarsData
 }) => {
+    const {isPremium} = useApp()
     const {
         date,
         amount,
@@ -10,7 +12,7 @@ const AffilateItemAdd= ({
         fee
     } = addStarsData
     return (
-        <div className="history-item history-item_withdraw">
+        <div className="history-item history-item_add">
             <div className={"history-item__img"}>
                 <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="18.5" cy="18.5" r="18.5" fill="#E9FBEE"/>
@@ -20,24 +22,43 @@ const AffilateItemAdd= ({
             <div className="history-item__info">
                 <div className="history-item__left">
                     <div className="history-item__topper">
-                        Add stars
+                        Income
                     </div>
-                    <div className="history-item__changes">
-                        <div className="history-item__benefits">
-                            <div className="history-game-result-star _active"></div>
-                            <span>{fee}</span>
-                            Service fee
+                    {isPremium
+                        ?
+                        <div className="history-item__changes">
+                            <div className="history-item__benefits">
+                                <div className="history-game-result-star _active _win"></div>
+                                <span>{fee.toLocaleString()}</span>
+                            </div>
+                            <div className="history-item__affilate-profit">
+                                <div className="history-game-result-star _active _win _green"></div>
+                                <span>{(25000).toLocaleString()}</span>
+                                <div>Yours 50%</div>
+                            </div>
                         </div>
-                        <div className="history-item__affilate-profit">
-                            <div className="history-game-result-star _active _win"></div>
-                            <span>20</span>
-                            <div>Yours 20%</div>
+                        :
+                        <div className="history-item__changes">
+                            <div className="history-item__benefits">
+                                <div className="history-game-result-star _active _win"></div>
+                                <span>{fee.toLocaleString()}</span>
+                            </div>
+                            <div className="history-item__affilate-profit">
+                                <div className="history-game-result-coin _active _win"></div>
+                                <span>{(25000).toLocaleString()}</span>
+                                <div>Airdrop</div>
+                            </div>
                         </div>
-                    </div>
+                    }
                     <div className="history-item__date">{date}</div>
                 </div>
                 <div className="history-item__right">
-                    <div className="history-item__win">+{profit}</div>
+                    <div className={"history-item__win _coin" + (isPremium ? " _usdt" : '')}>
+                        +{profit.toLocaleString()}
+                        {isPremium &&
+                            <div className="history-item__airdrop">1 Star = $0.005</div>
+                        }
+                    </div>
                 </div>
             </div>
         </div>

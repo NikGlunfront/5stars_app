@@ -55,7 +55,7 @@
             width: 2.5rem;
             height: 2.5rem;
             flex: 0 0 2.5rem;
-            background-image: url('../../../assets/img/icons/airdrop_coin.svg');
+            background-image: url('../../../assets/img/icons/game/bet_star_orange.svg');
             background-repeat: no-repeat;
             background-size: contain;
             transform: translate(0, -0.1rem);
@@ -256,6 +256,12 @@
                         }
                     }
                 }
+            }
+        }
+
+        &._long {
+            span {
+                width: 3.8rem;
             }
         }
 

@@ -3,6 +3,11 @@ import BoxWrapper from '../Wrappers/BoxWrapper';
 import { useStarGame } from '../../hooks/useStarGame';
 import greenCoin from '../../assets/img/icons/airdrop_coin.svg'
 import { useApp } from '../../hooks/useApp';
+import greenPartnership from '../../assets/img/icons/green_partnership.svg'
+import premiumPartnership from '../../assets/img/icons/purple_partner.svg'
+import tokenList from '../../assets/img/icons/tokenlist.svg'
+import tokenListCount from '../../assets/img/icons/token_list_count.svg'
+import { useCalculateGameMutation } from '../../store/services/starsGame';
 
 const FairGame = ({
 
@@ -11,15 +16,21 @@ const FairGame = ({
         resultNumber,
         isGameFinished,
         hash_1,
-        hash_2
+        hash_2,
+        gameResult,
+        game_id,
+        pickedStars,
+        betAmount
     } = useStarGame()
     
     const [hash2String, setHash2String] = useState('')
     const [hash1String, setHash1String] = useState('')
+    const [calculateCurrentGame, { data , isLoading, error}] = useCalculateGameMutation()
 
     const {
         airdropBalance,
-        partnershipBalance
+        partnershipBalance,
+        isPremium
     } = useApp()
 
     useEffect(() => {
@@ -40,6 +51,16 @@ const FairGame = ({
         setHash1String(firstSub + "..." + lastSub)
     }, [hash_1])
 
+    const handleGameCalculate = () => {
+        // calculateCurrentGame({
+        //     game_id: game_id,
+        //     picked_stars: pickedStars,
+        //     bet_amount: betAmount
+        // })
+    }
+
+    useEffect(() => {console.log(data)}, [data, isLoading])
+
     return (
         <div className='fair-game'>
             <div className="fair-game__title">FAIR GAME</div>
@@ -47,7 +68,7 @@ const FairGame = ({
                 <div className={"hash-box__inner" + (isGameFinished ? ' _result' : '')} data-winnum={isGameFinished ? resultNumber : '?'}>
                     <div className="hash-box__hash">
                         <span>WIN NUMBER HASH</span>
-                        <p>{isGameFinished ? hash1String : hash2String}</p>
+                        <p>{isGameFinished ? hash2String : hash2String}</p>
                     </div>
                     <div className={"hash-box__details"}>
                         {isGameFinished
@@ -74,16 +95,28 @@ const FairGame = ({
 
                 </div>
             </BoxWrapper>
+            <BoxWrapper className={'box-btn'}>
+                <div className="box-btn__img _orange" onClick={handleGameCalculate}>
+                    <img src={tokenList} alt="tokenlist" />
+                </div>
+                <div className="box-btn__text">Tokenlist</div>
+                <div className="box-btn__subinfo">
+                    {1}
+                    <img src={tokenListCount} alt="tokenlist_count" />
+
+                </div>
+            </BoxWrapper>
 
             <BoxWrapper className={'box-btn'} linkPath={'/affilate'}>
-                <div className="box-btn__img _orange">20%</div>
-                <div className="box-btn__text">Partnership</div>
-                <div className="box-btn__subinfo">
-                    {partnershipBalance}
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M6.41961 0.973017C6.696 0.384523 7.52997 0.384524 7.80636 0.973018L9.25517 4.05782C9.3666 4.29507 9.59073 4.45901 9.84985 4.49278L13.2115 4.93091C13.8516 5.01434 14.1087 5.80606 13.6406 6.25218L11.1708 8.6057C10.9823 8.78536 10.8973 9.04869 10.9451 9.30521L11.5715 12.67C11.6904 13.3086 11.0163 13.7986 10.4491 13.486L7.48191 11.8506C7.25214 11.724 6.97383 11.724 6.74406 11.8506L3.7769 13.486C3.20966 13.7986 2.53556 13.3086 2.65445 12.67C2.84382 11.6383 2.98615 10.7495 3.24168 10.151C3.96567 9.08218 7.84116 7.67134 7.66665 7.44864C7.7134 7.24381 3.1565 8.26988 2.38992 7.84235L1.96404 7.58583L0.585408 6.25218C0.11726 5.80606 0.374368 5.01434 1.01448 4.93091L4.37612 4.49278C4.63524 4.45901 4.85937 4.29507 4.9708 4.05782L6.41961 0.973017Z" fill="#31B545"/>
+                <div className={"box-btn__img _green" + (isPremium ? ' _purple' : '')}>
+                    <img src={isPremium ? premiumPartnership : greenPartnership} alt="" />
+                </div>
+                <div className="box-btn__text">{isPremium ? "Premium Partner" : "Partnership"}</div>
+                <div className={"box-btn__subinfo" + (348 === 0 ? " _empty" : '')}>
+                    {348}
+                    <svg width="13" height="16" viewBox="0 0 13 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fillRule="evenodd" clipRule="evenodd" d="M6.5 6.5C8.29508 6.5 9.75 5.04508 9.75 3.25C9.75 1.45492 8.29508 0 6.5 0C4.70492 0 3.25 1.45492 3.25 3.25C3.25 5.04508 4.70492 6.5 6.5 6.5ZM6.5 6.5C2.90983 6.5 0 8.3265 0 11.9167C0 16.25 13 16.25 13 11.9167C13 8.3265 10.0902 6.5 6.5 6.5Z" fill="#2CAFFD"/>
                     </svg>
-
                 </div>
             </BoxWrapper>
         </div>

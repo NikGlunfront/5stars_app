@@ -16,6 +16,7 @@ export function useStarGame() {
         resultNumber,
         hash_1,
         hash_2,
+        game_id,
         gameResult
     } = useSelector(state => state.stargame)
 
@@ -57,6 +58,7 @@ export function useStarGame() {
     return {
         pickedStars,
         betAmount,
+        game_id,
         betMultiply,
         isGameFinished,
         resultNumber,

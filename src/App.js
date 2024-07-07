@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.scss';
 import Star from './components/Star/Star';
 import { useApp } from './hooks/useApp';
-import { useScroll } from './hooks/useScroll';
 import { useTelegram } from './hooks/useTelegram';
 import AddStars from './pages/AddStars/AddStars';
 import Affilate from './pages/Affilate/Affilate';
@@ -11,7 +10,7 @@ import CheckWinNumber from './pages/CheckWinNumber/CheckWinNumber';
 import History from './pages/History/History';
 import Home from './pages/Home/Home';
 import Withdraw from './pages/Withdraw/Withdraw';
-import { useLoginUserQuery } from './store/services/starsGame';
+import { useGetActiveGameQuery, useGetBalancesQuery, useLoginUserQuery } from './store/services/starsGame';
 
 const routes = [
     {id: 1, path: '/', name: 'Home', element: <Home />, nodeRef: createRef()},
@@ -32,12 +31,15 @@ function App({
     const { 
         handleInitDataFetch,
         isLoaded,
-        isWithdrawPage
+        isWithdrawPage,
+        updateAllBalances,
+        updateActiveGame,
+        changeIsPremium
     } = useApp();
 
-    const { scrollTop } = useScroll()
-
     const { data: iniData, isLoading: isInitLoading, isError } = useLoginUserQuery(telegramId)
+    const { data: balancesData, isLoading: isBalanceDataLoading, isError: isBalanceDataError } = useGetBalancesQuery(telegramId)
+    const { data: activeGame, isLoading: isActiveGameLoading, isError: isActiveGameError } = useGetActiveGameQuery(telegramId)
 
     useEffect(() => {
         tg.ready()
@@ -50,7 +52,21 @@ function App({
             handleInitDataFetch(iniData)
             console.log(iniData)
         }
-    }, [isInitLoading])
+    }, [iniData])
+
+    useEffect(() => {
+        if (iniData && balancesData && !isBalanceDataLoading) {
+            updateAllBalances(balancesData)
+            console.log(balancesData)
+        }
+    }, [isBalanceDataLoading, balancesData])
+
+    useEffect(() => {
+        if (iniData && activeGame && !isActiveGameLoading) {
+            updateActiveGame(activeGame)
+            console.log(activeGame)
+        }
+    }, [isActiveGameLoading, activeGame])
 
     if (isError) {
         return (

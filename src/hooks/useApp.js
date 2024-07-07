@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setAirdropBalance, setIsApplicationLoaded, setIsWithdrawPage, setMainBalance, setPartnershipBalance } from "../store/slices/appSlice/appSlice";
+import { setAirdropBalance, setIsApplicationLoaded, setIsPremium, setIsWithdrawPage, setMainBalance, setPartnershipBalance } from "../store/slices/appSlice/appSlice";
 import { setGameId, setHash2 } from "../store/slices/gameSlice/gameSlice";
 
 export function useApp() {
@@ -9,7 +9,8 @@ export function useApp() {
         isWithdrawPage,
         mainBalance,
         airdropBalance,
-        partnershipBalance
+        partnershipBalance,
+        isPremium
     } = useSelector(state => state.app)
 
     const setIsAppLoaded = (isLoaded) => {
@@ -26,6 +27,9 @@ export function useApp() {
     const changeAirdropBalance = (value) => {
         dispatch(setAirdropBalance(value))
     }
+    const changeIsPremium = (value) => {
+        dispatch(setIsPremium(value))
+    }
     const changePartnershipBalance = (value) => {
         dispatch(setPartnershipBalance(value))
     }
@@ -36,17 +40,21 @@ export function useApp() {
         changePartnershipBalance(balanceObject.partnership_balance|0)
     }
 
+    const updateActiveGame = (gameObj) => {
+        dispatch(setHash2(gameObj.hash2))
+        dispatch(setGameId(gameObj.game_id))
+    }
+
     const handleInitDataFetch = (iniData) => {
-        updateAllBalances(iniData.balance)
+        dispatch(setIsPremium(iniData.is_premium == 1 ? true : false))
         dispatch(setIsApplicationLoaded(true))
-        dispatch(setHash2(iniData.active_game.hash2))
-        dispatch(setGameId(iniData.active_game.game_id))
     }
 
     return {
         isLoaded,
         isWithdrawPage,
         mainBalance,
+        isPremium,
         airdropBalance,
         partnershipBalance,
         setIsAppLoaded,
@@ -55,6 +63,8 @@ export function useApp() {
         changeAirdropBalance,
         changePartnershipBalance,
         updateAllBalances,
-        handleInitDataFetch
+        handleInitDataFetch,
+        updateActiveGame,
+        changeIsPremium
     }
 }

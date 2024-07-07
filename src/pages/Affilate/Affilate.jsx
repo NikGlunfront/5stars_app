@@ -3,10 +3,12 @@ import AffilateList from "../../components/AffilateList/AffilateList";
 import { useApp } from "../../hooks/useApp";
 import { useLocation } from "react-router-dom";
 import { useScroll } from "../../hooks/useScroll";
+import AffilateTodayList from "../../components/AffilateList/AffilateTodayList";
 
 const Affilate= ({}) => {
     const {
-        setIsWithDraw
+        setIsWithDraw,
+        isPremium
     } = useApp()
 
     const { scrollTop } = useScroll()
@@ -20,7 +22,10 @@ const Affilate= ({}) => {
     }, [])
 
     return (
-        <div className="affilate-page">
+        <div className={"affilate-page" + (isPremium ? " _premium" : '')}>
+            <div className="history-list-title">TODAY</div>
+            <AffilateTodayList />
+            <div className="history-list-title">FULL HISTORY</div>
             <AffilateList />
         </div>
     )

@@ -7,7 +7,7 @@
     &__actions {
         @include flex_row;
         justify-content: space-between;
-        position: fixed;
+        position: absolute;
         z-index: 10;
         top: 0;
         left: 0;
@@ -68,7 +68,7 @@
         &._airdrop {
             & > span {
                 &::before {
-                    background-image: url('../../../assets/img/logo/5s_eye_logo.png');
+                    background-image: url('../../../assets/img/icons/airdrop_coin.svg');
                     background-size: contain;
                     background-repeat: no-repeat;
                     transform: translate(0, 0.2rem);
@@ -79,6 +79,16 @@
             & > span {
                 &::before {
                     background-image: url('../../../assets/img/logo/5s_logo_green.png');
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    transform: translate(0, 0.2rem);
+                }
+            }
+        }
+        &._affilate_premium {
+            & > span {
+                &::before {
+                    background-image: url('../../../assets/img/icons/usdt.svg');
                     background-size: contain;
                     background-repeat: no-repeat;
                     transform: translate(0, 0.2rem);
@@ -96,7 +106,7 @@
                 margin-right: 0.5rem;
                 width: 1.6rem;
                 height: 1.6rem;
-                background-image: url('../../../assets/img/icons/airdrop_coin.svg');
+                background-image: url('../../../assets/img/icons/game/bet_star_orange.svg');
                 background-repeat: no-repeat;
                 background-size: contain;
                 transform: translate(0, 0.2rem);
@@ -171,8 +181,14 @@
         padding-bottom: 1.3rem;
     }
 
+    &._home {
+        & + .star-topper__actions {
+            position: fixed;
+        }
+    }
+
     & > p {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
         font-weight: 400;
         color: #63727B;
         line-height: 1.5rem;
@@ -264,6 +280,11 @@
     margin-bottom: 1.5rem;
     width: 100%;
 
+    .title-affilate__text {
+        
+        margin: 1.5rem auto 0;
+    }
+
     &__stars {
         @include flex_row;
         align-items: center;
@@ -306,7 +327,7 @@
                         border-radius: 50%;
                         width: 1.2rem;
                         height: 1.2rem;
-                        background-color: var(--s5-blue-color);
+                        background-color: #2CAFFD;
                         transform: translate(-50%, -50%);
                     }
                 }
@@ -360,6 +381,8 @@
         font-size: 1.3rem;
         color: #63727B;
         max-width: 33rem;
+        margin-top: 1.5rem;
+
         span {
             font-weight: 700;
             margin: 0 0.3rem;
@@ -374,17 +397,17 @@
     }
 
     &__percent {
-        width: 4rem;
-        height: 4rem;
+        // width: 4rem;
+        // height: 4rem;
         margin: 1rem auto;
-        border-radius: 0.8rem;
-        background-color: #918F9C;
-        @include flex_row;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: var(--s5-white-color);
+        // border-radius: 0.8rem;
+        // background-color: #918F9C;
+        // @include flex_row;
+        // align-items: center;
+        // justify-content: center;
+        font-size: 1.6rem;
+        font-weight: 500;
+        color: #02A762;
     }
 
     &__qr {
@@ -433,7 +456,7 @@
         @include flex_row;
         justify-content: space-between;
         align-items: center;
-        font-size: 2.4rem;
+        font-size: 1.8rem;
         font-weight: 500;
         margin: 0 auto 1.8rem;
         max-width: 28rem;
@@ -444,7 +467,7 @@
             white-space: nowrap;
         }
 
-        svg {
+        svg, img {
             width: 2.5rem;
             height: 2.5rem;
             flex: 0 0 2.5rem;

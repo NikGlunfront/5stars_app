@@ -28,7 +28,8 @@
             top: 50%;
             right: 2.9rem;
             transform: translate(0, -41%);
-            background-color: #FEF9E6;
+            background-color: #ffffff;
+            box-shadow: inset 0 0.5rem 0.5rem rgba($color: #898080, $alpha: 0.25);
             font-weight: 700;
             align-items: center;
             justify-content: center;
@@ -39,14 +40,14 @@
             background-color: #DAF3E1;
 
             &::after {
-                background-color: #DAF3E1;
+                background-color: #ffffff;
             }
             
             .hash-box__details {
                 p {
                     color: var(--s5-black-color);
                     font-weight: 400;
-                    font-size: 1.2rem;
+                    font-size: 1.3rem;
                 }
             }
         }
@@ -61,14 +62,14 @@
         }
 
         & > p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
         }
     }
 
     &__details {
-        font-size: 1.2rem;
-        max-width: 24rem;
-        min-height: 2.9rem;
+        font-size: 1.3rem;
+        max-width: 25rem;
+        min-height: 3.2rem;
 
         p {
             color: rgba($color: #000000, $alpha: 0.5);

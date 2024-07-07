@@ -2,6 +2,8 @@ import React, { useEffect } from "react"
 import { useApp } from "../../hooks/useApp";
 import { useLocation } from "react-router-dom";
 import { useScroll } from "../../hooks/useScroll";
+import { useAddStarsMutation, useLazyAddStarsQuery } from "../../store/services/starsGame";
+import { useTelegram } from "../../hooks/useTelegram";
 
 const starVars = [
     {id: 1, val: 50, iconsCount: 1},
@@ -23,8 +25,13 @@ const AddStars= ({
         setIsWithDraw
     } = useApp()
 
+    const { sendAlert } = useTelegram()
+
+    const [addStarsClick, { data: addStarsData, isLoading: isAddStarsLoading, error: isAddStarsError}] = useAddStarsMutation()
+
     const { scrollTop } = useScroll()
     const location = useLocation()
+
     useEffect(() => {
         scrollTop()
     }, [location.pathname])
@@ -33,11 +40,27 @@ const AddStars= ({
         setIsWithDraw(false)
     }, [])
 
+    const addStarsHandler = async (val) => {
+        // if (!isAddStarsLoading) {
+        //     await addStarsClick({
+        //         tg_id: 658318611,
+        //         amount: val,
+        //         type: 'DEF',
+        //         a_type: 'A' 
+        //     })
+        // }
+    }
+
+    useEffect(() => {
+        if (!isAddStarsLoading && addStarsData) {
+            isAddStarsError ? sendAlert('Произошла ошибка при пополнении баланса') : sendAlert(`Баланс успешно пополнен на \n${addStarsData.amount} Stars`)
+        }
+    }, [isAddStarsLoading]) 
     return (
         <div className="addstars-page">
             <div className="addstars-page__content">
                 {starVars.map(starItem => (
-                    <div key={starItem.id} className="addstars-item">
+                    <div key={starItem.id} className="addstars-item" onClick={() => addStarsHandler(starItem.val)}>
                         {starItem.val} stars
                     </div>
                 ))}
