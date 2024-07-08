@@ -4,6 +4,8 @@ import StarsBet from './Stars/StarsBet';
 import { useStarGame } from '../../hooks/useStarGame';
 import StarsResult from './Stars/StarsResult';
 import airdropCoin from '../../assets/img/icons/airdrop_coin.svg'
+import { useCalculateGameMutation, useCreateNewGameMutation } from '../../store/services/starsGame';
+import { useTelegram } from '../../hooks/useTelegram';
 
 const bets = [
     {id: 1, val: 10},
@@ -15,6 +17,12 @@ const Game = ({
 
 }) => {
     const {
+        game_id
+    } = useStarGame()
+    const { user: tgUser, sendAlert } = useTelegram()
+    const [calculateCurrentGame, { data: calculatedGameData , isLoading: isCalculatedGameLoading, isError: isCalculatedGameError}] = useCalculateGameMutation()
+    const [createNewGame, {data: newGameData, isLoading: isNewGameLoading, error: newGameError}] = useCreateNewGameMutation()
+    const {
         changeBet,
         betAmount,
         pickedStars,
@@ -22,9 +30,8 @@ const Game = ({
         resultNumber,
         initWinNum,
         betMultiply,
-        calculateGame,
         gameResult,
-        createNewGame
+        startNewGame
     } = useStarGame()
 
     useEffect(() => {
@@ -33,13 +40,29 @@ const Game = ({
         }
     }, [])
 
+    useEffect(() => {
+        if (!isNewGameLoading && calculatedGameData?.error) {
+            sendAlert(calculatedGameData.error)
+        }
+    }, [calculatedGameData, isNewGameLoading])
+
     const playButtonHandler = () => {
-        if (isGameFinished) {
-            createNewGame()
+        if (isGameFinished && !isNewGameLoading && !isCalculatedGameLoading) {
+            createNewGame({
+                tg_id: tgUser | 658318611
+            })
+            startNewGame()
         } else {
-            calculateGame()
+            if (!isNewGameLoading && !isCalculatedGameLoading) {
+                calculateCurrentGame({
+                    game_id: game_id,
+                    picked_stars: pickedStars,
+                    bet_amount: betAmount
+                })
+            }
         }
     }
+
 
     const handleBetChange = (bet) => {
         changeBet(bet)
@@ -78,7 +101,7 @@ const Game = ({
                     </p>
                 }
             </div>
-            <div className={"s5-game__btn" + (pickedStars.length ? ' _active' : '')} onClick={playButtonHandler}>
+            <div className={"s5-game__btn" + (pickedStars.length && !isCalculatedGameLoading && !isNewGameLoading ? ' _active' : '')} onClick={playButtonHandler}>
                 <div>{isGameFinished ? 'TRY AGAIN' : 'TAP & WIN'}</div>
                 <span className={!betAmount || isGameFinished || !pickedStars.length ? "_hidden" : ''}>
                     <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">

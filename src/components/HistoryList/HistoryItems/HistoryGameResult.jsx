@@ -17,7 +17,8 @@ const HistoryGameResult= ({
         bets,
         gameResult,
         winNumber,
-        fee
+        fee,
+        airdrop = 0
     } = gameData
     return (
         <div className="history-item history-item_game_result">
@@ -64,7 +65,7 @@ const HistoryGameResult= ({
                         :
                         <div className="history-item__lose">-{betAmount * bets.length}</div>
                     }
-                    <div className="history-item__airdrop">{'15 285'}</div>
+                    <div className="history-item__airdrop">{airdrop.toLocaleString()}</div>
                 </div>
             </div>
         </div>

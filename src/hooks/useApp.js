@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setAirdropBalance, setIsApplicationLoaded, setIsPremium, setIsWithdrawPage, setMainBalance, setPartnershipBalance } from "../store/slices/appSlice/appSlice";
+import { setAirdropBalance, setGamesLeft, setIsApplicationLoaded, setIsPremium, setIsWithdrawPage, setMainBalance, setPartnershipBalance } from "../store/slices/appSlice/appSlice";
 import { setGameId, setHash2 } from "../store/slices/gameSlice/gameSlice";
 
 export function useApp() {
@@ -10,6 +10,7 @@ export function useApp() {
         mainBalance,
         airdropBalance,
         partnershipBalance,
+        gamesLeft,
         isPremium
     } = useSelector(state => state.app)
 
@@ -43,6 +44,7 @@ export function useApp() {
     const updateActiveGame = (gameObj) => {
         dispatch(setHash2(gameObj.hash2))
         dispatch(setGameId(gameObj.game_id))
+        dispatch(setGamesLeft(gameObj.games_left))
     }
 
     const handleInitDataFetch = (iniData) => {
@@ -55,6 +57,7 @@ export function useApp() {
         isWithdrawPage,
         mainBalance,
         isPremium,
+        gamesLeft,
         airdropBalance,
         partnershipBalance,
         setIsAppLoaded,

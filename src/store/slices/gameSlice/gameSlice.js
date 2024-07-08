@@ -42,6 +42,11 @@ export const gameSlice = createSlice({
                 gameResult: resultWin
             }
         },
+        setGameResult: (state, action) => {
+            return {
+                ...state, gameResult: action.payload
+            }
+        },
         setNewResultNumber: (state, action) => {
             let newNum = Math.floor(Math.random() * (5000 - 2500) + 2500) % 5
             return {
@@ -49,14 +54,19 @@ export const gameSlice = createSlice({
                 resultNumber: newNum === 0 ? 5 : newNum
             }
         },
+        setResultNumber: (state, action) => {
+            return {
+                ...state, resultNumber: action.payload
+            }
+        },
         playNewGame: (state, action) => {
-            let newNum = Math.floor(Math.random() * (5000 - 2500) + 2500) % 5
+            
             return {
                 ...state,
                 isGameFinished: false,
                 gameResult: 0,
                 pickedStars: [],
-                resultNumber: newNum === 0 ? 5 : newNum
+                resultNumber: null
             }
         },
         setHash1: (state, action) => {
@@ -85,8 +95,10 @@ export const {
     playNewGame,
     setNewResultNumber,
     setHash1,
+    setResultNumber,
     setHash2,
-    setGameId
+    setGameId,
+    setGameResult
 } = gameSlice.actions
 
 export default gameSlice.reducer

@@ -9,7 +9,7 @@ const gamePath = "game/"
 export const starsApi = createApi({
     reducerPath: "starsApi",
     baseQuery: fetchBaseQuery({baseUrl: baseUrl}),
-    tagTypes: ['Balance', 'Game'],
+    tagTypes: ['Balance', 'Game', 'History'],
     endpoints: (builder) => ({
         loginUser: builder.query({
             query: (telegramId) => `${userPath}?dispatch=login&tg_id=${telegramId}`,
@@ -29,14 +29,28 @@ export const starsApi = createApi({
                 method: 'POST',
                 body: starsData
             }),
-            invalidatesTags: ['Balance']
+            invalidatesTags: ['Balance', 'History']
         }),
         calculateGame: builder.mutation({
             query: (gameData) => ({
                 url: gamePath,
                 method: 'POST',
                 body: {...gameData, method: 'calculate'}
-            })
+            }),
+            invalidatesTags: ['Game', 'Balance', 'History']
+        }),
+        createNewGame: builder.mutation({
+            query: (newGameData) => ({
+                url: gamePath,
+                method: "POST",
+                body: {...newGameData, method: 'create_new'}
+            }),
+            invalidatesTags: ['Game']
+        }),
+        getAllHistoryGames: builder.query({
+            query: (tgId) => `${gamePath}?dispatch=get_history_all&tg_id=${tgId}`,
+            responseHandler: 'text',
+            providesTags: result => ['History']
         })
     })
 })
@@ -46,5 +60,7 @@ export const {
     useAddStarsMutation,
     useGetBalancesQuery,
     useGetActiveGameQuery,
-    useCalculateGameMutation
+    useCalculateGameMutation,
+    useCreateNewGameMutation,
+    useGetAllHistoryGamesQuery
 } = starsApi

@@ -6,7 +6,8 @@ const initialState = {
     mainBalance: 0,
     airdropBalance: 0,
     partnershipBalance: 0,
-    isPremium: false
+    isPremium: false,
+    gamesLeft: 0
 }
 
 export const appSlice = createSlice({
@@ -42,6 +43,11 @@ export const appSlice = createSlice({
             return {
                 ...state, isPremium: action.payload
             }
+        },
+        setGamesLeft: (state, action) => {
+            return {
+                ...state, gamesLeft: action.payload
+            }
         }
     }
 })
@@ -52,6 +58,7 @@ export const {
     setMainBalance,
     setAirdropBalance,
     setPartnershipBalance,
+    setGamesLeft,
     setIsPremium
 } = appSlice.actions
 

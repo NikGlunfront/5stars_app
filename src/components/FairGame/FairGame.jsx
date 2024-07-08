@@ -25,7 +25,6 @@ const FairGame = ({
     
     const [hash2String, setHash2String] = useState('')
     const [hash1String, setHash1String] = useState('')
-    const [calculateCurrentGame, { data , isLoading, error}] = useCalculateGameMutation()
 
     const {
         airdropBalance,
@@ -51,24 +50,15 @@ const FairGame = ({
         setHash1String(firstSub + "..." + lastSub)
     }, [hash_1])
 
-    const handleGameCalculate = () => {
-        // calculateCurrentGame({
-        //     game_id: game_id,
-        //     picked_stars: pickedStars,
-        //     bet_amount: betAmount
-        // })
-    }
-
-    useEffect(() => {console.log(data)}, [data, isLoading])
-
     return (
         <div className='fair-game'>
             <div className="fair-game__title">FAIR GAME</div>
-            <BoxWrapper className={'hash-box'} linkPath={isGameFinished ? '/check-win-num' : null}>
+            {/* <BoxWrapper className={'hash-box'} linkPath={isGameFinished ? '/check-win-num' : null}> */}
+            <BoxWrapper className={'hash-box'}>
                 <div className={"hash-box__inner" + (isGameFinished ? ' _result' : '')} data-winnum={isGameFinished ? resultNumber : '?'}>
                     <div className="hash-box__hash">
                         <span>WIN NUMBER HASH</span>
-                        <p>{isGameFinished ? hash2String : hash2String}</p>
+                        <p>{isGameFinished ? hash1String : hash2String}</p>
                     </div>
                     <div className={"hash-box__details"}>
                         {isGameFinished
@@ -96,7 +86,7 @@ const FairGame = ({
                 </div>
             </BoxWrapper>
             <BoxWrapper className={'box-btn'}>
-                <div className="box-btn__img _orange" onClick={handleGameCalculate}>
+                <div className="box-btn__img _orange">
                     <img src={tokenList} alt="tokenlist" />
                 </div>
                 <div className="box-btn__text">Tokenlist</div>

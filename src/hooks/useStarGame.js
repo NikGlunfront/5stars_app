@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { setBetAmount, setHash1, setHash2, setPickedStars } from "../store/slices/gameSlice/gameSlice"
+import { setBetAmount, setGameResult, setHash1, setHash2, setIsGameFinished, setPickedStars, setResultNumber } from "../store/slices/gameSlice/gameSlice"
 import { playNewGame } from "../store/slices/gameSlice/gameSlice"
 import { setNewResultNumber } from "../store/slices/gameSlice/gameSlice"
 import { calculateGameResults } from "../store/slices/gameSlice/gameSlice"
@@ -43,7 +43,7 @@ export function useStarGame() {
         dispatch(calculateGameResults())
     }
 
-    const createNewGame = () => {
+    const startNewGame = () => {
         dispatch(playNewGame())
     }
 
@@ -52,6 +52,18 @@ export function useStarGame() {
     }
     const updateHash2 = (hash) => {
         dispatch(setHash2(hash))
+    }
+
+    const setPlayedGame = (activeGameOjb) => {
+        dispatch(setPickedStars([...activeGameOjb.picked_stars]))
+        dispatch(setBetAmount(parseInt(activeGameOjb.bet_amount)))
+        dispatch(setResultNumber(parseInt(activeGameOjb.win_num)))
+        dispatch(setIsGameFinished(true))
+        if (activeGameOjb.picked_stars.includes(parseInt(activeGameOjb.win_num))) {
+            dispatch(setGameResult(parseInt(activeGameOjb.bet_amount) * 5 - activeGameOjb.picked_stars.length * parseInt(activeGameOjb.bet_amount)))
+        } else {
+            dispatch(setGameResult(0))
+        }
     }
 
 
@@ -68,7 +80,8 @@ export function useStarGame() {
         handleStarClick,
         changeBet,
         calculateGame,
-        createNewGame,
+        setPlayedGame,
+        startNewGame,
         initWinNum,
         updateHash1,
         updateHash2,

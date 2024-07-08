@@ -25,7 +25,7 @@ const AddStars= ({
         setIsWithDraw
     } = useApp()
 
-    const { sendAlert } = useTelegram()
+    const { sendAlert, user: tgUser } = useTelegram()
 
     const [addStarsClick, { data: addStarsData, isLoading: isAddStarsLoading, error: isAddStarsError}] = useAddStarsMutation()
 
@@ -41,14 +41,14 @@ const AddStars= ({
     }, [])
 
     const addStarsHandler = async (val) => {
-        // if (!isAddStarsLoading) {
-        //     await addStarsClick({
-        //         tg_id: 658318611,
-        //         amount: val,
-        //         type: 'DEF',
-        //         a_type: 'A' 
-        //     })
-        // }
+        if (!isAddStarsLoading) {
+            await addStarsClick({
+                tg_id: tgUser | 658318611,
+                amount: val,
+                type: 'DEF',
+                a_type: 'A' 
+            })
+        }
     }
 
     useEffect(() => {

@@ -11,6 +11,7 @@ import History from './pages/History/History';
 import Home from './pages/Home/Home';
 import Withdraw from './pages/Withdraw/Withdraw';
 import { useGetActiveGameQuery, useGetBalancesQuery, useLoginUserQuery } from './store/services/starsGame';
+import { useStarGame } from './hooks/useStarGame';
 
 const routes = [
     {id: 1, path: '/', name: 'Home', element: <Home />, nodeRef: createRef()},
@@ -27,19 +28,20 @@ const telegramId = 658318611
 function App({
 
 }) {
-    const {tg} = useTelegram();
+    const {tg, user: tgUser} = useTelegram();
     const { 
         handleInitDataFetch,
         isLoaded,
         isWithdrawPage,
         updateAllBalances,
         updateActiveGame,
-        changeIsPremium
     } = useApp();
 
-    const { data: iniData, isLoading: isInitLoading, isError } = useLoginUserQuery(telegramId)
-    const { data: balancesData, isLoading: isBalanceDataLoading, isError: isBalanceDataError } = useGetBalancesQuery(telegramId)
-    const { data: activeGame, isLoading: isActiveGameLoading, isError: isActiveGameError } = useGetActiveGameQuery(telegramId)
+    const { setPlayedGame, updateHash1 } = useStarGame()
+
+    const { data: iniData, isLoading: isInitLoading, isError } = useLoginUserQuery(tgUser|telegramId)
+    const { data: balancesData, isLoading: isBalanceDataLoading, isError: isBalanceDataError } = useGetBalancesQuery(tgUser|telegramId)
+    const { data: activeGame, isLoading: isActiveGameLoading, isError: isActiveGameError } = useGetActiveGameQuery(tgUser|telegramId)
 
     useEffect(() => {
         tg.ready()
@@ -59,14 +61,19 @@ function App({
             updateAllBalances(balancesData)
             console.log(balancesData)
         }
-    }, [isBalanceDataLoading, balancesData])
+    }, [isBalanceDataLoading, balancesData, iniData])
 
     useEffect(() => {
         if (iniData && activeGame && !isActiveGameLoading) {
             updateActiveGame(activeGame)
             console.log(activeGame)
+            if (activeGame.result_history) {
+                console.log(activeGame.result_history)
+                updateHash1(activeGame.hash1)
+                setPlayedGame(activeGame.result_history)
+            }
         }
-    }, [isActiveGameLoading, activeGame])
+    }, [isActiveGameLoading, activeGame, iniData])
 
     if (isError) {
         return (

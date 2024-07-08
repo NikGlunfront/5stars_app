@@ -2,6 +2,12 @@
     padding: 0 1.5rem;
 
     .history-list {
+
+        &__empty {
+            padding: 5rem 1rem;
+            text-align: center;
+            color: var(--s5-grey-color);
+        }
         .history-item {
             &:last-child {
                 .history-item__info {
