@@ -65,7 +65,7 @@ export function useTelegram() {
         showTgButton,
         enableTgButton,
         tg,
-        user: tg.initDataUnsafe?.user.id,
+        user: tg.initDataUnsafe?.user?.id,
         queryId: tg.initDataUnsafe?.query_id
     }
 }
