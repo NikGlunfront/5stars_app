@@ -289,6 +289,10 @@
     
     &__lose {
         color: #CC5C5C;
+
+        & > span {
+            display: none;
+        }
     }
 }
 

@@ -61,7 +61,7 @@ const HistoryGameResult= ({
                 <div className="history-item__right">
                     {gameResult > 0
                         ?
-                        <div className="history-item__win">+{gameResult - betAmount * bets.length - fee}</div>
+                        <div className={gameResult - betAmount * bets.length - fee > 0 ? "history-item__win" : 'history-item__lose'}><span>+</span>{gameResult - betAmount * bets.length - fee}</div>
                         :
                         <div className="history-item__lose">-{betAmount * bets.length}</div>
                     }
