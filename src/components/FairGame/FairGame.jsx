@@ -8,10 +8,17 @@ import premiumPartnership from '../../assets/img/icons/purple_partner.svg'
 import tokenList from '../../assets/img/icons/tokenlist.svg'
 import tokenListCount from '../../assets/img/icons/token_list_count.svg'
 import { useCalculateGameMutation } from '../../store/services/starsGame';
+import { useTelegram } from '../../hooks/useTelegram';
 
 const FairGame = ({
 
 }) => {
+    const {
+        tg,
+        user,
+        queryId
+    } = useTelegram()
+    const [isVisibleDebug, setIsVisibleDebug] = useState(false)
     const {
         resultNumber,
         isGameFinished,
@@ -86,7 +93,7 @@ const FairGame = ({
                 </div>
             </BoxWrapper>
             <BoxWrapper className={'box-btn'}>
-                <div className="box-btn__img _orange">
+                <div className="box-btn__img _orange" onClick={() => setIsVisibleDebug(!isVisibleDebug)}>
                     <img src={tokenList} alt="tokenlist" />
                 </div>
                 <div className="box-btn__text">Tokenlist</div>
@@ -108,6 +115,14 @@ const FairGame = ({
                         <path fillRule="evenodd" clipRule="evenodd" d="M6.5 6.5C8.29508 6.5 9.75 5.04508 9.75 3.25C9.75 1.45492 8.29508 0 6.5 0C4.70492 0 3.25 1.45492 3.25 3.25C3.25 5.04508 4.70492 6.5 6.5 6.5ZM6.5 6.5C2.90983 6.5 0 8.3265 0 11.9167C0 16.25 13 16.25 13 11.9167C13 8.3265 10.0902 6.5 6.5 6.5Z" fill="#2CAFFD"/>
                     </svg>
                 </div>
+            </BoxWrapper>
+            <BoxWrapper className={'box-btn'} >
+                <p>TG</p>
+                <pre>{tg}</pre>
+                <p>User</p>
+                <pre>{user}</pre>
+                <p>QueryId</p>
+                <pre>{queryId}</pre>
             </BoxWrapper>
         </div>
     );
