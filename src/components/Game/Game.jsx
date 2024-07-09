@@ -6,6 +6,7 @@ import StarsResult from './Stars/StarsResult';
 import airdropCoin from '../../assets/img/icons/airdrop_coin.svg'
 import { useCalculateGameMutation, useCreateNewGameMutation } from '../../store/services/starsGame';
 import { useTelegram } from '../../hooks/useTelegram';
+import RequestButton from '../UI/RequestButton/RequestButton';
 
 const bets = [
     {id: 1, val: 10},
@@ -101,7 +102,11 @@ const Game = ({
                     </p>
                 }
             </div>
-            <div className={"s5-game__btn" + (pickedStars.length && !isCalculatedGameLoading && !isNewGameLoading ? ' _active' : '')} onClick={playButtonHandler}>
+            <RequestButton 
+                className={"s5-game__btn" + (pickedStars.length ? ' _active' : '')} 
+                onClick={playButtonHandler}
+                isloading={isCalculatedGameLoading || isNewGameLoading}
+            >
                 <div>{isGameFinished ? 'TRY AGAIN' : 'TAP & WIN'}</div>
                 <span className={!betAmount || isGameFinished || !pickedStars.length ? "_hidden" : ''}>
                     <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -109,7 +114,9 @@ const Game = ({
                     </svg>
                     {betAmount ? betAmount * betMultiply - pickedStars.length * betAmount : ''}
                 </span>
-            </div>
+            </RequestButton>
+            {/* <div className={"s5-game__btn" + (pickedStars.length && !isCalculatedGameLoading && !isNewGameLoading ? ' _active' : '')} onClick={playButtonHandler}>
+            </div> */}
         </BoxWrapper>
     );
 };

@@ -60,8 +60,8 @@ const FairGame = ({
     return (
         <div className='fair-game'>
             <div className="fair-game__title">FAIR GAME</div>
-            {/* <BoxWrapper className={'hash-box'} linkPath={isGameFinished ? '/check-win-num' : null}> */}
-            <BoxWrapper className={'hash-box'}>
+            <BoxWrapper className={'hash-box'} linkPath={isGameFinished ? '/check-win-num' : null}>
+            {/* <BoxWrapper className={'hash-box'}> */}
                 <div className={"hash-box__inner" + (isGameFinished ? ' _result' : '')} data-winnum={isGameFinished ? resultNumber : '?'}>
                     <div className="hash-box__hash">
                         <span>WIN NUMBER HASH</span>

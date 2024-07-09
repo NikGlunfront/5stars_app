@@ -51,6 +51,9 @@ export const starsApi = createApi({
             query: (tgId) => `${gamePath}?dispatch=get_history_all&tg_id=${tgId}`,
             responseHandler: 'text',
             providesTags: result => ['History']
+        }),
+        generateHashFromString: builder.mutation({
+            query: (stringVal) => `${gamePath}?dispatch=generate_hash&g_string=${stringVal}`
         })
     })
 })
@@ -62,5 +65,6 @@ export const {
     useGetActiveGameQuery,
     useCalculateGameMutation,
     useCreateNewGameMutation,
-    useGetAllHistoryGamesQuery
+    useGetAllHistoryGamesQuery,
+    useGenerateHashFromStringMutation
 } = starsApi

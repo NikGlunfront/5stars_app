@@ -7,7 +7,7 @@ import starImagePremium from '../../assets/img/logo/5s_premium.png';
 import { useApp } from '../../hooks/useApp';
 import AirdropModal from './Modals/AirdropModal';
 import DefaultModal from './Modals/DefaultModal';
-import greenPartnerShip from '../../assets/img/icons/green_partnership.svg';
+import greenPartnerShip from '../../assets/img/logo/green_logo.png';
 import TitleAddStars from './Titles/TitleAddStars';
 import TitleAffilate from './Titles/TitleAffilate';
 import TitleHistory from './Titles/TitleHistory';
@@ -47,7 +47,7 @@ const Star = ({
                     }
                     {location.pathname.includes('affilate') && !isPremium &&
                         <>
-                            <img src={starImageGreen} alt="5star" />
+                            <img src={greenPartnerShip} alt="5star" />
                             <TitleAffilate />
                         </>
                     }
@@ -98,7 +98,7 @@ const Star = ({
                     onClick={openModal}
                 >
                     <span>
-                        {(location.pathname === '/' || location.pathname.includes('add-stars')) && mainBalance}
+                        {(location.pathname === '/' || location.pathname.includes('add-stars') || location.pathname.includes('check-win-num')) && mainBalance}
                         {location.pathname.includes('history') && airdropBalance}
                         {location.pathname.includes('affilate') && partnershipBalance}
                         <svg width="2" height="12" viewBox="0 0 2 12" fill="none" xmlns="http://www.w3.org/2000/svg">

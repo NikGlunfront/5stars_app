@@ -58,7 +58,7 @@ const HistoryList= ({
     }
 
     useEffect(() => {
-        if (!isHistoryGamesLoading && historyGamesData.length) {
+        if (!isHistoryGamesLoading && historyGamesData?.length) {
             console.log(historyGamesData)
             setListItems([...historyGamesData])
         }

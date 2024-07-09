@@ -443,6 +443,11 @@
         }
     }
 }
+.s5-box-wrapper {
+    & + .history-list-title {
+        margin-top: 2rem;
+    }
+}
 
 .history-list-title {
     font-size: 1.5rem;
