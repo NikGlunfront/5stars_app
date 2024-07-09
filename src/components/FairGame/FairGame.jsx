@@ -118,11 +118,9 @@ const FairGame = ({
             </BoxWrapper>
             <BoxWrapper className={'box-btn'} >
                 <p>TG</p>
-                <pre>{tg}</pre>
+                <pre>{tg.initData}</pre>
                 <p>User</p>
                 <pre>{user}</pre>
-                <p>QueryId</p>
-                <pre>{queryId}</pre>
             </BoxWrapper>
         </div>
     );
