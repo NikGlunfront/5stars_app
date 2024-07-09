@@ -116,12 +116,14 @@ const FairGame = ({
                     </svg>
                 </div>
             </BoxWrapper>
-            <BoxWrapper className={'box-btn'} >
-                <p>TG</p>
-                <pre>{tg.initData}</pre>
-                <p>User</p>
-                <pre>{user}</pre>
-            </BoxWrapper>
+            {isVisibleDebug &&
+                <BoxWrapper className={'box-btn'} >
+                    <p>TG</p>
+                    <pre>{tg.initData?.user?.id}</pre>
+                    <p>User</p>
+                    <pre>{user.id}</pre>
+                </BoxWrapper>
+            }
         </div>
     );
 };
