@@ -92,15 +92,15 @@ const Star = ({
                     className={
                         "star-topper__balance" +
                         (location.pathname.includes('history') ? ' _airdrop' : '') +
-                        (location.pathname.includes('affilate') && !isPremium ? ' _affilate' : '') +
-                        (location.pathname.includes('affilate') && isPremium ? ' _affilate_premium' : '')
+                        ((location.pathname.includes('affilate') || location.pathname.includes('withdraw')) && !isPremium ? ' _affilate' : '') +
+                        ((location.pathname.includes('affilate') || location.pathname.includes('withdraw')) && isPremium ? ' _affilate_premium' : '')
                     } 
                     onClick={openModal}
                 >
                     <span>
                         {(location.pathname === '/' || location.pathname.includes('add-stars') || location.pathname.includes('check-win-num')) && mainBalance}
                         {location.pathname.includes('history') && airdropBalance}
-                        {location.pathname.includes('affilate') && partnershipBalance}
+                        {(location.pathname.includes('affilate') || location.pathname.includes('withdraw')) && partnershipBalance}
                         <svg width="2" height="12" viewBox="0 0 2 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1.7 11.6757C1.5 11.8919 1.26667 12 1 12C0.733333 12 0.5 11.8919 0.3 11.6757C0.1 11.4595 0 11.2073 0 10.9191C0 10.6308 0.1 10.3786 0.3 10.1624C0.5 9.94623 0.733333 9.83814 1 9.83814C1.26667 9.83814 1.5 9.94623 1.7 10.1624C1.9 10.3786 2 10.6308 2 10.9191C2 11.2073 1.9 11.4595 1.7 11.6757Z" fill="black"/>
                             <path d="M1.7 6.75665C1.5 6.97284 1.26667 7.08093 1 7.08093C0.733333 7.08093 0.5 6.97284 0.3 6.75665C0.1 6.54046 0 6.28825 0 6C0 5.71175 0.1 5.45954 0.3 5.24335C0.5 5.02716 0.733333 4.91907 1 4.91907C1.26667 4.91907 1.5 5.02716 1.7 5.24335C1.9 5.45954 2 5.71175 2 6C2 6.28825 1.9 6.54046 1.7 6.75665Z" fill="black"/>

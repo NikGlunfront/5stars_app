@@ -59,7 +59,7 @@ const AffilateItemAddPartnership= ({
                             </div>
                             <div className="history-item__affilate-profit">
                                 <div className="history-game-result-star _active _win _green"></div>
-                                <span>1000</span>
+                                <span>{(fee / 2).toLocaleString()}</span>
                                 <div>Yours 50%</div>
                             </div>
                         </div>

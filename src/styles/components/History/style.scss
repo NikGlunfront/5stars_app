@@ -17,6 +17,14 @@
         }
     }
 }
+.history-list {
+
+    &__empty {
+        padding: 5rem 1rem;
+        text-align: center;
+        color: var(--s5-grey-color);
+    }
+}
 
 .history-item {
     @include flex_row;
@@ -369,6 +377,23 @@
 
 .affilate-page {
     padding: 0 1.5rem;
+
+    & > .request-btn {
+        margin-top: 0;
+        margin-bottom: 2.5rem;
+
+        & > span {
+            padding-left: 3rem;
+        }
+
+        & > div {
+            margin-left: 1.6rem;
+
+            svg {
+                margin-right: 0.5rem;
+            }
+        }
+    }
 
     &._premium {
         .history-item {

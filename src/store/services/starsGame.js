@@ -54,6 +54,9 @@ export const starsApi = createApi({
         }),
         generateHashFromString: builder.mutation({
             query: (stringVal) => `${gamePath}?dispatch=generate_hash&g_string=${stringVal}`
+        }),
+        getReferral: builder.query({
+            query: (tgId) => `${userPath}?dispatch=get_referral&tg_id=${tgId}`
         })
     })
 })
@@ -66,5 +69,6 @@ export const {
     useCalculateGameMutation,
     useCreateNewGameMutation,
     useGetAllHistoryGamesQuery,
+    useGetReferralQuery,
     useGenerateHashFromStringMutation
 } = starsApi

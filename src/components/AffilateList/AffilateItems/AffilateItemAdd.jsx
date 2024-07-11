@@ -9,7 +9,6 @@ const AffilateItemAdd= ({
         date,
         amount,
         profit,
-        fee
     } = addStarsData
     return (
         <div className="history-item history-item_add">
@@ -29,11 +28,11 @@ const AffilateItemAdd= ({
                         <div className="history-item__changes">
                             <div className="history-item__benefits">
                                 <div className="history-game-result-star _active _win"></div>
-                                <span>{fee.toLocaleString()}</span>
+                                <span>{amount.toLocaleString()}</span>
                             </div>
                             <div className="history-item__affilate-profit">
                                 <div className="history-game-result-star _active _win _green"></div>
-                                <span>{(25000).toLocaleString()}</span>
+                                <span>{(profit).toLocaleString()}</span>
                                 <div>Yours 50%</div>
                             </div>
                         </div>
@@ -41,11 +40,11 @@ const AffilateItemAdd= ({
                         <div className="history-item__changes">
                             <div className="history-item__benefits">
                                 <div className="history-game-result-star _active _win"></div>
-                                <span>{fee.toLocaleString()}</span>
+                                <span>{amount.toLocaleString()}</span>
                             </div>
                             <div className="history-item__affilate-profit">
                                 <div className="history-game-result-coin _active _win"></div>
-                                <span>{(25000).toLocaleString()}</span>
+                                <span>{(profit).toLocaleString()}</span>
                                 <div>Airdrop</div>
                             </div>
                         </div>

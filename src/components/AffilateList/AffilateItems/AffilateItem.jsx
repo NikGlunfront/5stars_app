@@ -16,7 +16,7 @@ const AffilateItem= ({
         case 'add':
             return <AffilateItemAdd addStarsData={affilateItem} />
             
-        case 'addPartner':
+        case 'game':
             return <AffilateItemAddPartnership addStarsData={affilateItem} />
         case 'swap':
             return <AffilateItemSwap swapData={affilateItem} />

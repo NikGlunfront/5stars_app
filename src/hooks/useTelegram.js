@@ -2,6 +2,10 @@ const tg = window.Telegram.WebApp;
 
 export function useTelegram() {
 
+    // const devTGID = 1320;
+    // const devTGID = 132033;
+    const devTGID = false;
+
     const onClose = () => {
         tg.close()
     }
@@ -18,6 +22,10 @@ export function useTelegram() {
         tg.MainButton.show()
         tg.MainButton.text = text
         disableTgButton()
+    }
+
+    const hideTgButton = () => {
+        tg.MainButton.hide()
     }
     const disableTgButton = () => {
         tg.MainButton.disable()
@@ -63,9 +71,10 @@ export function useTelegram() {
         requestConfirmation,
         disableTgButton,
         showTgButton,
+        hideTgButton,
         enableTgButton,
         tg,
-        user: tg.initDataUnsafe?.user?.id,
+        user: devTGID | tg.initDataUnsafe?.user?.id,
         queryId: tg.initDataUnsafe?.query_id
     }
 }

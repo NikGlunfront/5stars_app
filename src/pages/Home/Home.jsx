@@ -4,6 +4,7 @@ import FairGame from '../../components/FairGame/FairGame';
 import { useApp } from '../../hooks/useApp';
 import { useLocation } from 'react-router-dom';
 import { useScroll } from '../../hooks/useScroll';
+import { useTelegram } from '../../hooks/useTelegram';
 
 const Home = ({
 
@@ -14,6 +15,7 @@ const Home = ({
         isLoaded
     } = useApp()
 
+    const { hideTgButton } = useTelegram()
     const { scrollTop } = useScroll()
     const location = useLocation()
     useEffect(() => {
@@ -21,6 +23,7 @@ const Home = ({
     }, [location.pathname])
     
     useEffect(() => {
+        hideTgButton()
         setIsWithDraw(false)
     }, [])
 

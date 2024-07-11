@@ -33,7 +33,7 @@ const CheckWinNumber= ({
         hash_2
     } = useStarGame()
 
-    const { sendAlert } = useTelegram()
+    const { sendAlert, hideTgButton } = useTelegram()
 
     const { scrollTop } = useScroll()
     const location = useLocation()
@@ -68,6 +68,10 @@ const CheckWinNumber= ({
             console.log(generatedHash)
         }
     }, [generateHash, isGeneratedHashLoading])
+
+    useEffect(() => {
+        hideTgButton()
+    }, [])
 
     if (!isGameFinished) {
         return
@@ -129,7 +133,7 @@ const CheckWinNumber= ({
                 </div>
                 <div className="conversion-hash__bits">
                     {generatedHash.bits.map((bitItem) => (
-                        <div key={bitItem.val} className="conversion-hash__bit">
+                        <div key={bitItem.bitName} className="conversion-hash__bit">
                             <span>{bitItem.bitName}</span>
                             <span>{bitItem.val}</span>
                         </div>
@@ -170,7 +174,7 @@ const CheckWinNumber= ({
                     </div>
                     <div className="win-number-result__stars">
                         {starTable.map(star => (
-                            <div className={"win-number-result__staritem" + (star.winNumber.includes(generatedHash.hash_sub % 5) ? " _win" : '')}>
+                            <div key={star.number} className={"win-number-result__staritem" + (star.winNumber.includes(generatedHash.hash_sub % 5) ? " _win" : '')}>
                                 <img src={starImg} alt="" />
                                 <div>{star.number}</div>
                                 <span>{star.winNumber.includes(generatedHash.hash_sub % 5) ? generatedHash.hash_sub % 5 : star.number}</span>

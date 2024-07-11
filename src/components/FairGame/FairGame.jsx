@@ -36,7 +36,8 @@ const FairGame = ({
     const {
         airdropBalance,
         partnershipBalance,
-        isPremium
+        isPremium,
+        referralsCount
     } = useApp()
 
     useEffect(() => {
@@ -109,8 +110,8 @@ const FairGame = ({
                     <img src={isPremium ? premiumPartnership : greenPartnership} alt="" />
                 </div>
                 <div className="box-btn__text">{isPremium ? "Premium Partner" : "Partnership"}</div>
-                <div className={"box-btn__subinfo" + (348 === 0 ? " _empty" : '')}>
-                    {348}
+                <div className={"box-btn__subinfo" + (referralsCount === 0 ? " _empty" : '')}>
+                    {referralsCount}
                     <svg width="13" height="16" viewBox="0 0 13 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" clipRule="evenodd" d="M6.5 6.5C8.29508 6.5 9.75 5.04508 9.75 3.25C9.75 1.45492 8.29508 0 6.5 0C4.70492 0 3.25 1.45492 3.25 3.25C3.25 5.04508 4.70492 6.5 6.5 6.5ZM6.5 6.5C2.90983 6.5 0 8.3265 0 11.9167C0 16.25 13 16.25 13 11.9167C13 8.3265 10.0902 6.5 6.5 6.5Z" fill="#2CAFFD"/>
                     </svg>

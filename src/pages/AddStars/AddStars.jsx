@@ -25,7 +25,7 @@ const AddStars= ({
         setIsWithDraw
     } = useApp()
 
-    const { sendAlert, user: tgUser } = useTelegram()
+    const { sendAlert, user: tgUser, hideTgButton } = useTelegram()
 
     const [addStarsClick, { data: addStarsData, isLoading: isAddStarsLoading, error: isAddStarsError}] = useAddStarsMutation()
 
@@ -37,6 +37,7 @@ const AddStars= ({
     }, [location.pathname])
     
     useEffect(() => {
+        hideTgButton()
         setIsWithDraw(false)
     }, [])
 

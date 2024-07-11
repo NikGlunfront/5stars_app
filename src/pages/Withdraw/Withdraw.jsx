@@ -15,11 +15,12 @@ const Withdraw= ({
 
     const {
         setIsWithDraw,
-        isWithdrawPage
+        isWithdrawPage,
+        partnershipBalance
     } = useApp()
     
 
-    const [starsAmount, setStarsAmount] = useState('')
+    const [starsAmount, setStarsAmount] = useState(partnershipBalance)
     const [tonRate, setTonRate] = useState(0.067656)
 
     const { scrollTop } = useScroll()
@@ -52,8 +53,8 @@ const Withdraw= ({
 
     const handleChange = (e) => {
         if (handleKeyPress(e)) {
-            if (e.target.value > 500) {
-                setStarsAmount(500)
+            if (e.target.value > partnershipBalance) {
+                setStarsAmount(partnershipBalance)
             } else {
                 setStarsAmount(e.target.value)
             }
@@ -67,9 +68,9 @@ const Withdraw= ({
             <div className="field-withdraw">
                 <div className="field-withdraw__topper">
                     <div>You send</div>
-                    <div onClick={() => setStarsAmount(500)}>
+                    <div onClick={() => setStarsAmount(partnershipBalance)}>
                         <span>Max.:</span>
-                        <span>500</span>
+                        <span>{partnershipBalance}</span>
                     </div>
                 </div>
                 <div className="field-withdraw__input">
@@ -83,9 +84,9 @@ const Withdraw= ({
                     />
                     <span>STAR</span>
                 </div>
-                <div className="field-withdraw__rate">
-                    1 STAR = {tonRate} TON
-                </div>
+                {/* <div className="field-withdraw__rate">
+                    1 STAR = {tonRate} STAR
+                </div> */}
             </div>
             <div className="field-withdraw">
                 <div className="field-withdraw__topper _ton">
@@ -93,8 +94,8 @@ const Withdraw= ({
                     <div></div>
                 </div>
                 <div className="field-withdraw__input">
-                    <div className="field-withdraw__num">{(starsAmount * tonRate).toFixed(5)}</div>
-                    <span>TON</span>
+                    <div className="field-withdraw__num">{starsAmount}</div>
+                    <span>STAR</span>
                 </div>
             </div>
         </div>

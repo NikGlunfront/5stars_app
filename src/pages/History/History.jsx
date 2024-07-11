@@ -4,6 +4,7 @@ import HistoryList from "../../components/HistoryList/HistoryList";
 import { useApp } from "../../hooks/useApp";
 import { useLocation } from "react-router-dom";
 import { useScroll } from "../../hooks/useScroll";
+import { useTelegram } from "../../hooks/useTelegram";
 
 const History= ({
 
@@ -12,6 +13,7 @@ const History= ({
         setIsWithDraw
     } = useApp()
 
+    const { hideTgButton } = useTelegram()
     const { scrollTop } = useScroll()
     const location = useLocation()
     useEffect(() => {
@@ -19,6 +21,7 @@ const History= ({
     }, [location.pathname])
     
     useEffect(() => {
+        hideTgButton()
         setIsWithDraw(false)
     }, [])
 

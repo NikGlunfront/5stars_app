@@ -98,7 +98,7 @@ const Game = ({
                     :
                     <p>You won 
                         <span className={gameResult > 0 ? '_win' : ''}>{gameResult}</span> 
-                        <span><img src={airdropCoin} alt="" />{gameResult * 5 + betAmount * pickedStars.length}</span>
+                        <span><img src={airdropCoin} alt="" />{gameResult + betAmount * pickedStars.length}</span>
                     </p>
                 }
             </div>
