@@ -1,11 +1,15 @@
 import React from 'react';
 import Modal from '../../UI/Modal/Modal';
 import { useNavigate } from 'react-router-dom';
+import { useResetDataMutation } from '../../../store/services/starsGame';
+import { useTelegram } from '../../../hooks/useTelegram';
 
 const DefaultModal = ({
     isModalActive,
     setIsModalActive
 }) => {
+    const [resetUserData, {data, isLoading}] = useResetDataMutation()
+    const {user: tgUser, sendAlert} = useTelegram()
     const navigate = useNavigate()
     const navigateToAddStars = () => {
         setIsModalActive(false)
@@ -14,6 +18,14 @@ const DefaultModal = ({
     const navigateToWithDraw = () => {
         setIsModalActive(false)
         navigate('/withdraw')
+    }
+
+    const handleResetUserData = async () => {
+        await resetUserData({
+            tg_id: tgUser | 658318611,
+        })
+        setIsModalActive(false)
+        sendAlert('Данные пользователя были очищены')
     }
     return (
         <Modal
@@ -51,6 +63,7 @@ const DefaultModal = ({
 
                 Rules
                 </div></li>
+                <li onClick={handleResetUserData}><div>RESET</div></li>
             </ul>
         </Modal>
     );

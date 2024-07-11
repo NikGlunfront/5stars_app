@@ -1,12 +1,12 @@
 import React from 'react';
 
-const AffilateItemSwap = ({swapData}) => {
+const HistoryItemSwap = ({swapData}) => {
     const {
         date,
         amount,
     } = swapData
     return (
-        <div className="history-item history-item_add">
+        <div className="history-item history-item_swap">
             <div className={"history-item__img"}>
                 <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="18.5" cy="18.5" r="18.5" fill="#E4E7FF"/>
@@ -25,7 +25,7 @@ const AffilateItemSwap = ({swapData}) => {
                             <div className="history-game-result-star _active _green"></div>
                             <span>{amount}</span>
                         </div>
-                        <div className="history-item__affilate-profit">
+                        <div className="history-item__affilate-profit ">
                             <div className="history-game-result-star _active _win"></div>
                             <span>{amount.toLocaleString()}</span>
                         </div>
@@ -40,4 +40,4 @@ const AffilateItemSwap = ({swapData}) => {
     );
 };
 
-export default AffilateItemSwap;
+export default HistoryItemSwap;

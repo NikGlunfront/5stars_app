@@ -73,7 +73,7 @@ const AffilateList= ({
 
     const getGameObjView = (obj) => {
         return {
-            id: obj.type + obj.created, 
+            id: obj.created, 
             type: 'game', 
             fee: parseInt(obj.fee_sum), 
             profit: parseInt(obj.fee_sum) / 2, 
@@ -83,10 +83,11 @@ const AffilateList= ({
         }
     }
 
+    const getSwapObjView = (obj) => {
+        return {id: obj.id, type: 'swap',  amount: parseInt(obj.amount), date: formatDate(obj.created)}
+    }
+
     const getIncomeObjView = (obj) => {
-        if (obj.user_id) {
-            console.log(obj)
-        }
         return {id: obj.id, type: 'add',  amount: parseInt(obj.act_value),  profit: parseInt(obj.act_value), date: formatDate(obj.created)}
     }
 
@@ -98,6 +99,10 @@ const AffilateList= ({
         
             case 'add':
                 return getIncomeObjView(obj)
+                break;
+        
+            case 'S':
+                return getSwapObjView(obj)
                 break;
         
             default:
@@ -121,11 +126,11 @@ const AffilateList= ({
     }
     return (
         <BoxWrapper className={'history-list list-affilate'}>
-            {trans.map(affilateItem => (
+            {trans.map((affilateItem, index) => (
                 <AffilateItem 
                     affilateItem={handleObjectView(affilateItem)}
                     tonRate={tonRate}
-                    key={`${affilateItem.type}_${affilateItem.id}`}
+                    key={`${affilateItem.type}_${index}`}
                 />
             ))}
         </BoxWrapper>

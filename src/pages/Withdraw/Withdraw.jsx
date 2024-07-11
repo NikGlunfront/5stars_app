@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react"
 import { useTelegram } from "../../hooks/useTelegram";
 import { useApp } from "../../hooks/useApp";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useScroll } from "../../hooks/useScroll";
+import RequestButton from "../../components/UI/RequestButton/RequestButton";
+import { useSwapStarsMutation } from "../../store/services/starsGame";
 
 const Withdraw= ({
 
@@ -10,7 +12,9 @@ const Withdraw= ({
     const { 
         showTgButton,
         enableTgButton,
-        disableTgButton
+        disableTgButton,
+        user: tgUser,
+        sendAlert
     } = useTelegram()
 
     const {
@@ -19,9 +23,10 @@ const Withdraw= ({
         partnershipBalance
     } = useApp()
     
-
+    const navigate = useNavigate()
     const [starsAmount, setStarsAmount] = useState(partnershipBalance)
     const [tonRate, setTonRate] = useState(0.067656)
+    const [swapStars, {data: swapStarsData, isLoading: isSwapStarsLoading}] = useSwapStarsMutation()
 
     const { scrollTop } = useScroll()
     const location = useLocation()
@@ -63,6 +68,17 @@ const Withdraw= ({
         }
     }
 
+    const handleSwapAccept = async () => {
+        let numStars = starsAmount
+        await swapStars({
+            tg_id: tgUser | 658318611,
+            swap_amount: starsAmount
+        })
+        sendAlert(`${numStars} Stars were successfuly swapped.`)
+        navigate(-1)
+        console.log(`Вывести GreenStars ${starsAmount}`)
+    }
+
     return (
         <div className="withdraw-page">
             <div className="field-withdraw">
@@ -98,6 +114,12 @@ const Withdraw= ({
                     <span>STAR</span>
                 </div>
             </div>
+            <RequestButton
+                onClick={handleSwapAccept}
+                disabled={partnershipBalance < starsAmount}
+            >
+                Swap Stars
+            </RequestButton>
         </div>
     )
 };

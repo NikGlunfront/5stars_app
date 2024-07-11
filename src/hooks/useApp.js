@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setAirdropBalance, setGamesLeft, setIsApplicationLoaded, setIsPremium, setIsWithdrawPage, setMainBalance, setPartnershipBalance, setReferralsCount } from "../store/slices/appSlice/appSlice";
+import { setActivePartnerBalance, setAirdropBalance, setGamesLeft, setIsApplicationLoaded, setIsPremium, setIsWithdrawPage, setMainBalance, setPartnershipBalance, setReferralsCount } from "../store/slices/appSlice/appSlice";
 import { setGameId, setHash2 } from "../store/slices/gameSlice/gameSlice";
 
 export function useApp() {
@@ -12,6 +12,7 @@ export function useApp() {
         partnershipBalance,
         referralsCount,
         gamesLeft,
+        activePartnerBalance,
         isPremium
     } = useSelector(state => state.app)
 
@@ -58,6 +59,10 @@ export function useApp() {
         dispatch(setIsApplicationLoaded(true))
     }
 
+    const changeActivePartnerBalance = (balanceType) => {
+        dispatch(setActivePartnerBalance(balanceType))
+    }
+
     return {
         isLoaded,
         isWithdrawPage,
@@ -67,6 +72,7 @@ export function useApp() {
         referralsCount,
         airdropBalance,
         partnershipBalance,
+        activePartnerBalance,
         setIsAppLoaded,
         setIsWithDraw,
         changeMainBalance,
@@ -76,6 +82,7 @@ export function useApp() {
         handleInitDataFetch,
         updateActiveGame,
         changeIsPremium,
-        changeRefNum
+        changeRefNum,
+        changeActivePartnerBalance
     }
 }

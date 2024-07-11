@@ -8,7 +8,8 @@ const initialState = {
     partnershipBalance: 0,
     isPremium: false,
     gamesLeft: 0,
-    referralsCount: 0
+    referralsCount: 0,
+    activePartnerBalance: 'star'
 }
 
 export const appSlice = createSlice({
@@ -52,6 +53,9 @@ export const appSlice = createSlice({
         },
         setReferralsCount: (state, action) => {
             return {...state, referralsCount: action.payload}
+        },
+        setActivePartnerBalance: (state, action) => {
+            return {...state, activePartnerBalance: action.payload}
         }
     }
 })
@@ -64,7 +68,8 @@ export const {
     setPartnershipBalance,
     setGamesLeft,
     setIsPremium,
-    setReferralsCount
+    setReferralsCount,
+    setActivePartnerBalance
 } = appSlice.actions
 
 export default appSlice.reducer

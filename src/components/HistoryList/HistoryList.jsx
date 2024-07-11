@@ -28,21 +28,6 @@ const HistoryList= ({
     const {user: tgUser} = useTelegram()
     const {data: historyGamesData, isLoading: isHistoryGamesLoading, isError: isHistoryGamesError} = useGetAllHistoryGamesQuery(tgUser | 658318611)
 
-    const updateGlobalItems = (alLItems) => {
-        let betsTotal = 0;
-        let profitTotal = 0;
-        let airdropTotal = 0;
-        for (let i = 0; i < alLItems.length; i++) {
-            const historyItem = alLItems[i];
-            betsTotal += parseInt(historyItem.bet_amount) * historyItem.picked_stars.length
-        }
-        setGlobalHistoryData({
-            bets: betsTotal,
-            profit: profitTotal,
-            airdrop: airdropTotal
-        })
-    }
-
     function formatDate(dateString) {
         const date = new Date(dateString);
       

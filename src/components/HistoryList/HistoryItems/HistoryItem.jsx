@@ -2,6 +2,7 @@ import React from "react"
 import HistoryWithdrawItem from "./HistoryWithdrawItem";
 import HistoryGameResult from "./HistoryGameResult";
 import HistoryItemAddStars from "./HistoryItemAddStars";
+import HistoryItemSwap from "./HistoryItemSwap";
 
 const HistoryItem= ({
     historyItem,
@@ -16,8 +17,12 @@ const HistoryItem= ({
             return <HistoryWithdrawItem tonRate={tonRate} withdrawData={historyItem} />
             
     
-        case 'add':
+        case 'A':
             return <HistoryItemAddStars addStarsData={historyItem} />
+            
+    
+        case 'S':
+            return <HistoryItemSwap swapData={historyItem} />
             
     
         default:

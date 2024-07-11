@@ -57,6 +57,22 @@ export const starsApi = createApi({
         }),
         getReferral: builder.query({
             query: (tgId) => `${userPath}?dispatch=get_referral&tg_id=${tgId}`
+        }),
+        swapStars: builder.mutation({
+            query: (swapData) => ({
+                url: balancePath,
+                method: "POST",
+                body: {...swapData, method: 'swap'}
+            }),
+            invalidatesTags: ['Balance', 'History']
+        }),
+        resetData: builder.mutation({
+            query: (resetData) => ({
+                url: balancePath,
+                method: "POST",
+                body: {...resetData, method: 'reset'}
+            }),
+            invalidatesTags: ['Balance', 'Game', 'History']
         })
     })
 })
@@ -70,5 +86,7 @@ export const {
     useCreateNewGameMutation,
     useGetAllHistoryGamesQuery,
     useGetReferralQuery,
-    useGenerateHashFromStringMutation
+    useGenerateHashFromStringMutation,
+    useSwapStarsMutation,
+    useResetDataMutation
 } = starsApi

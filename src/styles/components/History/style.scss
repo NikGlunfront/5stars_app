@@ -383,11 +383,12 @@
         margin-bottom: 2.5rem;
 
         & > span {
-            padding-left: 3rem;
+            
         }
 
         & > div {
             margin-left: 1.6rem;
+            margin-right: -3rem;
 
             svg {
                 margin-right: 0.5rem;
@@ -453,19 +454,24 @@
         margin-left: 0;
     }
 
-    .history-item__affilate-profit {
-        @include flex_row;
-        align-items: center;
-        margin-left: 1rem;
+}
+.history-item_swap {
+    .history-item__benefits {
+        margin-left: 0;
+    }
+}
+.history-item__affilate-profit {
+    @include flex_row;
+    align-items: center;
+    margin-left: 1rem;
 
-        & > span {
-            font-weight: 700;
-            margin-right: 0.3rem;
-        }
+    & > span {
+        font-weight: 700;
+        margin-right: 0.3rem;
+    }
 
-        & > div {
-            color: #918F9C;
-        }
+    & > div {
+        color: #918F9C;
     }
 }
 .s5-box-wrapper {
