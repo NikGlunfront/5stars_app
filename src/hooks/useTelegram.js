@@ -31,6 +31,10 @@ export function useTelegram() {
         tg.MainButton.disable()
     }
 
+    const handleMainButtonClick = (callback) => {
+        tg.MainButton.onClick(callback)
+    }
+
     const enableTgButton = () => {
         tg.MainButton.enable()
     }
@@ -73,6 +77,7 @@ export function useTelegram() {
         showTgButton,
         hideTgButton,
         enableTgButton,
+        handleMainButtonClick,
         tg,
         user: devTGID | tg.initDataUnsafe?.user?.id,
         queryId: tg.initDataUnsafe?.query_id

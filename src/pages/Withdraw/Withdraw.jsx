@@ -14,7 +14,8 @@ const Withdraw= ({
         enableTgButton,
         disableTgButton,
         user: tgUser,
-        sendAlert
+        sendAlert,
+        handleMainButtonClick
     } = useTelegram()
 
     const {
@@ -33,14 +34,25 @@ const Withdraw= ({
     useEffect(() => {
         scrollTop()
     }, [location.pathname])
-
+    
+    const handleSwapAccept = async () => {
+        let numStars = starsAmount
+        await swapStars({
+            tg_id: tgUser | 658318611,
+            swap_amount: starsAmount
+        })
+        sendAlert(`${numStars} Stars were successfuly swapped.`)
+        navigate(-1)
+        console.log(`Вывести GreenStars ${starsAmount}`)
+    }
     useEffect(() => {
         showTgButton('CONTINUE')
         setIsWithDraw(true)
+        handleMainButtonClick(() => handleSwapAccept())
     }, [])
 
     useEffect(() => {
-        if (starsAmount > 0) {
+        if (starsAmount > 0 && starsAmount <= partnershipBalance) {
             enableTgButton()
         } else {
             disableTgButton()
@@ -68,16 +80,6 @@ const Withdraw= ({
         }
     }
 
-    const handleSwapAccept = async () => {
-        let numStars = starsAmount
-        await swapStars({
-            tg_id: tgUser | 658318611,
-            swap_amount: starsAmount
-        })
-        sendAlert(`${numStars} Stars were successfuly swapped.`)
-        navigate(-1)
-        console.log(`Вывести GreenStars ${starsAmount}`)
-    }
 
     return (
         <div className="withdraw-page">
@@ -114,12 +116,12 @@ const Withdraw= ({
                     <span>STAR</span>
                 </div>
             </div>
-            <RequestButton
+            {/* <RequestButton
                 onClick={handleSwapAccept}
                 disabled={partnershipBalance < starsAmount}
             >
                 Swap Stars
-            </RequestButton>
+            </RequestButton> */}
         </div>
     )
 };
