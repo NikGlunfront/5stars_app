@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../../UI/Modal/Modal';
 import { useApp } from '../../../hooks/useApp';
 import greenStar from '../../../assets/img/icons/game/bet_star_green.svg'
 import coinImg from '../../../assets/img/icons/airdrop_coin.svg'
+import { useChangePpMutation } from '../../../store/services/starsGame';
+import { useTelegram } from '../../../hooks/useTelegram';
 
 const PartnerModal = ({
     isModalActive,
@@ -16,6 +18,11 @@ const PartnerModal = ({
         partnershipBalance,
         changeActivePartnerBalance
     } = useApp()
+
+    const { tg: tgUser, sendAlert } = useTelegram()
+    const { changeIsPremium, isPremium } = useApp()
+
+    const [changePremium, {data, isLoading}] = useChangePpMutation()
     
     const navigateToWithDraw = () => {
         setIsModalActive(false)
@@ -29,6 +36,20 @@ const PartnerModal = ({
         }
         setIsModalActive(false)
     }
+
+    const handleChangePremium = async () => {
+        await changePremium({
+            tg_id: tgUser | 658318611
+        })
+
+        sendAlert('Партнерская программа изменена.')
+    }
+
+    useEffect(() => {
+        if (data && !isLoading) {
+            changeIsPremium(!isPremium)
+        }
+    }, [data, isLoading])
     return (
         <Modal
             className={'balance-popup'}
@@ -49,6 +70,9 @@ const PartnerModal = ({
                             {airdropBalance}
                         </div>
                     }
+                </li>
+                <li onClick={handleChangePremium}>
+                    <div>Change partnership</div>
                 </li>
                 <li onClick={changeBalance}><div>Change Balance</div></li>
                 {activePartnerBalance === "star" &&

@@ -10,8 +10,8 @@ import RequestButton from '../UI/RequestButton/RequestButton';
 
 const bets = [
     {id: 1, val: 10},
-    {id: 2, val: 50},
-    {id: 3, val: 100},
+    {id: 2, val: 20},
+    {id: 3, val: 30},
 ]
 
 const Game = ({

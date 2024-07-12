@@ -22,7 +22,7 @@ const TitleHistory= ({}) => {
             if (historyItem.type === 'game') {
                 betsTotal += parseInt(historyItem.betAmount) * historyItem.bets.length
                 airdropTotal += parseInt(historyItem.is_success) ? (parseInt(historyItem.betAmount) * 5 - parseInt(historyItem.betAmount) * historyItem.bets.length) + parseInt(historyItem.betAmount) * historyItem.bets.length : parseInt(historyItem.betAmount) * historyItem.bets.length
-                profitTotal += parseInt(historyItem.is_success) ? parseInt(historyItem.betAmount) * 5 - parseInt(historyItem.fee) : 0
+                profitTotal += parseInt(historyItem.is_success) ? parseInt(historyItem.betAmount) * 5 - (parseInt(historyItem.betAmount) * historyItem.bets.length) : 0
             }
         }
         setGlobalHistoryData({

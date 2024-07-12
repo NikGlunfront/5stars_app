@@ -2,9 +2,10 @@ import React from 'react';
 
 const HistoryItemSwap = ({swapData}) => {
     const {
-        date,
+        created,
         amount,
     } = swapData
+    
     return (
         <div className="history-item history-item_swap">
             <div className={"history-item__img"}>
@@ -30,7 +31,7 @@ const HistoryItemSwap = ({swapData}) => {
                             <span>{amount.toLocaleString()}</span>
                         </div>
                     </div>
-                    <div className="history-item__date">{date}</div>
+                    <div className="history-item__date">{created}</div>
                 </div>
                 <div className="history-item__right">
                     <div className="history-item__lose _green">-{amount.toLocaleString()}</div>

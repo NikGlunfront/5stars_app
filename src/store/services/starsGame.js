@@ -73,6 +73,14 @@ export const starsApi = createApi({
                 body: {...resetData, method: 'reset'}
             }),
             invalidatesTags: ['Balance', 'Game', 'History']
+        }),
+        changePp: builder.mutation({
+            query: (userData) => ({
+                url: balancePath,
+                method: "POST",
+                body: {...userData, method: 'change_pp'}
+            }),
+            invalidatesTags: ['Balance', 'Game', 'History']
         })
     })
 })
@@ -88,5 +96,6 @@ export const {
     useGetReferralQuery,
     useGenerateHashFromStringMutation,
     useSwapStarsMutation,
-    useResetDataMutation
+    useResetDataMutation,
+    useChangePpMutation
 } = starsApi

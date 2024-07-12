@@ -93,17 +93,6 @@ const FairGame = ({
 
                 </div>
             </BoxWrapper>
-            <BoxWrapper className={'box-btn'}>
-                <div className="box-btn__img _orange" onClick={() => setIsVisibleDebug(!isVisibleDebug)}>
-                    <img src={tokenList} alt="tokenlist" />
-                </div>
-                <div className="box-btn__text">Tokenlist</div>
-                <div className="box-btn__subinfo">
-                    {1}
-                    <img src={tokenListCount} alt="tokenlist_count" />
-
-                </div>
-            </BoxWrapper>
 
             <BoxWrapper className={'box-btn'} linkPath={'/affilate'}>
                 <div className={"box-btn__img _green" + (isPremium ? ' _purple' : '')}>
@@ -115,6 +104,17 @@ const FairGame = ({
                     <svg width="13" height="16" viewBox="0 0 13 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" clipRule="evenodd" d="M6.5 6.5C8.29508 6.5 9.75 5.04508 9.75 3.25C9.75 1.45492 8.29508 0 6.5 0C4.70492 0 3.25 1.45492 3.25 3.25C3.25 5.04508 4.70492 6.5 6.5 6.5ZM6.5 6.5C2.90983 6.5 0 8.3265 0 11.9167C0 16.25 13 16.25 13 11.9167C13 8.3265 10.0902 6.5 6.5 6.5Z" fill="#2CAFFD"/>
                     </svg>
+                </div>
+            </BoxWrapper>
+            <BoxWrapper className={'box-btn'}>
+                <div className="box-btn__img _orange" onClick={() => setIsVisibleDebug(!isVisibleDebug)}>
+                    <img src={tokenList} alt="tokenlist" />
+                </div>
+                <div className="box-btn__text">Tokenlist</div>
+                <div className="box-btn__subinfo">
+                    {1}
+                    <img src={tokenListCount} alt="tokenlist_count" />
+
                 </div>
             </BoxWrapper>
             {isVisibleDebug &&
