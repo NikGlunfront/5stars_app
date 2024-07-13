@@ -14,7 +14,7 @@ const PartnerModal = ({
     const navigate = useNavigate()
     const {
         activePartnerBalance,
-        airdropBalance,
+        partnershipBalanceAirdrop,
         partnershipBalance,
         changeActivePartnerBalance
     } = useApp()
@@ -67,7 +67,7 @@ const PartnerModal = ({
                     {activePartnerBalance === 'coin' && 
                         <div>
                             <img src={coinImg} alt="" />
-                            {airdropBalance}
+                            {partnershipBalanceAirdrop}
                         </div>
                     }
                 </li>

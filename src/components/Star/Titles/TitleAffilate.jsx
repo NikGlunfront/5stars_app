@@ -8,7 +8,7 @@ const TitleAffilate= ({}) => {
     const {
         partnershipBalance,
         referralsCount,
-        airdropBalance
+        partnershipBalanceAirdrop
     } = useApp()
     return (
         <div className='title-affilate'>
@@ -49,7 +49,7 @@ const TitleAffilate= ({}) => {
                 </div>
                 <div>
                     <img src={airdropCoin} alt="airdrop" />
-                    {airdropBalance.toLocaleString()}
+                    {partnershipBalanceAirdrop.toLocaleString()}
                 </div>
                 <div>
                     <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
