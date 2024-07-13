@@ -10,7 +10,7 @@ import CheckWinNumber from './pages/CheckWinNumber/CheckWinNumber';
 import History from './pages/History/History';
 import Home from './pages/Home/Home';
 import Withdraw from './pages/Withdraw/Withdraw';
-import { useGetActiveGameQuery, useGetBalancesQuery, useLoginUserQuery } from './store/services/starsGame';
+import { useGetActiveGameQuery, useGetBalancesQuery, useLoginUserQuery, useSetRefPartnerMutation } from './store/services/starsGame';
 import { useStarGame } from './hooks/useStarGame';
 
 const routes = [
@@ -42,11 +42,22 @@ function App({
     const { data: iniData, isLoading: isInitLoading, isError } = useLoginUserQuery(tgUser|telegramId)
     const { data: balancesData, isLoading: isBalanceDataLoading, isError: isBalanceDataError } = useGetBalancesQuery(tgUser|telegramId)
     const { data: activeGame, isLoading: isActiveGameLoading, isError: isActiveGameError } = useGetActiveGameQuery(tgUser|telegramId)
+    const [setRefPartner, {data, isLoading}] = useSetRefPartnerMutation()
+
+    async function setRef (ref) {
+        await setRefPartner({
+            tg_id: tgUser | telegramId,
+            ref: ref
+        })
+    }
 
     useEffect(() => {
         tg.ready()
         tg.expand()
         tg.enableClosingConfirmation()
+        if (tg.initDataUnsafe?.start_param) {
+            setRef(tg.initDataUnsafe?.start_param)
+        }
     }, [])
 
     useEffect(() => {

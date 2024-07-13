@@ -17,6 +17,9 @@ export function useTelegram() {
             tg.MainButton.show()
         }
     }
+    createUserRefConnection
+    getUserData
+    getUserDataByRefHash
 
     const showTgButton = (text) => {
         tg.MainButton.show()

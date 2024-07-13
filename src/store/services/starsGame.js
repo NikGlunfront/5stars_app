@@ -81,6 +81,13 @@ export const starsApi = createApi({
                 body: {...userData, method: 'change_pp'}
             }),
             invalidatesTags: ['Balance', 'Game', 'History']
+        }),
+        setRefPartner: builder.mutation({
+            query: (userData) => ({
+                url: gamePath,
+                method: "POST",
+                body: {...userData, method: 'set_partner'}
+            })
         })
     })
 })
@@ -97,5 +104,6 @@ export const {
     useGenerateHashFromStringMutation,
     useSwapStarsMutation,
     useResetDataMutation,
-    useChangePpMutation
+    useChangePpMutation,
+    useSetRefPartnerMutation
 } = starsApi
