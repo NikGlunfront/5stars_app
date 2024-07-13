@@ -120,8 +120,8 @@ const FairGame = ({
             {isVisibleDebug &&
                 <BoxWrapper className={'box-btn'} >
                     <p>TG</p>
-                    <pre>{tg.initData?.user?.id}</pre>
-                    <pre>{tg.initData?.start_param}</pre>
+                    <pre>{tg.initDataUnsafe?.user?.id}</pre>
+                    <pre>{tg.initDataUnsafe?.start_param}</pre>
                     <p>User</p>
                     <pre>{user.id}</pre>
                 </BoxWrapper>
