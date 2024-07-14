@@ -3,13 +3,27 @@ import BoxWrapper from "../../Wrappers/BoxWrapper";
 import qrCodeImg from '../../../assets/img/qrcode.png'
 import airdropCoin from '../../../assets/img/icons/airdrop_coin.svg';
 import { useApp } from "../../../hooks/useApp";
+import { useTelegram } from "../../../hooks/useTelegram";
 
 const TitleAffilate= ({}) => {
     const {
         partnershipBalance,
         referralsCount,
-        partnershipBalanceAirdrop
+        partnershipBalanceAirdrop,
+        ref: refHash
     } = useApp()
+
+    const { sendAlert } = useTelegram()
+
+    const copyRefLink = () => {
+        navigator.clipboard.writeText(`https://t.me/gl_pl_bot/starsdevapp?startapp=${refHash}`).then(() => {
+            sendAlert('Реферальная ссылка скопирована');
+        /* Resolved - text copied to clipboard successfully */
+        },() => {
+            sendAlert('Failed to copy');
+        /* Rejected - text failed to copy to the clipboard */
+        });
+    }
     return (
         <div className='title-affilate'>
             <div className="intro-star-topper__subtitle">Affiliate program</div>
@@ -23,7 +37,7 @@ const TitleAffilate= ({}) => {
             <BoxWrapper className={'title-affilate__qr'}>
                 <img src={qrCodeImg} alt="qrCode" />
                 <div className="title-affilate__qr-row">
-                    <div className="title-affilate__qr-copy">
+                    <div className="title-affilate__qr-copy" onClick={copyRefLink}>
                         <svg width="19" height="17" viewBox="0 0 19 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect x="0.5" y="5.33781" width="12.9599" height="10.8659" rx="2.5" stroke="black"/>
                             <path d="M15.4 12C16.8359 12 18 10.8412 18 9.41176V3.58824C18 2.15879 16.8359 1 15.4 1H7.6C6.16406 1 5 2.15879 5 3.58824" stroke="black"/>

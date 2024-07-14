@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setActivePartnerBalance, setAirdropBalance, setGamesLeft, setIsApplicationLoaded, setIsPremium, setIsWithdrawPage, setMainBalance, setPartnershipBalance, setPBalanceAirdrop, setReferralsCount } from "../store/slices/appSlice/appSlice";
+import { setActivePartnerBalance, setAirdropBalance, setGamesLeft, setIsApplicationLoaded, setIsPremium, setIsWithdrawPage, setMainBalance, setPartnershipBalance, setPBalanceAirdrop, setReferralsCount, setRefString } from "../store/slices/appSlice/appSlice";
 import { setGameId, setHash2 } from "../store/slices/gameSlice/gameSlice";
 
 export function useApp() {
@@ -14,11 +14,16 @@ export function useApp() {
         gamesLeft,
         activePartnerBalance,
         isPremium,
+        ref,
         partnershipBalanceAirdrop
     } = useSelector(state => state.app)
 
     const changeRefNum = (val) => {
         dispatch(setReferralsCount(val))
+    }
+
+    const setRefHash = (hash) => {
+        dispatch(setRefString(hash))
     }
 
     const changePAirdropBalance = (val) => {
@@ -62,6 +67,7 @@ export function useApp() {
 
     const handleInitDataFetch = (iniData) => {
         dispatch(setIsPremium(iniData.is_premium == 1 ? true : false))
+        setRefHash(iniData.ref)
         dispatch(setIsApplicationLoaded(true))
     }
 
@@ -76,6 +82,7 @@ export function useApp() {
         isPremium,
         gamesLeft,
         referralsCount,
+        ref,
         airdropBalance,
         partnershipBalance,
         activePartnerBalance,
