@@ -39,11 +39,11 @@ const Withdraw= ({
         let numStars = starsAmount
         await swapStars({
             tg_id: tgUser | 658318611,
-            swap_amount: starsAmount
+            swap_amount: numStars
         })
         sendAlert(`${numStars} Stars were successfuly swapped.`)
         navigate(-1)
-        console.log(`Вывести GreenStars ${starsAmount}`)
+        console.log(`Вывести GreenStars ${numStars}`)
     }
     useEffect(() => {
         showTgButton('CONTINUE')
