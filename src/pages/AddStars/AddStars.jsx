@@ -29,7 +29,8 @@ const AddStars= ({
     const dispatch = useDispatch()
 
     const {
-        setIsWithDraw
+        setIsWithDraw,
+        mainBalance
     } = useApp()
 
     const { 
@@ -76,12 +77,12 @@ const AddStars= ({
     }
 
     useEffect(() => {
-        if (pickedVal > 0) {
+        if (pickedVal > 0 && mainBalance < 10) {
             showTgButton(`ADD ${pickedVal} Stars`)
         } else {
             hideTgButton()
         }
-    }, [pickedVal])
+    }, [pickedVal, mainBalance])
 
     useEffect(() => {
         if (!isAddStarsLoading && addStarsData) {
