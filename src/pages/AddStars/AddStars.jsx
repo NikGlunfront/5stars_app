@@ -38,6 +38,8 @@ const AddStars= ({
         user: tgUser, 
         hideTgButton,
         showTgButton,
+        enableTgButton,
+        disableTgButton,
         handleMainButtonClick
      } = useTelegram()
 
@@ -83,8 +85,10 @@ const AddStars= ({
     useEffect(() => {
         if (pickedVal > 0 && mainBalance < 10) {
             showTgButton(`ADD ${pickedVal} Stars`)
+            enableTgButton()
         } else {
             hideTgButton()
+            disableTgButton()
         }
     }, [pickedVal, mainBalance])
 
