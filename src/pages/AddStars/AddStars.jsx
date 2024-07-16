@@ -36,7 +36,8 @@ const AddStars= ({
         sendAlert, 
         user: tgUser, 
         hideTgButton,
-        showTgButton
+        showTgButton,
+        handleMainButtonClick
      } = useTelegram()
 
     const [addStarsClick, { data: addStarsData, isLoading: isAddStarsLoading, error: isAddStarsError}] = useAddStarsMutation()
@@ -51,6 +52,7 @@ const AddStars= ({
     useEffect(() => {
         hideTgButton()
         setIsWithDraw(false)
+        handleMainButtonClick(addStarsHandler())
     }, [])
 
     const handlePickStarAmount = (val) => {
