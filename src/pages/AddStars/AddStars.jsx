@@ -55,7 +55,6 @@ const AddStars= ({
     useEffect(() => {
         hideTgButton()
         setIsWithDraw(false)
-        handleMainButtonClick(() => handleMainButtonAddStars())
     }, [])
 
     const handleMainButtonAddStars = () => {
@@ -65,12 +64,13 @@ const AddStars= ({
     const handlePickStarAmount = (val) => {
         if (pickedVal !== val) {
             setPickedVal(val)
+            handleMainButtonClick((val) => handleMainButtonAddStars(val))
         } else {
             setPickedVal(0)
         }
     }
 
-    const addStarsHandler = async () => {
+    const addStarsHandler = async (pickedVal) => {
         if (!isAddStarsLoading) {
             await addStarsClick({
                 tg_id: tgUser | 658318611,

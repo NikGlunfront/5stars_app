@@ -14,7 +14,7 @@ const AddStarsGame = ({
 }) => {
     const [pickedStarBet, setPickedStarBet] = useState(0)
     const { isVisibleBonus } = useSelector(state => state.addStar)
-    const { user: tgUser, sendAlert } = useTelegram()
+    const { user: tgUser, sendAlert, hideTgButton } = useTelegram()
     const [saveBonusGame, {data: bonusGamePost, isLoading: isBonusGamePostLoading}] = useSaveBonusGameMutation()
     const [addStarsClick, { data: addStarsData, isLoading: isAddStarsLoading, error: isAddStarsError}] = useAddStarsMutation()
     const {data: bonusData, isLoading: isBonusDataLoading} = useGetBonusQuery(tgUser | 658318611)
@@ -39,6 +39,10 @@ const AddStarsGame = ({
             }
         } else {
             dispatch(shuffleBonuses())
+        }
+
+        if (bonusData?.error) {
+            hideTgButton()
         }
 
     }, [bonusData, isBonusDataLoading])
