@@ -53,9 +53,13 @@ const AddStars= ({
     useEffect(() => {
         hideTgButton()
         setIsWithDraw(false)
-        handleMainButtonClick(addStarsHandler())
+        handleMainButtonClick(() => handleMainButtonAddStars())
     }, [])
 
+    const handleMainButtonAddStars = () => {
+        addStarsHandler()
+        hideTgButton()
+    }
     const handlePickStarAmount = (val) => {
         if (pickedVal !== val) {
             setPickedVal(val)

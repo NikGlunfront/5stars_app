@@ -28,13 +28,14 @@ const telegramId = 658318611
 function App({
 
 }) {
-    const {tg, user: tgUser} = useTelegram();
+    const {tg, user: tgUser, hideTgButton} = useTelegram();
     const { 
         handleInitDataFetch,
         isLoaded,
         isWithdrawPage,
         updateAllBalances,
         updateActiveGame,
+        mainBalance
     } = useApp();
 
     const { setPlayedGame, updateHash1 } = useStarGame()
@@ -88,6 +89,12 @@ function App({
             }
         }
     }, [isActiveGameLoading, activeGame, iniData])
+
+    useEffect(() => {
+        if (mainBalance >= 10) {
+            hideTgButton()
+        }
+    }, [mainBalance])
 
     if (isError) {
         return (

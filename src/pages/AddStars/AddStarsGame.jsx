@@ -69,6 +69,7 @@ const AddStarsGame = ({
                     bonus_multiply: pickedStarBet
                 }
             })
+            sendAlert(`Баланс пополнен на ${pickedAddStarValue * pickedStarBet} Stars`)
             dispatch(resetBonus())
         }
     }
