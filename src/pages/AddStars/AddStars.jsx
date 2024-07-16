@@ -85,13 +85,13 @@ const AddStars= ({
     }
 
     useEffect(() => {
-        if (pickedVal > 0 && mainBalance < 10 && !pickedStar) {
-            showTgButton(`ADD ${pickedVal} Stars`)
-            enableTgButton()
-        } else {
-            hideTgButton()
-            disableTgButton()
-        }
+        // if (pickedVal > 0 && mainBalance < 10 && !pickedStar) {
+        //     showTgButton(`ADD ${pickedVal} Stars`)
+        //     enableTgButton()
+        // } else {
+        //     hideTgButton()
+        //     disableTgButton()
+        // }
     }, [pickedVal, mainBalance, pickedStar])
 
     useEffect(() => {
