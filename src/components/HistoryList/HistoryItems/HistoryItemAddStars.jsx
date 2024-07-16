@@ -1,14 +1,16 @@
 import React from "react"
 
 const HistoryItemAddStars= ({
-    addStarsData
+    addStarsData,
+    isPrize = false,
 }) => {
     const {
         amount,
         date,
+        bonus_multiply = 0
     } = addStarsData
     return (
-        <div className="history-item history-item_withdraw">
+        <div className="history-item history-item_add">
             <div className={"history-item__img"}>
                 <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="18.5" cy="18.5" r="18.5" fill="#E9FBEE"/>
@@ -22,14 +24,20 @@ const HistoryItemAddStars= ({
                     </div>
                     <div className="history-item__changes">
                         <div className="history-item__spend">
-                            <div className="history-game-result-star _active _win"></div>
+                            <div className={"history-game-result-star _active _win" + (isPrize ? " _bonus" : "")}></div>
                             {amount}
                         </div>
+                        {bonus_multiply > 0 &&
+                            <div className="history-item__affilate-profit ">
+                                <div className="history-game-result-star _active _green"></div>
+                                <span>{parseInt(bonus_multiply) * parseInt(amount)}</span>
+                            </div>
+                        }
                     </div>
                     <div className="history-item__date">{date}</div>
                 </div>
                 <div className="history-item__right">
-                    <div className="history-item__win">+{amount}</div>
+                    <div className="history-item__win">+{parseInt(bonus_multiply) ? parseInt(amount) * (parseInt(bonus_multiply) + 1) : amount}</div>
                 </div>
             </div>
         </div>

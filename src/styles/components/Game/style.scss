@@ -94,7 +94,7 @@
                         background-image: url('../../../assets/img/icons/game/bet_active.png');
                         background-repeat: no-repeat;
                         background-size: contain;
-                        transform: translate(0, 0.1rem);
+                        transform: translate(0, 0.2rem);
                     }
                 }
 
@@ -102,7 +102,7 @@
                     margin-left: 1.5rem;
                     img {
                         margin-right: 0.5rem;
-                        transform: translate(0, 0.1rem);
+                        transform: translate(0, 0.2rem);
                     }
                 }
 
@@ -265,5 +265,26 @@
             }
         }
 
+    }
+}
+
+.add-star-game .s5-game__text p span {
+    margin-left: 0;
+
+    &:first-child::before {
+        background-image: url('../../../assets/img/icons/game/bet_star_green.svg');
+        background-repeat: no-repeat;
+        background-size: contain;
+        filter: none;
+    }
+}
+.add-star-game.add-star-game_prize .s5-game__text p span {
+    margin-left: 0;
+
+    &:first-child::before {
+        background-image: url('../../../assets/img/icons/game/bet_star_bonus.svg');
+        background-repeat: no-repeat;
+        background-size: contain;
+        filter: none;
     }
 }

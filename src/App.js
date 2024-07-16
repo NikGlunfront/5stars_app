@@ -55,10 +55,13 @@ function App({
         tg.ready()
         tg.expand()
         tg.enableClosingConfirmation()
+    }, [])
+
+    useEffect(() => {
         if (tg.initDataUnsafe?.start_param) {
             setRef(tg.initDataUnsafe?.start_param)
         }
-    }, [])
+    }, [tg.initDataUnsafe?.start_param])
 
     useEffect(() => {
         if (!isInitLoading) {

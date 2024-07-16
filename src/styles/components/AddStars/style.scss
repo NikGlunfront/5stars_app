@@ -4,10 +4,102 @@
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
-        padding: 0 1.5rem;
+        // padding: 0 1.5rem;
         margin-top: 2rem;
+        margin-bottom: 2.5rem;
     }
 
+    &__game {
+        // padding: 0 1.5rem;
+    }
+
+}
+
+.add-star-game {
+    &._disabled {
+        pointer-events: none !important;
+    }
+    &__topper {
+        @include flex_row;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 2.2rem;
+        padding: 0 1rem;
+
+        & > span {
+            display: block;   
+            font-weight: 700;
+            font-size: 3rem;
+            line-height: 3.4rem;
+        }
+    }
+
+    &__timer {
+        flex-grow: 0;
+        flex-shrink: 0;
+        flex-basis: calc((100% - 4rem) / 3);
+        border-radius: 0.5rem;
+        background-color: #EFEEF4;
+        color: rgba(0, 0, 0, 0.4);
+        font-weight: 500;
+        font-size: 2.4rem;
+        line-height: 3.4rem;
+        padding: 0 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &.add-star-game_prize {
+        .stars-s5-game {
+            &__star {
+                &._active {
+                    &._finished {
+                        svg {
+                            fill: #DC82FD;
+                            path {
+                                fill: #DC82FD;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .stars-s5-game {
+        &__star {
+            &._finished {
+                svg {
+                    fill: #918F9C;
+                    path {
+                        fill: #918F9C;
+                    }
+                }
+                span {
+                    @include flex_row;
+                    color: var(--s5-black-color);
+                    background-color: var(--s5-white-color);
+                }
+            }
+            &._active {
+                &._finished {
+                    span {
+                        background-color: var(--s5-white-color);
+                        color: var(--s5-black-color);
+                    }
+                    svg {
+                        // fill: #DC82FD;
+                        fill: #31B545;
+                        path {
+                            // fill: #DC82FD;
+                            fill: #31B545;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 .addstars-item {
@@ -26,4 +118,9 @@
     background-color: var(--s5-white-color);
     font-size: 1.5rem;
     font-weight: 500;
+
+    &._active {
+        background-color: var(--s5-blue-color);
+        color: var(--s5-white-color);
+    }
 }

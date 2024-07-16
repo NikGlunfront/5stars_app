@@ -25,7 +25,7 @@ const Withdraw= ({
     } = useApp()
     
     const navigate = useNavigate()
-    const [starsAmount, setStarsAmount] = useState(partnershipBalance)
+    const [starsAmount, setStarsAmount] = useState(0)
     const [tonRate, setTonRate] = useState(0.067656)
     const [swapStars, {data: swapStarsData, isLoading: isSwapStarsLoading}] = useSwapStarsMutation()
 

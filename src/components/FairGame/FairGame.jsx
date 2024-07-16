@@ -9,6 +9,7 @@ import tokenList from '../../assets/img/icons/tokenlist.svg'
 import tokenListCount from '../../assets/img/icons/token_list_count.svg'
 import { useCalculateGameMutation } from '../../store/services/starsGame';
 import { useTelegram } from '../../hooks/useTelegram';
+import { useSelector } from 'react-redux';
 
 const FairGame = ({
 
@@ -18,6 +19,7 @@ const FairGame = ({
         user,
         queryId
     } = useTelegram()
+    const { isVisibleBonus } = useSelector(state => state.addStar)
     const [isVisibleDebug, setIsVisibleDebug] = useState(false)
     const {
         resultNumber,
@@ -37,7 +39,8 @@ const FairGame = ({
         airdropBalance,
         partnershipBalance,
         isPremium,
-        referralsCount
+        referralsCount,
+        mainBalance
     } = useApp()
 
     useEffect(() => {
@@ -60,24 +63,28 @@ const FairGame = ({
 
     return (
         <div className='fair-game'>
-            <div className="fair-game__title">FAIR GAME</div>
-            <BoxWrapper className={'hash-box'} linkPath={isGameFinished ? '/check-win-num' : null}>
-            {/* <BoxWrapper className={'hash-box'}> */}
-                <div className={"hash-box__inner" + (isGameFinished ? ' _result' : '')} data-winnum={isGameFinished ? resultNumber : '?'}>
-                    <div className="hash-box__hash">
-                        <span>WIN NUMBER HASH</span>
-                        <p>{isGameFinished ? hash1String : hash2String}</p>
-                    </div>
-                    <div className={"hash-box__details"}>
-                        {isGameFinished
-                            ?
-                            <p>Win number: {resultNumber} <span>Check it</span></p>
-                            :
-                            <p>Number of the Lucky Star has been encrypted into the hash above. <span>See details</span></p>
-                        }
-                    </div>
+            {mainBalance >= 10 &&
+                <div>
+                    <div className="fair-game__title">FAIR GAME</div>
+                    <BoxWrapper className={'hash-box'} linkPath={isGameFinished ? '/check-win-num' : null}>
+                    {/* <BoxWrapper className={'hash-box'}> */}
+                        <div className={"hash-box__inner" + (isGameFinished ? ' _result' : '')} data-winnum={isGameFinished ? resultNumber : '?'}>
+                            <div className="hash-box__hash">
+                                <span>WIN NUMBER HASH</span>
+                                <p>{isGameFinished ? hash1String : hash2String}</p>
+                            </div>
+                            <div className={"hash-box__details"}>
+                                {isGameFinished
+                                    ?
+                                    <p>Win number: {resultNumber} <span>Check it</span></p>
+                                    :
+                                    <p>Number of the Lucky Star has been encrypted into the hash above. <span>See details</span></p>
+                                }
+                            </div>
+                        </div>
+                    </BoxWrapper>
                 </div>
-            </BoxWrapper>
+            }
 
             <BoxWrapper className={'box-btn'} linkPath={'/history'}>
                 <div className="box-btn__img _grey">

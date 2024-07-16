@@ -5,6 +5,9 @@ import { useApp } from '../../hooks/useApp';
 import { useLocation } from 'react-router-dom';
 import { useScroll } from '../../hooks/useScroll';
 import { useTelegram } from '../../hooks/useTelegram';
+import { useSelector } from 'react-redux';
+import AddStars from '../AddStars/AddStars';
+import AddStarsGamePrize from '../AddStars/AddStarsGamePrize';
 
 const Home = ({
 
@@ -12,8 +15,11 @@ const Home = ({
 
     const {
         setIsWithDraw,
-        isLoaded
+        isLoaded,
+        mainBalance
     } = useApp()
+
+    const { isVisibleBonus } = useSelector(state => state.addStar)
 
     const { hideTgButton } = useTelegram()
     const { scrollTop } = useScroll()
@@ -32,7 +38,9 @@ const Home = ({
         <div className='homepage'>
             {isLoaded &&
                 <div className="s5-app__content">
-                    <Game />
+                    {<AddStarsGamePrize />}
+                    {(mainBalance < 10) && <AddStars />}
+                    {(mainBalance >= 10) && <Game />}
                 
 
                     <FairGame />

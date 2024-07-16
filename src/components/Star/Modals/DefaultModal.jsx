@@ -1,23 +1,34 @@
 import React from 'react';
-import Modal from '../../UI/Modal/Modal';
-import { useNavigate } from 'react-router-dom';
-import { useResetDataMutation } from '../../../store/services/starsGame';
 import { useTelegram } from '../../../hooks/useTelegram';
+import { useCreatePrizeGameMutation, useResetDataMutation } from '../../../store/services/starsGame';
+import Modal from '../../UI/Modal/Modal';
+import { useSelector } from 'react-redux';
+
+const prizes = [
+    {id: 1, value: 50},
+    {id: 2, value: 100},
+    {id: 3, value: 150},
+    {id: 4, value: 200},
+    {id: 5, value: 250},
+]
 
 const DefaultModal = ({
     isModalActive,
     setIsModalActive
 }) => {
+    const { prizeId } = useSelector(state => state.addStar)
     const [resetUserData, {data, isLoading}] = useResetDataMutation()
     const {user: tgUser, sendAlert} = useTelegram()
-    const navigate = useNavigate()
-    const navigateToAddStars = () => {
-        setIsModalActive(false)
-        navigate('/add-stars')
-    }
-    const navigateToWithDraw = () => {
-        setIsModalActive(false)
-        navigate('/withdraw')
+    const [createUserPrize, {data: prizeData, isLoading: isPrizeDataLoading}] = useCreatePrizeGameMutation()
+
+    const shufflePrizes = () => {
+        let newArr = [...prizes]
+        for (let i = newArr.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1));
+            [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
+        }
+
+        return newArr;
     }
 
     const handleResetUserData = async () => {
@@ -27,6 +38,15 @@ const DefaultModal = ({
         setIsModalActive(false)
         sendAlert('Данные пользователя были очищены')
     }
+
+    const createPrize = async () => {
+        await createUserPrize({
+            picked_star: 0,
+            tg_id: tgUser | 658318611,
+            prizes: [...shufflePrizes()]
+        })
+        setIsModalActive(false)
+    }
     return (
         <Modal
             className={'balance-popup'}
@@ -34,7 +54,7 @@ const DefaultModal = ({
             setActive={setIsModalActive}
         >
             <ul>
-                <li onClick={navigateToAddStars}><div>
+                {/* <li onClick={navigateToAddStars}><div>
                 <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fillRule="evenodd" clipRule="evenodd" d="M13.7886 13.7886C16.3272 11.2499 16.3272 7.13482 13.7886 4.59618C11.2499 2.05755 7.13482 2.05755 4.59619 4.59618C2.05756 7.13482 2.05756 11.2499 4.59619 13.7886C7.13482 16.3272 11.2499 16.3272 13.7886 13.7886Z" stroke="black" strokeLinecap="round" strokeLinejoin="round"/>
                     <path d="M7.14969 11.2351H11.2352V7.1496" stroke="black" strokeLinecap="round" strokeLinejoin="round"/>
@@ -42,7 +62,7 @@ const DefaultModal = ({
                 </svg>
 
                 Add stars
-                </div></li>
+                </div></li> */}
                 {/* <li onClick={navigateToWithDraw}><div>
                 <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fillRule="evenodd" clipRule="evenodd" d="M13.7886 4.59622C16.3272 7.13486 16.3272 11.25 13.7886 13.7886C11.2499 16.3272 7.13482 16.3272 4.59619 13.7886C2.05756 11.25 2.05756 7.13486 4.59619 4.59622C7.13482 2.05759 11.2499 2.05759 13.7886 4.59622Z" stroke="black" strokeLinecap="round" strokeLinejoin="round"/>
@@ -64,6 +84,7 @@ const DefaultModal = ({
                 Rules
                 </div></li>
                 <li onClick={handleResetUserData}><div>RESET</div></li>
+                {!prizeId && <li onClick={createPrize}><div>Get prize</div></li>}
             </ul>
         </Modal>
     );

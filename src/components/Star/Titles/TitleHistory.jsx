@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useTelegram } from "../../../hooks/useTelegram";
-import { useGetAllHistoryGamesQuery } from "../../../store/services/starsGame";
+import { useGetAllHistoryGamesQuery, useGetHistoryTotalsQuery } from "../../../store/services/starsGame";
 
 const TitleHistory= ({}) => {
     const [globalHistoryData, setGlobalHistoryData] = useState({
@@ -10,30 +10,19 @@ const TitleHistory= ({}) => {
     })
 
     const {user: tgUser} = useTelegram()
-    const {data: historyGamesData, isLoading: isHistoryGamesLoading, isError: isHistoryGamesError, refetch} = useGetAllHistoryGamesQuery(tgUser | 658318611)
+    const {data: historyGamesData, isLoading: isHistoryGamesLoading, isError: isHistoryGamesError, refetch} = useGetHistoryTotalsQuery(tgUser | 658318611)
 
 
     const updateGlobalItems = (alLItems) => {
-        let betsTotal = 0;
-        let profitTotal = 0;
-        let airdropTotal = 0;
-        for (let i = 0; i < alLItems.length; i++) {
-            const historyItem = alLItems[i];
-            if (historyItem.type === 'game') {
-                betsTotal += parseInt(historyItem.betAmount) * historyItem.bets.length
-                airdropTotal += parseInt(historyItem.is_success) ? (parseInt(historyItem.betAmount) * 5 - parseInt(historyItem.betAmount) * historyItem.bets.length) + parseInt(historyItem.betAmount) * historyItem.bets.length : parseInt(historyItem.betAmount) * historyItem.bets.length
-                profitTotal += parseInt(historyItem.is_success) ? parseInt(historyItem.betAmount) * 5 - (parseInt(historyItem.betAmount) * historyItem.bets.length) : 0
-            }
-        }
         setGlobalHistoryData({
-            bets: betsTotal,
-            profit: profitTotal,
-            airdrop: airdropTotal
+            bets: parseInt(alLItems.bet_sum) | 0,
+            profit: parseInt(alLItems.win_sum) | 0,
+            airdrop: parseInt(alLItems.air_sum) | 0
         })
     }
 
     useEffect(() => {
-        if (!isHistoryGamesLoading && historyGamesData?.length) {
+        if (!isHistoryGamesLoading && historyGamesData) {
             updateGlobalItems(historyGamesData)
         }
     }, [historyGamesData, isHistoryGamesLoading])

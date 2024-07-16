@@ -328,6 +328,9 @@
         &._green {
             opacity: 1;
         }
+        &._bonus {
+            opacity: 1;
+        }
     }
 
     &._win {
@@ -340,6 +343,13 @@
     &._green {
         opacity: 0.4;
         background-image: url('../../../assets/img/icons/game/bet_star_green.svg');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+    }
+    &._bonus {
+        opacity: 0.4;
+        background-image: url('../../../assets/img/icons/game/bet_star_bonus.svg');
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center;
@@ -505,5 +515,14 @@
     svg {
         margin-right: 0.5rem;
         transform: translate(0, -0.1rem);
+    }
+}
+
+.history-item.history-item_add {
+    .history-item__affilate-profit {
+        margin-left: 0;
+    }
+    .history-item__spend {
+        font-weight: 700;
     }
 }

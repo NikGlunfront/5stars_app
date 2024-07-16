@@ -33,6 +33,9 @@ const HistoryItem= ({
         case 'A':
             return <HistoryItemAddStars addStarsData={historyItem} />
             
+        case 'P':
+            return <HistoryItemAddStars addStarsData={historyItem} isPrize={true} />
+            
     
         case 'S':
             return <HistoryItemSwap swapData={{...historyItem, created: formatDate(historyItem.created)}} />
