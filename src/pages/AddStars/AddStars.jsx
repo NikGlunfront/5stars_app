@@ -6,7 +6,7 @@ import { useAddStarsMutation, useLazyAddStarsQuery } from "../../store/services/
 import { useTelegram } from "../../hooks/useTelegram";
 import AddStarsGame from "./AddStarsGame";
 import RequestButton from "../../components/UI/RequestButton/RequestButton";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { resetBonus } from "../../store/slices/addStarSlice/addStarSlice";
 
 const starVars = [
@@ -43,6 +43,8 @@ const AddStars= ({
         handleMainButtonClick
      } = useTelegram()
 
+    const {pickedStar} = useSelector(state => state.addStar)
+
     const [addStarsClick, { data: addStarsData, isLoading: isAddStarsLoading, error: isAddStarsError}] = useAddStarsMutation()
 
     const { scrollTop } = useScroll()
@@ -57,8 +59,8 @@ const AddStars= ({
         setIsWithDraw(false)
     }, [])
 
-    const handleMainButtonAddStars = () => {
-        addStarsHandler()
+    const handleMainButtonAddStars = (val) => {
+        addStarsHandler(val)
         hideTgButton()
     }
     const handlePickStarAmount = (val) => {
@@ -83,14 +85,14 @@ const AddStars= ({
     }
 
     useEffect(() => {
-        if (pickedVal > 0 && mainBalance < 10) {
+        if (pickedVal > 0 && mainBalance < 10 && !pickedStar) {
             showTgButton(`ADD ${pickedVal} Stars`)
             enableTgButton()
         } else {
             hideTgButton()
             disableTgButton()
         }
-    }, [pickedVal, mainBalance])
+    }, [pickedVal, mainBalance, pickedStar])
 
     useEffect(() => {
         if (!isAddStarsLoading && addStarsData) {
