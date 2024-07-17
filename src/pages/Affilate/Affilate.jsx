@@ -46,6 +46,10 @@ const Affilate= ({}) => {
         }
     }
 
+    if (!refData) {
+        return
+    }
+
     return (
         <div className={"affilate-page" + (isPremium ? " _premium" : '')}>
             <RequestButton

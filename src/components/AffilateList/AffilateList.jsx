@@ -72,14 +72,26 @@ const AffilateList= ({
     }
 
     const getGameObjView = (obj) => {
-        return {
-            id: obj.created, 
-            type: 'game', 
-            fee: parseInt(obj.fee_sum), 
-            profit: parseInt(obj.fee_sum) / 2, 
-            date: formatDate(obj.created, 'dayOnly'), 
-            partnerProfit: parseInt(obj.act_value_sum), 
-            partnerAmount: parseInt(obj.uniq_user_ids_amount)
+        if (isPremium) {
+            return {
+                id: obj.created, 
+                type: 'game', 
+                fee: parseInt(obj.act_value_sum), 
+                profit: parseInt(obj.act_value_sum), 
+                date: formatDate(obj.created, 'dayOnly'), 
+                partnerProfit: parseInt(obj.act_value_sum), 
+                partnerAmount: parseInt(obj.uniq_user_ids_amount)
+            }
+        } else {
+            return {
+                id: obj.created, 
+                type: 'game', 
+                fee: parseInt(obj.fee_sum), 
+                profit: parseInt(obj.fee_sum) / 2, 
+                date: formatDate(obj.created, 'dayOnly'), 
+                partnerProfit: parseInt(obj.act_value_sum), 
+                partnerAmount: parseInt(obj.uniq_user_ids_amount)
+            }
         }
     }
 
@@ -88,26 +100,41 @@ const AffilateList= ({
     }
 
     const getIncomeObjView = (obj) => {
-        return {id: obj.id, type: 'add',  amount: parseInt(obj.act_value),  profit: parseInt(obj.act_value), date: formatDate(obj.created)}
+        if (isPremium) {
+            return {id: obj.id, type: 'add',  amount: parseInt(obj.act_value),  profit: parseInt(obj.act_value) / 2, date: formatDate(obj.created)}
+        } else {
+            return {id: obj.id, type: 'add',  amount: parseInt(obj.act_value),  profit: parseInt(obj.act_value), date: formatDate(obj.created)}
+        }
     }
 
+    const handleObjectViewPremium = (obj) => {
+        switch (obj.type) {
+            case 'game':
+                return getGameObjView(obj)
+        
+            case 'add':
+                return getIncomeObjView(obj)
+        
+            case 'S':
+                return
+        
+            default:
+                return obj
+        }
+    }
     const handleObjectView = (obj) => {
         switch (obj.type) {
             case 'game':
                 return getGameObjView(obj)
-                break;
         
             case 'add':
                 return getIncomeObjView(obj)
-                break;
         
             case 'S':
                 return getSwapObjView(obj)
-                break;
         
             default:
                 return obj
-                break;
         }
     }
     
@@ -128,7 +155,7 @@ const AffilateList= ({
         <BoxWrapper className={'history-list list-affilate'}>
             {trans.map((affilateItem, index) => (
                 <AffilateItem 
-                    affilateItem={handleObjectView(affilateItem)}
+                    affilateItem={isPremium ? handleObjectViewPremium(affilateItem) : handleObjectView(affilateItem)}
                     tonRate={tonRate}
                     key={`${affilateItem.type}_${index}`}
                 />

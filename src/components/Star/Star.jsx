@@ -13,6 +13,7 @@ import TitleAffilate from './Titles/TitleAffilate';
 import TitleHistory from './Titles/TitleHistory';
 import TitleAffilatePremium from './Titles/TitleAffilatePremium';
 import PartnerModal from './Modals/PartnerModal';
+import PremiumPartnerModal from './Modals/PremiumPartnerModal';
  
 const Star = ({
 
@@ -21,7 +22,15 @@ const Star = ({
     const [isShareActive, setIsShareActive] = useState(false)
     const navigate = useNavigate()
     const location = useLocation()
-    const { isLoaded, mainBalance, isPremium, airdropBalance, partnershipBalance, gamesLeft, activePartnerBalance, partnershipBalanceAirdrop } = useApp()
+    const { isLoaded, mainBalance, isPremium, airdropBalance, partnershipBalance, gamesLeft, activePartnerBalance, partnershipBalanceAirdrop, partnershipBalanceUsdt, changeActivePartnerBalance } = useApp()
+
+    useEffect(() => {
+        if (isPremium) {
+            changeActivePartnerBalance('usdt')
+        } else {
+            changeActivePartnerBalance('star')
+        }
+    }, [isPremium])
 
     useEffect(() => {
         if (location.pathname === '/') {
@@ -94,8 +103,8 @@ const Star = ({
                         "star-topper__balance" +
                         (location.pathname.includes('history') ? ' _airdrop' : '') +
                         ((location.pathname.includes('affilate') || location.pathname.includes('withdraw')) && !isPremium ? ' _affilate' : '') +
-                        ((location.pathname.includes('affilate') || location.pathname.includes('withdraw')) && activePartnerBalance === 'coin' ? ' _affilate_coin' : '') +
-                        ((location.pathname.includes('affilate') || location.pathname.includes('withdraw')) && isPremium ? ' _affilate_premium' : '')
+                        ((location.pathname.includes('affilate') || location.pathname.includes('withdraw')) && isPremium ? ' _affilate_premium' : '') +
+                        ((location.pathname.includes('affilate') || location.pathname.includes('withdraw')) && activePartnerBalance === 'coin' ? ' _affilate_coin' : '')
                     } 
                     onClick={openModal}
                 >
@@ -103,6 +112,7 @@ const Star = ({
                         {(location.pathname === '/' || location.pathname.includes('add-stars') || location.pathname.includes('check-win-num')) && mainBalance}
                         {location.pathname.includes('history') && airdropBalance}
                         {(location.pathname.includes('affilate') || location.pathname.includes('withdraw')) && activePartnerBalance === 'star' && partnershipBalance}
+                        {(location.pathname.includes('affilate') || location.pathname.includes('withdraw')) && activePartnerBalance === 'usdt' && partnershipBalanceUsdt}
                         {location.pathname.includes('affilate') && activePartnerBalance === 'coin' && partnershipBalanceAirdrop}
                         <svg width="2" height="12" viewBox="0 0 2 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1.7 11.6757C1.5 11.8919 1.26667 12 1 12C0.733333 12 0.5 11.8919 0.3 11.6757C0.1 11.4595 0 11.2073 0 10.9191C0 10.6308 0.1 10.3786 0.3 10.1624C0.5 9.94623 0.733333 9.83814 1 9.83814C1.26667 9.83814 1.5 9.94623 1.7 10.1624C1.9 10.3786 2 10.6308 2 10.9191C2 11.2073 1.9 11.4595 1.7 11.6757Z" fill="black"/>
@@ -118,8 +128,14 @@ const Star = ({
                         setIsModalActive={setIsModalActive}
                     />
                 }
-                {location.pathname.includes('affilate') &&
+                {location.pathname.includes('affilate') && !isPremium &&
                     <PartnerModal 
+                        isModalActive={isModalActive}
+                        setIsModalActive={setIsModalActive}
+                    />
+                }
+                {location.pathname.includes('affilate') && isPremium &&
+                    <PremiumPartnerModal 
                         isModalActive={isModalActive}
                         setIsModalActive={setIsModalActive}
                     />

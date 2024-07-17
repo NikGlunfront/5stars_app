@@ -14,9 +14,7 @@ const TitleAffilate= ({}) => {
         ref: refHash
     } = useApp()
 
-    const {user: tgUser} = useTelegram()
-
-    const { sendAlert } = useTelegram()
+    const { sendAlert, user: tgUser } = useTelegram()
     const {data: refData, isLoading: isRefDataLoading, refetch: refetchRefQuery} = useGetReferralQuery(tgUser|telegramId)
 
     const copyRefLink = () => {
@@ -40,6 +38,7 @@ const TitleAffilate= ({}) => {
             </div>
             <BoxWrapper className={'title-affilate__qr'}>
                 <img src={qrCodeImg} alt="qrCode" />
+                <strong>https://t.me/gl_pl_bot/starsdevapp?startapp={refHash}</strong>
                 <div className="title-affilate__qr-row">
                     <div className="title-affilate__qr-copy" onClick={copyRefLink}>
                         <svg width="19" height="17" viewBox="0 0 19 17" fill="none" xmlns="http://www.w3.org/2000/svg">

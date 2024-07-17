@@ -33,31 +33,24 @@ const AffilateTodayList = ({
     const tonRate = 0.00126917
 
     useEffect(() => {
-        if (isPremium) {
-            setTrans(transactionsPremium)
-        }
-    }, [isPremium])
-
-    useEffect(() => {
         if (refData !== null) {
             let gamesObj, addSObj
             let refGames = Object.keys(refData.todayGames).length ? refData.todayGames : null
             let refAddStars = Object.keys(refData.todayAddStars).length ? refData.todayAddStars : null
             if (refGames !== null) {
-                gamesObj = {
-                    id: 1, 
-                    type: 'game', 
-                    fee: refGames.totalServiceFee, 
-                    profit: refGames.totalPartnerProfit, 
-                    date: 'Today', 
-                    partnerProfit: refGames.referralsTotal, 
-                    partnerAmount: refGames.referralsCount
-                }
+                gamesObj = 
+                    isPremium 
+                    ? {id: 1, type: 'game', fee: refGames.referralsTotal, profit: refGames.referralsTotal, date: 'Today', partnerProfit: refGames.referralsTotal, partnerAmount: refGames.referralsCount}
+                    : {id: 1, type: 'game', fee: refGames.totalServiceFee, profit: refGames.totalPartnerProfit, date: 'Today', partnerProfit: refGames.referralsTotal, partnerAmount: refGames.referralsCount}
             } else {
                 gamesObj = defGameObj
             }
             if (refAddStars !== null) {
-                addSObj = {id: 1, type: 'add', amount: refAddStars.totalSum, profit: refAddStars.airdrop, date: 'Today'}
+                addSObj = 
+                isPremium 
+                    ? {id: 1, type: 'add', amount: refAddStars.totalSum, profit: refAddStars.totalSum / 2, date: 'Today'}
+                    : {id: 1, type: 'add', amount: refAddStars.totalSum, profit: refAddStars.airdrop, date: 'Today'}
+                    
             } else {
                 addSObj = {id: 1, type: 'add', status: 'completed', amount: 0, peopleAmount: 0, fee: 0, profit: 0, date: 'Today'}
             }

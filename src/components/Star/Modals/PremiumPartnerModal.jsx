@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../../UI/Modal/Modal';
 import { useApp } from '../../../hooks/useApp';
-import greenStar from '../../../assets/img/icons/game/bet_star_green.svg'
+import usdt from '../../../assets/img/icons/usdt.svg'
 import coinImg from '../../../assets/img/icons/airdrop_coin.svg'
 import { useChangePpMutation } from '../../../store/services/starsGame';
 import { useTelegram } from '../../../hooks/useTelegram';
 
-const PartnerModal = ({
+const PremiumPartnerModal = ({
     isModalActive,
     setIsModalActive
 }) => {
@@ -15,7 +15,7 @@ const PartnerModal = ({
     const {
         activePartnerBalance,
         partnershipBalanceAirdrop,
-        partnershipBalance,
+        partnershipBalanceUsdt,
         changeActivePartnerBalance
     } = useApp()
 
@@ -25,14 +25,13 @@ const PartnerModal = ({
     const [changePremium, {data, isLoading}] = useChangePpMutation()
     
     const navigateToWithDraw = () => {
-        setIsModalActive(false)
-        navigate('/withdraw')
+        console.log('Withdraw')
     }
     const changeBalance = () => {
-        if (activePartnerBalance === 'star') {
+        if (activePartnerBalance === 'usdt') {
             changeActivePartnerBalance('coin')
         } else {
-            changeActivePartnerBalance('star')
+            changeActivePartnerBalance('usdt')
         }
         setIsModalActive(false)
     }
@@ -41,6 +40,7 @@ const PartnerModal = ({
         await changePremium({
             tg_id: tgUser | 658318611
         })
+
         navigate('/')
         window.location.reload();
 
@@ -55,10 +55,10 @@ const PartnerModal = ({
         >
             <ul>
                 <li className='balance-popup__balance'>
-                    {activePartnerBalance === 'star' && 
+                    {activePartnerBalance === 'usdt' && 
                         <div>
-                            <img src={greenStar} alt="" />
-                            {partnershipBalance}
+                            <img src={usdt} alt="" />
+                            {partnershipBalanceUsdt}
                         </div>
                     }
                     {activePartnerBalance === 'coin' && 
@@ -72,8 +72,7 @@ const PartnerModal = ({
                     <div>Change partnership</div>
                 </li>
                 <li onClick={changeBalance}><div>Change Balance</div></li>
-                {activePartnerBalance === "star" &&
-                    <li onClick={navigateToWithDraw}><div>
+                {/* <li onClick={navigateToWithDraw}><div>
                     <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" clipRule="evenodd" d="M13.7886 4.59622C16.3272 7.13486 16.3272 11.25 13.7886 13.7886C11.2499 16.3272 7.13482 16.3272 4.59619 13.7886C2.05756 11.25 2.05756 7.13486 4.59619 4.59622C7.13482 2.05759 11.2499 2.05759 13.7886 4.59622Z" stroke="black" strokeLinecap="round" strokeLinejoin="round"/>
                         <path d="M7.14969 7.14969H11.2352V11.2352" stroke="black" strokeLinecap="round" strokeLinejoin="round"/>
@@ -81,13 +80,10 @@ const PartnerModal = ({
                     </svg>
 
                     Withdraw
-                    </div></li>
-                }
-                {activePartnerBalance === "coin" &&
-                    <li onClick={() => setIsModalActive(false)}><div>
+                </div></li> */}
+                <li onClick={() => setIsModalActive(false)}><div>
                     Connect TON Space
-                    </div></li>
-                }
+                </div></li>
                 <li onClick={() => setIsModalActive(false)}><div>
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fillRule="evenodd" clipRule="evenodd" d="M0.692383 12.0257V2.02571C0.692383 1.28905 1.28905 0.692383 2.02571 0.692383H8.80703C9.16037 0.692383 9.4997 0.833049 9.7497 1.08305L12.3017 3.63504C12.5517 3.88504 12.6924 4.22438 12.6924 4.57771V12.0257C12.6924 12.7624 12.0957 13.359 11.359 13.359H2.02571C1.28905 13.359 0.692383 12.7624 0.692383 12.0257Z" stroke="black" strokeLinecap="round" strokeLinejoin="round"/>
@@ -104,4 +100,4 @@ const PartnerModal = ({
     );
 };
 
-export default PartnerModal;
+export default PremiumPartnerModal;

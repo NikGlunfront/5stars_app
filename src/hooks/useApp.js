@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setActivePartnerBalance, setAirdropBalance, setGamesLeft, setIsApplicationLoaded, setIsPremium, setIsWithdrawPage, setMainBalance, setPartnershipBalance, setPBalanceAirdrop, setReferralsCount, setRefString } from "../store/slices/appSlice/appSlice";
+import { setActivePartnerBalance, setAirdropBalance, setGamesLeft, setIsApplicationLoaded, setIsPremium, setIsWithdrawPage, setMainBalance, setPartnershipBalance, setPartnershipBalanceUsdt, setPBalanceAirdrop, setReferralsCount, setRefString } from "../store/slices/appSlice/appSlice";
 import { setGameId, setHash2 } from "../store/slices/gameSlice/gameSlice";
 
 export function useApp() {
@@ -10,6 +10,7 @@ export function useApp() {
         mainBalance,
         airdropBalance,
         partnershipBalance,
+        partnershipBalanceUsdt,
         referralsCount,
         gamesLeft,
         activePartnerBalance,
@@ -20,6 +21,10 @@ export function useApp() {
 
     const changeRefNum = (val) => {
         dispatch(setReferralsCount(val))
+    }
+    
+    const changePartnershipBalanceUsdt = (val) => {
+        dispatch(setPartnershipBalanceUsdt(val))
     }
 
     const setRefHash = (hash) => {
@@ -56,6 +61,7 @@ export function useApp() {
         changeAirdropBalance(balanceObject.airdrop_balance|0)
         changePartnershipBalance(balanceObject.partnership_balance|0)
         changePAirdropBalance(balanceObject.partnership_balance_airdrop|0)
+        changePartnershipBalanceUsdt(parseFloat(balanceObject.partnership_balance_usdt)|0)
         changeRefNum(balanceObject.referals_count)
     }
 
@@ -66,7 +72,7 @@ export function useApp() {
     }
 
     const handleInitDataFetch = (iniData) => {
-        dispatch(setIsPremium(iniData.is_premium == 1 ? true : false))
+        dispatch(setIsPremium(parseInt(iniData.is_premium) ? true : false))
         setRefHash(iniData.ref)
         dispatch(setIsApplicationLoaded(true))
     }
@@ -85,7 +91,9 @@ export function useApp() {
         ref,
         airdropBalance,
         partnershipBalance,
+        partnershipBalanceUsdt,
         activePartnerBalance,
+        partnershipBalanceAirdrop,
         setIsAppLoaded,
         setIsWithDraw,
         changeMainBalance,
@@ -96,7 +104,6 @@ export function useApp() {
         updateActiveGame,
         changeIsPremium,
         changeRefNum,
-        partnershipBalanceAirdrop,
         changeActivePartnerBalance,
         changePAirdropBalance
     }

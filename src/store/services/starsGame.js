@@ -88,6 +88,14 @@ export const starsApi = createApi({
             }),
             invalidatesTags: ['Balance', 'Game', 'History']
         }),
+        setZeroBalance: builder.mutation({
+            query: (userData) => ({
+                url: balancePath,
+                method: "POST",
+                body: {...userData, method: 'zero_balance'}
+            }),
+            invalidatesTags: ['Balance', 'Game', 'History', 'Bonus']
+        }),
         setRefPartner: builder.mutation({
             query: (userData) => ({
                 url: gamePath,
@@ -148,5 +156,6 @@ export const {
     useGetHistoryTotalsQuery,
     useCreatePrizeGameMutation,
     useGetPrizeQuery,
-    useSavePrizeWinMutation
+    useSavePrizeWinMutation,
+    useSetZeroBalanceMutation
 } = starsApi

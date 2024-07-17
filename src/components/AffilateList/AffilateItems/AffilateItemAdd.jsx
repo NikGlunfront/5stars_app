@@ -53,7 +53,7 @@ const AffilateItemAdd= ({
                 </div>
                 <div className="history-item__right">
                     <div className={"history-item__win _coin" + (isPremium ? " _usdt" : '')}>
-                        +{profit.toLocaleString()}
+                        +{isPremium ? (profit * 0.005).toFixed(2) : profit.toLocaleString()}
                         {isPremium &&
                             <div className="history-item__airdrop">1 Star = $0.005</div>
                         }

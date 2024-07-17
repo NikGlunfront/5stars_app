@@ -7,6 +7,7 @@ const initialState = {
     airdropBalance: 0,
     partnershipBalance: 0,
     partnershipBalanceAirdrop: 0,
+    partnershipBalanceUsdt: 0.0,
     isPremium: false,
     gamesLeft: 0,
     referralsCount: 0,
@@ -36,6 +37,11 @@ export const appSlice = createSlice({
         setAirdropBalance: (state, action) => {
             return {
                 ...state, airdropBalance: action.payload
+            }
+        },
+        setPartnershipBalanceUsdt: (state, action) => {
+            return {
+                ...state, partnershipBalanceUsdt: parseFloat(action.payload)
             }
         },
         setPartnershipBalance: (state, action) => {
@@ -81,7 +87,8 @@ export const {
     setReferralsCount,
     setActivePartnerBalance,
     setPBalanceAirdrop,
-    setRefString
+    setRefString,
+    setPartnershipBalanceUsdt
 } = appSlice.actions
 
 export default appSlice.reducer

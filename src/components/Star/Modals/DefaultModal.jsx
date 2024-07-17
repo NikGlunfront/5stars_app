@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTelegram } from '../../../hooks/useTelegram';
-import { useCreatePrizeGameMutation, useResetDataMutation } from '../../../store/services/starsGame';
+import { useCreatePrizeGameMutation, useResetDataMutation, useSetZeroBalanceMutation } from '../../../store/services/starsGame';
 import Modal from '../../UI/Modal/Modal';
 import { useSelector } from 'react-redux';
 
@@ -20,6 +20,7 @@ const DefaultModal = ({
     const [resetUserData, {data, isLoading}] = useResetDataMutation()
     const {user: tgUser, sendAlert} = useTelegram()
     const [createUserPrize, {data: prizeData, isLoading: isPrizeDataLoading}] = useCreatePrizeGameMutation()
+    const [nulifyBalance, {data: zeroBalanceData, isLoading: isZeroBalanceDataLoading}] = useSetZeroBalanceMutation()
 
     const shufflePrizes = () => {
         let newArr = [...prizes]
@@ -44,6 +45,12 @@ const DefaultModal = ({
             picked_star: 0,
             tg_id: tgUser | 658318611,
             prizes: [...shufflePrizes()]
+        })
+        setIsModalActive(false)
+    }
+    const setZeroBalance = async () => {
+        await nulifyBalance({
+            tg_id: tgUser | 658318611,
         })
         setIsModalActive(false)
     }
@@ -84,6 +91,7 @@ const DefaultModal = ({
                 Rules
                 </div></li>
                 <li onClick={handleResetUserData}><div>RESET</div></li>
+                <li onClick={setZeroBalance}><div>Zero Balance</div></li>
                 {!prizeId && <li onClick={createPrize}><div>Get prize</div></li>}
             </ul>
         </Modal>
