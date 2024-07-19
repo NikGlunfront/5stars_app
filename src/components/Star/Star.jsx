@@ -14,6 +14,7 @@ import TitleHistory from './Titles/TitleHistory';
 import TitleAffilatePremium from './Titles/TitleAffilatePremium';
 import PartnerModal from './Modals/PartnerModal';
 import PremiumPartnerModal from './Modals/PremiumPartnerModal';
+import { useStarGame } from '../../hooks/useStarGame';
  
 const Star = ({
 
@@ -22,7 +23,8 @@ const Star = ({
     const [isShareActive, setIsShareActive] = useState(false)
     const navigate = useNavigate()
     const location = useLocation()
-    const { isLoaded, mainBalance, isPremium, airdropBalance, partnershipBalance, gamesLeft, activePartnerBalance, partnershipBalanceAirdrop, partnershipBalanceUsdt, changeActivePartnerBalance } = useApp()
+    const {pickedStars, isGameFinished, betAmount} = useStarGame()
+    const { isLoaded, mainBalance, isPremium, airdropBalance, partnershipBalance, gamesLeft, activePartnerBalance, partnershipBalanceAirdrop, partnershipBalanceUsdt, changeActivePartnerBalance, isMainBalanceLoading } = useApp()
 
     useEffect(() => {
         if (isPremium) {
@@ -109,7 +111,7 @@ const Star = ({
                     onClick={openModal}
                 >
                     <span>
-                        {(location.pathname === '/' || location.pathname.includes('add-stars') || location.pathname.includes('check-win-num')) && mainBalance}
+                        {(location.pathname === '/' || location.pathname.includes('add-stars') || location.pathname.includes('check-win-num')) && !isMainBalanceLoading && (!isGameFinished && pickedStars.length && !isMainBalanceLoading ? (mainBalance - pickedStars.length * betAmount) : mainBalance)}
                         {location.pathname.includes('history') && airdropBalance}
                         {(location.pathname.includes('affilate') || location.pathname.includes('withdraw')) && activePartnerBalance === 'star' && partnershipBalance}
                         {(location.pathname.includes('affilate') || location.pathname.includes('withdraw')) && activePartnerBalance === 'usdt' && partnershipBalanceUsdt}

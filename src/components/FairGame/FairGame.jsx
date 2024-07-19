@@ -10,6 +10,8 @@ import tokenListCount from '../../assets/img/icons/token_list_count.svg'
 import { useCalculateGameMutation } from '../../store/services/starsGame';
 import { useTelegram } from '../../hooks/useTelegram';
 import { useSelector } from 'react-redux';
+import greenStar from '../../assets/img/icons/game/bet_star_green.svg'
+import usdtIcon from '../../assets/img/icons/usdt.svg'
 
 const FairGame = ({
 
@@ -40,6 +42,7 @@ const FairGame = ({
         partnershipBalance,
         isPremium,
         referralsCount,
+        partnershipBalanceUsdt,
         mainBalance
     } = useApp()
 
@@ -70,7 +73,7 @@ const FairGame = ({
                     {/* <BoxWrapper className={'hash-box'}> */}
                         <div className={"hash-box__inner" + (isGameFinished ? ' _result' : '')} data-winnum={isGameFinished ? resultNumber : '?'}>
                             <div className="hash-box__hash">
-                                <span>WIN NUMBER HASH</span>
+                                <span>{isGameFinished ? "REVEALED HASH" : "WIN NUMBER HASH"}</span>
                                 <p>{isGameFinished ? hash1String : hash2String}</p>
                             </div>
                             <div className={"hash-box__details"}>
@@ -101,16 +104,14 @@ const FairGame = ({
                 </div>
             </BoxWrapper>
 
-            <BoxWrapper className={'box-btn'} linkPath={'/affilate'}>
+            <BoxWrapper className={'box-btn box-btn_partnership'} linkPath={'/affilate'}>
                 <div className={"box-btn__img _green" + (isPremium ? ' _purple' : '')}>
                     <img src={isPremium ? premiumPartnership : greenPartnership} alt="" />
                 </div>
                 <div className="box-btn__text">{isPremium ? "Premium Partner" : "Partnership"}</div>
                 <div className={"box-btn__subinfo" + (referralsCount === 0 ? " _empty" : '')}>
-                    {referralsCount}
-                    <svg width="13" height="16" viewBox="0 0 13 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path fillRule="evenodd" clipRule="evenodd" d="M6.5 6.5C8.29508 6.5 9.75 5.04508 9.75 3.25C9.75 1.45492 8.29508 0 6.5 0C4.70492 0 3.25 1.45492 3.25 3.25C3.25 5.04508 4.70492 6.5 6.5 6.5ZM6.5 6.5C2.90983 6.5 0 8.3265 0 11.9167C0 16.25 13 16.25 13 11.9167C13 8.3265 10.0902 6.5 6.5 6.5Z" fill="#2CAFFD"/>
-                    </svg>
+                    {isPremium ? partnershipBalanceUsdt : partnershipBalance}
+                    <img src={isPremium ? usdtIcon : greenStar} alt="" />
                 </div>
             </BoxWrapper>
             <BoxWrapper className={'box-btn'}>

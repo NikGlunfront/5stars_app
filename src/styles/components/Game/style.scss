@@ -1,5 +1,5 @@
 .s5-game {
-    padding: 2.2rem 0.8rem;
+    padding: 1.5rem;
     margin-bottom: 2.3rem;
 
     &__bets {
@@ -26,13 +26,13 @@
     }
 
     &__bet {
-        flex: 0 0 calc((100% - 4rem) / 3);
-        border-radius: 0.5rem;
+        flex: 0 0 calc((100% - 3rem) / 3);
+        border-radius: 1.2rem;
         background-color: #EFEEF4;
         color: rgba($color: #000000, $alpha: 0.4);
         font-weight: 500;
         font-size: 2.4rem;
-        line-height: 3.4rem;
+        line-height: 4rem;
         padding: 0 1rem;
         @include flex_row;
         align-items: center;

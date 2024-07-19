@@ -3,7 +3,8 @@ import { setBetAmount, setGameResult, setHash1, setHash2, setIsGameFinished, set
 import { playNewGame } from "../store/slices/gameSlice/gameSlice"
 import { setNewResultNumber } from "../store/slices/gameSlice/gameSlice"
 import { calculateGameResults } from "../store/slices/gameSlice/gameSlice"
-import { setAirdropBalance, setIsApplicationLoaded, setMainBalance, setPartnershipBalance } from "../store/slices/appSlice/appSlice"
+import { setAirdropBalance, setIsApplicationLoaded, setIsMainBalanceLoading, setMainBalance, setPartnershipBalance } from "../store/slices/appSlice/appSlice"
+import { useTelegram } from "./useTelegram"
 
 export function useStarGame() {
     const dispatch = useDispatch()
@@ -20,11 +21,20 @@ export function useStarGame() {
         gameResult
     } = useSelector(state => state.stargame)
 
+    const { sendAlert, vibrateALert } = useTelegram()
+
+    const { mainBalance, gamesLeft } = useSelector(state => state.app)
+
     const initWinNum = () => {
         dispatch(setNewResultNumber())
     }
 
     const handleStarClick = (starId) => {
+        if (gamesLeft === 0) {
+            vibrateALert()
+            sendAlert('Количество попыток закончилось')
+            return
+        }
         let newResultStars
         if (pickedStars.includes(starId)) {
             newResultStars = pickedStars.filter(star => star !== starId)
@@ -32,10 +42,19 @@ export function useStarGame() {
             newResultStars = [...pickedStars, starId]
         }
 
+        let newBalanceNum = mainBalance - newResultStars.length * betAmount
+        if (newBalanceNum < 0) {
+            vibrateALert()
+            sendAlert('Ставка превышает доступный баланс')
+            return
+        }
+
         dispatch(setPickedStars(newResultStars))
+
     }
 
     const changeBet = (newBetAmount) => {
+        dispatch(setPickedStars([]))
         dispatch(setBetAmount(newBetAmount))
     }
 
@@ -54,6 +73,10 @@ export function useStarGame() {
         dispatch(setHash2(hash))
     }
 
+    const setGameFinishedTrue = () => {
+        dispatch(setIsGameFinished(true))
+    }
+
     const setPlayedGame = (activeGameOjb) => {
         dispatch(setPickedStars([...activeGameOjb.picked_stars]))
         dispatch(setBetAmount(parseInt(activeGameOjb.bet_amount)))
@@ -64,6 +87,7 @@ export function useStarGame() {
         } else {
             dispatch(setGameResult(0))
         }
+        dispatch(setIsMainBalanceLoading(false))
     }
 
 
@@ -85,5 +109,6 @@ export function useStarGame() {
         initWinNum,
         updateHash1,
         updateHash2,
+        setGameFinishedTrue
     }
 }

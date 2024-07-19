@@ -31,10 +31,10 @@ const HistoryItem= ({
             
     
         case 'A':
-            return <HistoryItemAddStars addStarsData={historyItem} />
+            return <HistoryItemAddStars addStarsData={{...historyItem, date: formatDate(historyItem.created)}} />
             
         case 'P':
-            return <HistoryItemAddStars addStarsData={historyItem} isPrize={true} />
+            return <HistoryItemAddStars addStarsData={{...historyItem, date: formatDate(historyItem.created)}} isPrize={true} />
             
     
         case 'S':

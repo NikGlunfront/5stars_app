@@ -31,6 +31,10 @@ export function useTelegram() {
         tg.MainButton.disable()
     }
 
+    const vibrateALert = () => {
+        tg.HapticFeedback.impactOccurred('medium')
+    }
+
     const handleMainButtonClick = (callback) => {
         tg.MainButton.onClick(callback)
     }
@@ -78,6 +82,7 @@ export function useTelegram() {
         hideTgButton,
         enableTgButton,
         handleMainButtonClick,
+        vibrateALert,
         tg,
         user: devTGID | tg.initDataUnsafe?.user?.id,
         queryId: tg.initDataUnsafe?.query_id

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setActivePartnerBalance, setAirdropBalance, setGamesLeft, setIsApplicationLoaded, setIsPremium, setIsWithdrawPage, setMainBalance, setPartnershipBalance, setPartnershipBalanceUsdt, setPBalanceAirdrop, setReferralsCount, setRefString } from "../store/slices/appSlice/appSlice";
+import { setActivePartnerBalance, setAirdropBalance, setGamesLeft, setIsApplicationLoaded, setIsMainBalanceLoading, setIsPremium, setIsWithdrawPage, setMainBalance, setPartnershipBalance, setPartnershipBalanceUsdt, setPBalanceAirdrop, setReferralsCount, setRefString } from "../store/slices/appSlice/appSlice";
 import { setGameId, setHash2 } from "../store/slices/gameSlice/gameSlice";
 
 export function useApp() {
@@ -15,6 +15,7 @@ export function useApp() {
         gamesLeft,
         activePartnerBalance,
         isPremium,
+        isMainBalanceLoading,
         ref,
         partnershipBalanceAirdrop
     } = useSelector(state => state.app)
@@ -39,6 +40,10 @@ export function useApp() {
         dispatch(setIsApplicationLoaded(isLoaded))
     }
 
+    const setMainBalanceLoading = (isLoading) => {
+        dispatch(setIsMainBalanceLoading(isLoading))
+    }
+
     const setIsWithDraw = (isTrue) => {
         dispatch(setIsWithdrawPage(isTrue))
     }
@@ -61,7 +66,7 @@ export function useApp() {
         changeAirdropBalance(balanceObject.airdrop_balance|0)
         changePartnershipBalance(balanceObject.partnership_balance|0)
         changePAirdropBalance(balanceObject.partnership_balance_airdrop|0)
-        changePartnershipBalanceUsdt(parseFloat(balanceObject.partnership_balance_usdt)|0)
+        changePartnershipBalanceUsdt(parseFloat(balanceObject.partnership_balance_usdt))
         changeRefNum(balanceObject.referals_count)
     }
 
@@ -74,7 +79,9 @@ export function useApp() {
     const handleInitDataFetch = (iniData) => {
         dispatch(setIsPremium(parseInt(iniData.is_premium) ? true : false))
         setRefHash(iniData.ref)
-        dispatch(setIsApplicationLoaded(true))
+        setTimeout(() => {
+            dispatch(setIsApplicationLoaded(true))
+        }, 1500);
     }
 
     const changeActivePartnerBalance = (balanceType) => {
@@ -89,6 +96,7 @@ export function useApp() {
         gamesLeft,
         referralsCount,
         ref,
+        isMainBalanceLoading,
         airdropBalance,
         partnershipBalance,
         partnershipBalanceUsdt,
@@ -105,6 +113,7 @@ export function useApp() {
         changeIsPremium,
         changeRefNum,
         changeActivePartnerBalance,
-        changePAirdropBalance
+        changePAirdropBalance,
+        setMainBalanceLoading
     }
 }
