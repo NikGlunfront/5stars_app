@@ -21,7 +21,7 @@ export function useStarGame() {
         gameResult
     } = useSelector(state => state.stargame)
 
-    const { sendAlert, vibrateALert } = useTelegram()
+    const { sendAlert, vibrate4ALert } = useTelegram()
 
     const { mainBalance, gamesLeft } = useSelector(state => state.app)
 
@@ -31,7 +31,8 @@ export function useStarGame() {
 
     const handleStarClick = (starId) => {
         if (gamesLeft === 0) {
-            vibrateALert()
+            vibrate4ALert()
+            vibrate4ALert()
             sendAlert('Количество попыток закончилось')
             return
         }
@@ -44,7 +45,8 @@ export function useStarGame() {
 
         let newBalanceNum = mainBalance - newResultStars.length * betAmount
         if (newBalanceNum < 0) {
-            vibrateALert()
+            vibrate4ALert()
+            vibrate4ALert()
             sendAlert('Ставка превышает доступный баланс')
             return
         }
