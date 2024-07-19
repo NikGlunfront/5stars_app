@@ -31,8 +31,20 @@ export function useTelegram() {
         tg.MainButton.disable()
     }
 
-    const vibrateALert = () => {
-        tg.HapticFeedback.impactOccurred('medium')
+    const vibrate1ALert = () => {
+        tg.HapticFeedback.impactOccurred('heavy')
+    }
+    const vibrate2ALert = () => {
+        tg.HapticFeedback.impactOccurred('rigid')
+    }
+    const vibrate3ALert = () => {
+        tg.HapticFeedback.impactOccurred('success')
+    }
+    const vibrate4ALert = () => {
+        tg.HapticFeedback.notificationOccurred('error')
+    }
+    const vibrate5ALert = () => {
+        tg.HapticFeedback.impactOccurred('warning')
     }
 
     const handleMainButtonClick = (callback) => {
@@ -82,7 +94,11 @@ export function useTelegram() {
         hideTgButton,
         enableTgButton,
         handleMainButtonClick,
-        vibrateALert,
+        vibrate1ALert,
+        vibrate2ALert,
+        vibrate3ALert,
+        vibrate4ALert,
+        vibrate5ALert,
         tg,
         user: devTGID | tg.initDataUnsafe?.user?.id,
         queryId: tg.initDataUnsafe?.query_id

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useStarGame } from '../../../hooks/useStarGame';
+import { useTelegram } from '../../../hooks/useTelegram';
 
 const StarItem = ({
     starId
@@ -10,9 +11,32 @@ const StarItem = ({
         handleStarClick
     } = useStarGame()
 
+    const {
+        vibrate1ALert,
+        vibrate2ALert,
+        vibrate3ALert,
+        vibrate4ALert,
+        vibrate5ALert
+    } = useTelegram()
+
     const handleBet = () => {
         if (betAmount > 0) {
             handleStarClick(starId)
+        }
+        if (starId === 1) {
+            vibrate1ALert()
+        }
+        if (starId === 2) {
+            vibrate2ALert()
+        }
+        if (starId === 3) {
+            vibrate3ALert()
+        }
+        if (starId === 4) {
+            vibrate4ALert()
+        }
+        if (starId === 5) {
+            vibrate5ALert()
         }
     }
 
