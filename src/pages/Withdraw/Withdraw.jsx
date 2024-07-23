@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { useTelegram } from "../../hooks/useTelegram";
 import { useApp } from "../../hooks/useApp";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -36,30 +36,33 @@ const Withdraw= ({
         scrollTop()
     }, [location.pathname])
     
-    async function handleSwapAccept(starsAmount) {
-        // let numStars = starsAmount
+    const handleSwapAccept = useCallback(async () => {
         await swapStars({
             tg_id: tgUser | 658318611,
             swap_amount: starsAmount
         })
         sendAlert(`${starsAmount} Stars were successfuly swapped.`)
         navigate(-1)
-        console.log(`Вывести GreenStars ${starsAmount}`)
-    }
+    }, [starsAmount])
+
     useEffect(() => {
         showTgButton('CONTINUE')
         setIsWithDraw(true)
     }, [])
 
     useEffect(() => {
-        handleMainButtonClick(handleSwapAccept(starsAmount))
+        handleMainButtonClick(handleSwapAccept())
+
+        return () => {
+            handleMainButtonOffEventClick(handleSwapAccept())
+        }
+    }, [handleSwapAccept])
+
+    useEffect(() => {
         if (starsAmount > 0 && starsAmount <= partnershipBalance) {
             enableTgButton()
         } else {
             disableTgButton()
-        }
-        return () => {
-            handleMainButtonOffEventClick(handleSwapAccept(starsAmount))
         }
     }, [starsAmount])
 
