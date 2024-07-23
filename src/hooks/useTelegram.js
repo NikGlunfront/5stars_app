@@ -103,6 +103,7 @@ export function useTelegram() {
         vibrate3ALert,
         vibrate4ALert,
         vibrate5ALert,
+        handleMainButtonOffEventClick,
         tg,
         user: devTGID | tg.initDataUnsafe?.user?.id,
         queryId: tg.initDataUnsafe?.query_id
