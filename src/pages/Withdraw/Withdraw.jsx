@@ -36,7 +36,7 @@ const Withdraw= ({
         scrollTop()
     }, [location.pathname])
     
-    const handleSwapAccept = async (starsAmount) => {
+    async function handleSwapAccept(starsAmount) {
         // let numStars = starsAmount
         await swapStars({
             tg_id: tgUser | 658318611,
