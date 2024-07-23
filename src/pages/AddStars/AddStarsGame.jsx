@@ -27,15 +27,15 @@ const AddStarsGame = ({
 
     useEffect(() => {
 
-        if (bonusData && !isBonusDataLoading && !bonusData?.new) {
+        if (bonusData?.bonus && !isBonusDataLoading && !bonusData?.bonus?.new) {
             if (bonusData.error) {
                 
             } else {
                 dispatch(setBonusFromHistory({
-                    pickedStar: parseInt(bonusData.picked_star),
-                    activeBonus: bonusData.bonuses,
+                    pickedStar: parseInt(bonusData?.bonus.picked_star),
+                    activeBonus: bonusData?.bonus.bonuses,
                 }))
-                setPickedStarBet(parseInt(bonusData.picked_star))
+                setPickedStarBet(parseInt(bonusData?.bonus.picked_star))
             }
         } else {
             dispatch(shuffleBonuses())
@@ -84,15 +84,15 @@ const AddStarsGame = ({
         }
     }, [isAddStarsLoading]) 
 
-    if (!isVisibleBonus || !bonusData) {
+    if (!isVisibleBonus || !bonusData?.bonus) {
         return
     }
 
     return (
-        <BoxWrapper className={'s5-game add-star-game' + (bonusData?.error ? " _disabled" : "")}>
+        <BoxWrapper className={'s5-game add-star-game' + (bonusData?.bonus?.error ? " _disabled" : "")}>
             <div className="add-star-game__topper">
                 <span>Bonus Time</span>
-                <AddStarsTimers activeTime={bonusData?.timer} />
+                <AddStarsTimers activeTime={bonusData?.bonus?.timer} />
             </div>
             <div className="stars-s5-game">
                 {false
@@ -125,7 +125,7 @@ const AddStarsGame = ({
             <RequestButton 
                 className={"s5-game__btn" + ((pickedStarBet && !isBonusGameFinished) || (isBonusGameFinished && pickedStar && pickedAddStarValue) ? ' _active' : '')} 
                 onClick={revealBonus}
-                isloading={!bonusData || isBonusDataLoading}
+                isloading={!bonusData?.bonus || isBonusDataLoading}
             >
                 <div>{isBonusGameFinished && !isBonusDataLoading ? (pickedAddStarValue ? `ADD ${pickedAddStarValue + (pickedAddStarValue * activeBonusGame.filter(item => item.id === pickedStar)[0]['value'] / 100)} STARS` : 'ADD STARS') : 'TAP & WIN BONUS'}</div>
                 <span className={(!isBonusGameFinished) || (!pickedAddStarValue) ? "_hidden" : ''}>
