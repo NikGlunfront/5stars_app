@@ -37,12 +37,14 @@ const Withdraw= ({
     }, [location.pathname])
     
     const handleSwapAccept = useCallback(async () => {
-        await swapStars({
-            tg_id: tgUser | 658318611,
-            swap_amount: starsAmount
-        })
-        sendAlert(`${starsAmount} Stars were successfuly swapped.`)
-        navigate(-1)
+        if (starsAmount > 0) {
+            await swapStars({
+                tg_id: tgUser | 658318611,
+                swap_amount: starsAmount
+            })
+            sendAlert(`${starsAmount} Stars were successfuly swapped.`)
+            navigate(-1)
+        }
     }, [starsAmount])
 
     useEffect(() => {
