@@ -35,8 +35,8 @@ const Withdraw= ({
         scrollTop()
     }, [location.pathname])
     
-    const handleSwapAccept = async () => {
-        let numStars = starsAmount
+    const handleSwapAccept = async (numStars) => {
+        // let numStars = starsAmount
         await swapStars({
             tg_id: tgUser | 658318611,
             swap_amount: numStars
@@ -48,12 +48,13 @@ const Withdraw= ({
     useEffect(() => {
         showTgButton('CONTINUE')
         setIsWithDraw(true)
-        handleMainButtonClick(() => handleSwapAccept())
     }, [])
+
 
     useEffect(() => {
         if (starsAmount > 0 && starsAmount <= partnershipBalance) {
             enableTgButton()
+            handleMainButtonClick(() => handleSwapAccept(starsAmount))
         } else {
             disableTgButton()
         }
@@ -98,7 +99,7 @@ const Withdraw= ({
                         onChange={handleChange} 
                         onInput={handleKeyPress} 
                         autoFocus 
-                        max={500}
+                        max={partnershipBalance}
                     />
                     <span>STAR</span>
                 </div>
