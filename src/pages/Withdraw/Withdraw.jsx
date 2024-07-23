@@ -53,10 +53,10 @@ const Withdraw= ({
     }, [])
 
     useEffect(() => {
-        handleMainButtonClick(handleSwapAccept())
+        handleMainButtonClick(() => handleSwapAccept())
 
         return () => {
-            handleMainButtonOffEventClick(handleSwapAccept())
+            handleMainButtonOffEventClick(() => handleSwapAccept())
         }
     }, [handleSwapAccept])
 
