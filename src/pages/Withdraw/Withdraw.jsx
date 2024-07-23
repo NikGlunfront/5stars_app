@@ -53,17 +53,13 @@ const Withdraw= ({
 
     useEffect(() => {
         handleMainButtonClick(handleSwapAccept(starsAmount))
-
-        return () => {
-            handleMainButtonOffEventClick(handleSwapAccept(starsAmount))
-        }
-    }, [starsAmount])
-
-    useEffect(() => {
         if (starsAmount > 0 && starsAmount <= partnershipBalance) {
             enableTgButton()
         } else {
             disableTgButton()
+        }
+        return () => {
+            handleMainButtonOffEventClick(handleSwapAccept(starsAmount))
         }
     }, [starsAmount])
 
