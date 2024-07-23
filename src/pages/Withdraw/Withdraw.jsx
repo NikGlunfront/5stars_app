@@ -15,7 +15,8 @@ const Withdraw= ({
         disableTgButton,
         user: tgUser,
         sendAlert,
-        handleMainButtonClick
+        handleMainButtonClick,
+        handleMainButtonOffEventClick
     } = useTelegram()
 
     const {
@@ -35,26 +36,32 @@ const Withdraw= ({
         scrollTop()
     }, [location.pathname])
     
-    const handleSwapAccept = async (numStars) => {
+    const handleSwapAccept = async (starsAmount) => {
         // let numStars = starsAmount
         await swapStars({
             tg_id: tgUser | 658318611,
-            swap_amount: numStars
+            swap_amount: starsAmount
         })
-        sendAlert(`${numStars} Stars were successfuly swapped.`)
+        sendAlert(`${starsAmount} Stars were successfuly swapped.`)
         navigate(-1)
-        console.log(`Вывести GreenStars ${numStars}`)
+        console.log(`Вывести GreenStars ${starsAmount}`)
     }
     useEffect(() => {
         showTgButton('CONTINUE')
         setIsWithDraw(true)
     }, [])
 
+    useEffect(() => {
+        handleMainButtonClick(handleSwapAccept(starsAmount))
+
+        return () => {
+            handleMainButtonOffEventClick(handleSwapAccept(starsAmount))
+        }
+    }, [starsAmount])
 
     useEffect(() => {
         if (starsAmount > 0 && starsAmount <= partnershipBalance) {
             enableTgButton()
-            handleMainButtonClick(() => handleSwapAccept(starsAmount))
         } else {
             disableTgButton()
         }

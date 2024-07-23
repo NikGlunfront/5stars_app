@@ -3,8 +3,8 @@ const tg = window.Telegram.WebApp;
 export function useTelegram() {
 
     // const devTGID = 1320;
-    // const devTGID = 132033;
-    const devTGID = false;
+    const devTGID = 132033;
+    // const devTGID = false;
 
     const onClose = () => {
         tg.close()
@@ -48,7 +48,11 @@ export function useTelegram() {
     }
 
     const handleMainButtonClick = (callback) => {
-        tg.MainButton.onClick(callback)
+        tg.onEvent('mainButtonClicked', callback)
+    }
+    
+    const handleMainButtonOffEventClick = (callback) => {
+        tg.offEvent('mainButtonClicked', callback)
     }
 
     const enableTgButton = () => {
