@@ -44,13 +44,7 @@ const AffilateList= ({
 }) => {
     const tonRate = 0.00126917
     const {isPremium} = useApp()
-    const [trans, setTrans] = useState(transactions)
-
-    useEffect(() => {
-        if (isPremium) {
-            setTrans(transactionsPremium)
-        }
-    }, [isPremium])
+    const [trans, setTrans] = useState([])
 
     function formatDate(dateString, type='def') {
         const date = new Date(dateString);
@@ -116,7 +110,7 @@ const AffilateList= ({
                 return getIncomeObjView(obj)
         
             case 'S':
-                return
+                return getSwapObjView(obj)
         
             default:
                 return obj
@@ -155,7 +149,7 @@ const AffilateList= ({
         <BoxWrapper className={'history-list list-affilate'}>
             {trans.map((affilateItem, index) => (
                 <AffilateItem 
-                    affilateItem={isPremium ? handleObjectViewPremium(affilateItem) : handleObjectView(affilateItem)}
+                    affilateItem={isPremium && affilateItem.type ? handleObjectViewPremium(affilateItem) : handleObjectView(affilateItem)}
                     tonRate={tonRate}
                     key={`${affilateItem.type}_${index}`}
                 />

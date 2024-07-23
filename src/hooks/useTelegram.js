@@ -48,11 +48,11 @@ export function useTelegram() {
     }
 
     const handleMainButtonClick = (callback) => {
-        tg.onEvent('mainButtonClicked', callback)
+        tg.MainButton.onClick(callback)
     }
 
     const handleMainButtonOffEventClick = (callback) => {
-        tg.offEvent('mainButtonClicked', callback)
+        tg.MainButton.offClick(callback)
     }
 
     const enableTgButton = () => {
