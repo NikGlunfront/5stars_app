@@ -34,7 +34,7 @@ const DefaultModal = ({
 
     const handleResetUserData = async () => {
         await resetUserData({
-            tg_id: tgUser | 658318611,
+            tg_id: tgUser,
         })
         setIsModalActive(false)
         sendAlert('Данные пользователя были очищены')
@@ -43,14 +43,14 @@ const DefaultModal = ({
     const createPrize = async () => {
         await createUserPrize({
             picked_star: 0,
-            tg_id: tgUser | 658318611,
+            tg_id: tgUser,
             prizes: [...shufflePrizes()]
         })
         setIsModalActive(false)
     }
     const setZeroBalance = async () => {
         await nulifyBalance({
-            tg_id: tgUser | 658318611,
+            tg_id: tgUser,
         })
         setIsModalActive(false)
     }

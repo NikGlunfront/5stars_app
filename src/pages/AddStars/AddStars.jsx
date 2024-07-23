@@ -75,7 +75,7 @@ const AddStars= ({
     const addStarsHandler = async (pickedVal) => {
         if (!isAddStarsLoading) {
             await addStarsClick({
-                tg_id: tgUser | 658318611,
+                tg_id: tgUser,
                 amount: pickedVal,
                 type: 'DEF',
                 a_type: 'A' 

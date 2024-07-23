@@ -38,7 +38,7 @@ const PremiumPartnerModal = ({
 
     const handleChangePremium = async () => {
         await changePremium({
-            tg_id: tgUser | 658318611
+            tg_id: tgUser
         })
 
         navigate('/')

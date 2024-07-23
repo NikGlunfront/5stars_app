@@ -17,7 +17,7 @@ const AddStarsGamePrize = ({
     const [pickedStarBet, setPickedStarBet] = useState(0)
     const {user: tgUser, sendAlert} = useTelegram()
     const dispatch = useDispatch()
-    const {data: prizeData, isLoading: isPrizeDataLoading} = useGetPrizeQuery(tgUser | 658318611)
+    const {data: prizeData, isLoading: isPrizeDataLoading} = useGetPrizeQuery(tgUser)
     const [savePrizeWin, {data: prizePost, isLoading: isPrizePostLoading}] = useSavePrizeWinMutation()
     const [addStarsClick, { data: addStarsData, isLoading: isAddStarsLoading, error: isAddStarsError}] = useAddStarsMutation()
     const { 
@@ -46,7 +46,7 @@ const AddStarsGamePrize = ({
     const revealPrize = async () => {
         if (!isGamePrizeFinished && prizeId) {
             await savePrizeWin({
-                tg_id: tgUser | 658318611,
+                tg_id: tgUser,
                 picked_star: pickedStarBet,
                 game_id: prizeId
             })
@@ -55,7 +55,7 @@ const AddStarsGamePrize = ({
             const prizeVal = activeGamePrize.filter(item => item.id === pickedStarPrize)[0]['value'] | null
             if (prizeVal) {
                 await addStarsClick({
-                    tg_id: tgUser | 658318611,
+                    tg_id: tgUser,
                     amount: prizeVal,
                     type: 'DEF',
                     a_type: 'P',

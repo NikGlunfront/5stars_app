@@ -1,10 +1,9 @@
 const tg = window.Telegram.WebApp;
 
 export function useTelegram() {
-
-    // const devTGID = 1320;
-    // const devTGID = 132033;
-    const devTGID = false;
+    const devTelegramId = 658318611
+    // const devTelegramId = 1320;
+    // const devTelegramId = 132033;
 
     const onClose = () => {
         tg.close()
@@ -105,7 +104,7 @@ export function useTelegram() {
         vibrate5ALert,
         handleMainButtonOffEventClick,
         tg,
-        user: devTGID | tg.initDataUnsafe?.user?.id,
+        user: tg.initDataUnsafe?.user?.id ? tg.initDataUnsafe?.user?.id : devTelegramId,
         queryId: tg.initDataUnsafe?.query_id
     }
 }

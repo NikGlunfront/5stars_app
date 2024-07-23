@@ -6,15 +6,13 @@ import { useTelegram } from "../../../hooks/useTelegram";
 import { useGetReferralQuery } from "../../../store/services/starsGame";
 import { useApp } from "../../../hooks/useApp";
 
-const telegramId = 658318611
-
 const TitleAffilatePremium= ({}) => {
     const {
         referralsCount,
         ref: refHash
     } = useApp()
     const {user: tgUser, sendAlert} = useTelegram()
-    const {data: refData, isLoading: isRefDataLoading, refetch: refetchRefQuery} = useGetReferralQuery(tgUser|telegramId)
+    const {data: refData, isLoading: isRefDataLoading, refetch: refetchRefQuery} = useGetReferralQuery(tgUser)
 
     const copyRefLink = () => {
         navigator.clipboard.writeText(`https://t.me/gl_pl_bot/starsdevapp?startapp=${refHash}`).then(() => {

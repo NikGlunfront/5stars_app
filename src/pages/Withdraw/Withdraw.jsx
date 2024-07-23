@@ -39,7 +39,7 @@ const Withdraw= ({
     async function swapAccept(starsAmount) {
         if (starsAmount > 0) {
             await swapStars({
-                tg_id: tgUser | 658318611,
+                tg_id: tgUser,
                 swap_amount: starsAmount
             })
             sendAlert(`${starsAmount} Stars were successfuly swapped.`)

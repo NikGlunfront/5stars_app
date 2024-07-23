@@ -15,7 +15,7 @@ const TitleAffilate= ({}) => {
     } = useApp()
 
     const { sendAlert, user: tgUser } = useTelegram()
-    const {data: refData, isLoading: isRefDataLoading, refetch: refetchRefQuery} = useGetReferralQuery(tgUser|telegramId)
+    const {data: refData, isLoading: isRefDataLoading, refetch: refetchRefQuery} = useGetReferralQuery(tgUser)
 
     const copyRefLink = () => {
         navigator.clipboard.writeText(`https://t.me/gl_pl_bot/starsdevapp?startapp=${refHash}`).then(() => {

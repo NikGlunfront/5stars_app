@@ -17,7 +17,7 @@ const AddStarsGame = ({
     const { user: tgUser, sendAlert, hideTgButton } = useTelegram()
     const [saveBonusGame, {data: bonusGamePost, isLoading: isBonusGamePostLoading}] = useSaveBonusGameMutation()
     const [addStarsClick, { data: addStarsData, isLoading: isAddStarsLoading, error: isAddStarsError}] = useAddStarsMutation()
-    const {data: bonusData, isLoading: isBonusDataLoading} = useGetBonusQuery(tgUser | 658318611)
+    const {data: bonusData, isLoading: isBonusDataLoading} = useGetBonusQuery(tgUser)
     const dispatch = useDispatch()
     const { 
         activeBonusGame,
@@ -52,7 +52,7 @@ const AddStarsGame = ({
     const revealBonus = async () => {
         if (!isBonusGameFinished) {
             await saveBonusGame({
-                tg_id: tgUser | 658318611,
+                tg_id: tgUser,
                 picked_star: pickedStarBet,
                 bonuses: activeBonusGame
             })
@@ -65,7 +65,7 @@ const AddStarsGame = ({
     const addStarsWithBonusHandler = async () => {
         if (!isAddStarsLoading && pickedStarBet) {
             await addStarsClick({
-                tg_id: tgUser | 658318611,
+                tg_id: tgUser,
                 amount: pickedAddStarValue,
                 type: 'BON',
                 a_type: 'A',

@@ -58,7 +58,7 @@ const Game = ({
     const playButtonHandler = async () => {
         if (isGameFinished && !isNewGameLoading && !isCalculatedGameLoading) {
             await createNewGame({
-                tg_id: tgUser | 658318611
+                tg_id: tgUser
             })
             startNewGame()
             setBtnText('TAP & WIN')

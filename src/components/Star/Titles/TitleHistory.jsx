@@ -10,7 +10,7 @@ const TitleHistory= ({}) => {
     })
 
     const {user: tgUser} = useTelegram()
-    const {data: historyGamesData, isLoading: isHistoryGamesLoading, isError: isHistoryGamesError, refetch} = useGetHistoryTotalsQuery(tgUser | 658318611)
+    const {data: historyGamesData, isLoading: isHistoryGamesLoading, isError: isHistoryGamesError, refetch} = useGetHistoryTotalsQuery(tgUser)
 
 
     const updateGlobalItems = (alLItems) => {

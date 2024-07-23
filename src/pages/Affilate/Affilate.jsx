@@ -8,8 +8,6 @@ import { useGetReferralQuery } from "../../store/services/starsGame";
 import { useTelegram } from "../../hooks/useTelegram";
 import RequestButton from "../../components/UI/RequestButton/RequestButton";
 
-const telegramId = 658318611
-
 const Affilate= ({}) => {
     const {
         setIsWithDraw,
@@ -20,7 +18,7 @@ const Affilate= ({}) => {
 
     const {user: tgUser, hideTgButton} = useTelegram()
     const navigate = useNavigate()
-    const {data: refData, isLoading: isRefDataLoading, refetch: refetchRefQuery} = useGetReferralQuery(tgUser|telegramId)
+    const {data: refData, isLoading: isRefDataLoading, refetch: refetchRefQuery} = useGetReferralQuery(tgUser)
 
     const { scrollTop } = useScroll()
     const location = useLocation()

@@ -22,8 +22,6 @@ const routes = [
     {id: 6, path: '/check-win-num', name: 'CheckWinNumber', element: <CheckWinNumber />, nodeRef: createRef()},
 ]
 
-const telegramId = 658318611
-
 
 function App({
 
@@ -40,14 +38,14 @@ function App({
 
     const { setPlayedGame, updateHash1 } = useStarGame()
 
-    const { data: iniData, isLoading: isInitLoading, isError } = useLoginUserQuery(tgUser|telegramId)
-    const { data: balancesData, isLoading: isBalanceDataLoading, isError: isBalanceDataError } = useGetBalancesQuery(tgUser|telegramId)
-    const { data: activeGame, isLoading: isActiveGameLoading, isError: isActiveGameError } = useGetActiveGameQuery(tgUser|telegramId)
+    const { data: iniData, isLoading: isInitLoading, isError } = useLoginUserQuery(tgUser)
+    const { data: balancesData, isLoading: isBalanceDataLoading, isError: isBalanceDataError } = useGetBalancesQuery(tgUser)
+    const { data: activeGame, isLoading: isActiveGameLoading, isError: isActiveGameError } = useGetActiveGameQuery(tgUser)
     const [setRefPartner, {data, isLoading}] = useSetRefPartnerMutation()
 
     async function setRef (ref) {
         await setRefPartner({
-            tg_id: tgUser | telegramId,
+            tg_id: tgUser,
             ref: ref
         })
     }

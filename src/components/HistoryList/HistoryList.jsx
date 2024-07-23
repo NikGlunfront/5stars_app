@@ -26,7 +26,7 @@ const HistoryList= ({
         airdrop: 0
     })
     const {user: tgUser} = useTelegram()
-    const {data: historyGamesData, isLoading: isHistoryGamesLoading, isError: isHistoryGamesError} = useGetAllHistoryGamesQuery(tgUser | 658318611)
+    const {data: historyGamesData, isLoading: isHistoryGamesLoading, isError: isHistoryGamesError} = useGetAllHistoryGamesQuery(tgUser)
 
     function formatDate(dateString) {
         const date = new Date(dateString);
