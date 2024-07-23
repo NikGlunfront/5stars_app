@@ -19,7 +19,7 @@ const PartnerModal = ({
         changeActivePartnerBalance
     } = useApp()
 
-    const { tg: tgUser, sendAlert } = useTelegram()
+    const { user: tgUser, sendAlert } = useTelegram()
     const { changeIsPremium, isPremium } = useApp()
 
     const [changePremium, {data, isLoading}] = useChangePpMutation()
@@ -36,6 +36,7 @@ const PartnerModal = ({
         }
         setIsModalActive(false)
     }
+
 
     const handleChangePremium = async () => {
         await changePremium({
