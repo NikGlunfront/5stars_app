@@ -23,6 +23,10 @@ export function useTelegram() {
         disableTgButton()
     }
 
+    const setTgButtonText = (text) => {
+        tg.MainButton.text = text
+    }
+
     const hideTgButton = () => {
         tg.MainButton.hide()
     }
@@ -102,6 +106,7 @@ export function useTelegram() {
         vibrate3ALert,
         vibrate4ALert,
         vibrate5ALert,
+        setTgButtonText,
         handleMainButtonOffEventClick,
         tg,
         user: tg.initDataUnsafe?.user?.id ? tg.initDataUnsafe?.user?.id : devTelegramId,

@@ -16,7 +16,8 @@ const Withdraw= ({
         user: tgUser,
         sendAlert,
         handleMainButtonClick,
-        handleMainButtonOffEventClick
+        handleMainButtonOffEventClick,
+        setTgButtonText
     } = useTelegram()
 
     const {
@@ -47,7 +48,7 @@ const Withdraw= ({
         }
     }
     
-    const handleSwapAccept = useCallback(async () => {
+    const handleSwapAccept = useCallback(() => {
         swapAccept(starsAmount)
     }, [starsAmount])
 
@@ -57,10 +58,10 @@ const Withdraw= ({
     }, [])
 
     useEffect(() => {
-        handleMainButtonClick(() => handleSwapAccept())
+        handleMainButtonClick(handleSwapAccept)
 
         return () => {
-            handleMainButtonOffEventClick(() => handleSwapAccept())
+            handleMainButtonOffEventClick(handleSwapAccept)
         }
     }, [handleSwapAccept])
 
@@ -70,6 +71,7 @@ const Withdraw= ({
         } else {
             disableTgButton()
         }
+        setTgButtonText(`Swap ${starsAmount > 0 ? starsAmount : ''} stars`)
     }, [starsAmount])
 
     const handleKeyPress = (e) => {
