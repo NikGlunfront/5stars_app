@@ -28,7 +28,7 @@ const AddStarsGame = ({
     useEffect(() => {
 
         if (bonusData?.bonus && !isBonusDataLoading && !bonusData?.bonus?.new) {
-            if (bonusData.error) {
+            if (bonusData.bonus.error) {
                 
             } else {
                 dispatch(setBonusFromHistory({
@@ -41,7 +41,7 @@ const AddStarsGame = ({
             dispatch(shuffleBonuses())
         }
 
-        if (bonusData?.error) {
+        if (bonusData?.bonus?.error) {
             hideTgButton()
         }
 

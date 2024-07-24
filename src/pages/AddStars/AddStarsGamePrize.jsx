@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import RequestButton from "../../components/UI/RequestButton/RequestButton";
 import BoxWrapper from "../../components/Wrappers/BoxWrapper";
 import { useTelegram } from "../../hooks/useTelegram";
-import AddStarsBet from "./AddStarsBet";
-import AddStarsTimersPrize from "./AddStarsTimersPrize";
+import { useAddStarsMutation, useGetBonusQuery, useSavePrizeWinMutation } from "../../store/services/starsGame";
+import { resetPrize, setPickedPrizeStar, setPrizesFromHistory } from "../../store/slices/addStarSlice/addStarSlice";
 import AddStarsBetPrize from "./AddStarsBetPrize";
-import { resetPrize, revealPrizeResult, setPickedPrizeStar, setPrizesFromHistory, shufflePrizes } from "../../store/slices/addStarSlice/addStarSlice";
-import RequestButton from "../../components/UI/RequestButton/RequestButton";
-import { useAddStarsMutation, useGetPrizeQuery, useSavePrizeWinMutation } from "../../store/services/starsGame";
 
 const prizeData = {}
 
@@ -17,7 +15,7 @@ const AddStarsGamePrize = ({
     const [pickedStarBet, setPickedStarBet] = useState(0)
     const {user: tgUser, sendAlert} = useTelegram()
     const dispatch = useDispatch()
-    const {data: prizeData, isLoading: isPrizeDataLoading} = useGetPrizeQuery(tgUser)
+    const {data: bonusData, isLoading: isBonusDataLoading} = useGetBonusQuery(tgUser)
     const [savePrizeWin, {data: prizePost, isLoading: isPrizePostLoading}] = useSavePrizeWinMutation()
     const [addStarsClick, { data: addStarsData, isLoading: isAddStarsLoading, error: isAddStarsError}] = useAddStarsMutation()
     const { 
@@ -34,14 +32,14 @@ const AddStarsGamePrize = ({
 
 
     useEffect(() => {
-        if (prizeData && !isPrizeDataLoading) {
+        if (bonusData?.prize && !isBonusDataLoading) {
             dispatch(setPrizesFromHistory({
-                pickedStar: parseInt(prizeData.picked_star),
-                prizes: prizeData.prizes,
-                id: parseInt(prizeData.id)
+                pickedStar: parseInt(bonusData?.prize?.picked_star),
+                prizes: bonusData?.prize?.prizes,
+                id: parseInt(bonusData?.prize?.id)
             }))
         }
-    }, [prizeData, isPrizeDataLoading])
+    }, [bonusData, isBonusDataLoading])
 
     const revealPrize = async () => {
         if (!isGamePrizeFinished && prizeId) {
@@ -74,7 +72,7 @@ const AddStarsGamePrize = ({
     }
 
     return (
-        <BoxWrapper className={'s5-game add-star-game add-star-game_prize' + (prizeData?.error ? " _disabled" : "")}>
+        <BoxWrapper className={'s5-game add-star-game add-star-game_prize' + (bonusData?.prize?.error ? " _disabled" : "")}>
             <div className="add-star-game__topper">
                 <span>Free Prize</span>
                 {/* <AddStarsTimersPrize activeTime={prizeData?.timer} /> */}

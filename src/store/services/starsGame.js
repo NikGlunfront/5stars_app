@@ -132,7 +132,7 @@ export const starsApi = createApi({
                 method: "POST",
                 body: {...prizeData, method: 'update_prize'}
             }),
-            invalidatesTags: ['Prize']
+            invalidatesTags: ['Bonus']
         }),
     })
 })
