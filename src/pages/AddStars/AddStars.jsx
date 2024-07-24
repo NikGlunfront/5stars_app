@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useApp } from "../../hooks/useApp";
 import { useLocation } from "react-router-dom";
 import { useScroll } from "../../hooks/useScroll";
-import { useAddStarsMutation, useLazyAddStarsQuery } from "../../store/services/starsGame";
+import { useAddStarsMutation, useGetBonusQuery, useLazyAddStarsQuery } from "../../store/services/starsGame";
 import { useTelegram } from "../../hooks/useTelegram";
 import AddStarsGame from "./AddStarsGame";
 import RequestButton from "../../components/UI/RequestButton/RequestButton";
@@ -26,6 +26,7 @@ const AddStars= ({
 
 }) => {
     const [pickedVal, setPickedVal] = useState(0)
+    const [percentInfo, setPercentInfo] = useState('up to 500%')
     const dispatch = useDispatch()
 
     const {
@@ -37,15 +38,13 @@ const AddStars= ({
         sendAlert, 
         user: tgUser, 
         hideTgButton,
-        showTgButton,
-        enableTgButton,
-        disableTgButton,
         handleMainButtonClick
      } = useTelegram()
 
-    const {pickedStar} = useSelector(state => state.addStar)
+    const {pickedStar, isBonusGameFinished} = useSelector(state => state.addStar)
 
     const [addStarsClick, { data: addStarsData, isLoading: isAddStarsLoading, error: isAddStarsError}] = useAddStarsMutation()
+    const {data: bonusData, isLoading: isBonusDataLoading} = useGetBonusQuery(tgUser)
 
     const { scrollTop } = useScroll()
     const location = useLocation()
@@ -105,17 +104,22 @@ const AddStars= ({
             <div className="addstars-page__game">
                 <AddStarsGame 
                     pickedAddStarValue={pickedVal}
+                    changePrizePercent={setPercentInfo}
                 />
             </div>
 
-
-            <div className="addstars-page__content">
-                {starVars.map(starItem => (
-                    <div key={starItem.id} className={"addstars-item" + (starItem.val === pickedVal ? ' _active' : '')} onClick={() => handlePickStarAmount(starItem.val)}>
-                        {starItem.val} stars
-                    </div>
-                ))}
+            {((bonusData?.bonus && isBonusGameFinished) || (bonusData?.bonus?.error)) &&
+            <div>
+                <p style={{textAlign: 'center'}}>Choose an amount and get the bonus <b>{percentInfo}</b>, <br />till timer is counting down.</p>
+                <div className="addstars-page__content">
+                    {starVars.map(starItem => (
+                        <div key={starItem.id} className={"addstars-item" + (starItem.val === pickedVal ? ' _active' : '')} onClick={() => handlePickStarAmount(starItem.val)}>
+                            {starItem.val} stars
+                        </div>
+                    ))}
+                </div>
             </div>
+            }
             {/* <RequestButton
                 onClick={addStarsHandler}
                 isloading={isAddStarsLoading}

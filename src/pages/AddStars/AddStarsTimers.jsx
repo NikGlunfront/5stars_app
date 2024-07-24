@@ -2,14 +2,18 @@ import React, { useEffect, useState } from "react"
 import { useInterval } from "../../hooks/useInterval";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsVisibleBonus } from "../../store/slices/addStarSlice/addStarSlice";
+import { useGetBonusQuery } from "../../store/services/starsGame";
+import { useTelegram } from "../../hooks/useTelegram";
 
 const AddStarsTimers = ({
     activeTime,
     expired = false
 }) => {
     const [timerTime, setTimerTime] = useState(0)
+    const { user: tgUser } = useTelegram()
     const dispatch = useDispatch()
     const { isVisibleBonus } = useSelector(state => state.addStar)
+    const {data: bonusData, isLoading: isBonusDataLoading, refetch: refetchBonus} = useGetBonusQuery(tgUser)
 
     function getDaysDifference(dateString) {
         // Преобразуем строку в объект Date
@@ -31,8 +35,15 @@ const AddStarsTimers = ({
         const timeDiff = getDaysDifference(activeTime)
         if (timeDiff > 0) {
             setTimerTime(timeDiff)
+        } else {
         }
     }, [activeTime])
+    
+    useEffect(() => {
+        if (timerTime === 0) {
+            refetchBonus()
+        }
+    }, [timerTime])
 
     useInterval(() => {
         if (timerTime > 0) {
@@ -46,7 +57,7 @@ const AddStarsTimers = ({
     return (
         <div className="add-star-game__timer">
             {timerTime === 0
-                ? "Expired"
+                ? "00:00"
                 : <span>{Math.floor(timerTime / 60) > 9 ? Math.floor(timerTime / 60) : `0${Math.floor(timerTime / 60)}`}:{timerTime % 60 > 9 ? timerTime % 60 : `0${timerTime % 60}`}</span>
             }
         </div>

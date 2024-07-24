@@ -94,7 +94,7 @@ export const starsApi = createApi({
                 method: "POST",
                 body: {...userData, method: 'zero_balance'}
             }),
-            invalidatesTags: ['Balance', 'Game', 'History', 'Bonus']
+            invalidatesTags: ['Balance', 'Game', 'History']
         }),
         setRefPartner: builder.mutation({
             query: (userData) => ({

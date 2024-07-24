@@ -86,6 +86,31 @@
     }
 }
 
+.addstars-modal {
+    width: calc(100% - 3rem);
+
+    &.modal-window__content {
+        background-color: var(--s5-white-color);
+        @include flex_col;
+        justify-content: center;
+        border-radius: 2rem;
+    }
+    .modal-window__close {
+        display: none;
+    }
+
+    p {
+        margin-top: auto;
+        font-size: 2.4rem;
+        font-weight: 700;
+        margin-bottom: 4rem;
+    }
+
+    .request-btn {
+        margin-top: auto;
+    }
+}
+
 .modal-window {
     position: fixed;
     top: 0;
@@ -124,6 +149,7 @@
         opacity: 1;
         visibility: visible;
         pointer-events: all;
+        backdrop-filter: blur(5px);
 
         .modal-window__content {
             transform: translate(0, 0) scale(1);

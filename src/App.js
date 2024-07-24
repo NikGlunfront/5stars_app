@@ -10,7 +10,7 @@ import CheckWinNumber from './pages/CheckWinNumber/CheckWinNumber';
 import History from './pages/History/History';
 import Home from './pages/Home/Home';
 import Withdraw from './pages/Withdraw/Withdraw';
-import { useGetActiveGameQuery, useGetBalancesQuery, useLoginUserQuery, useSetRefPartnerMutation } from './store/services/starsGame';
+import { useGetActiveGameQuery, useGetBalancesQuery, useGetBonusQuery, useLoginUserQuery, useSetRefPartnerMutation } from './store/services/starsGame';
 import { useStarGame } from './hooks/useStarGame';
 
 const routes = [
@@ -41,6 +41,7 @@ function App({
     const { data: iniData, isLoading: isInitLoading, isError } = useLoginUserQuery(tgUser)
     const { data: balancesData, isLoading: isBalanceDataLoading, isError: isBalanceDataError } = useGetBalancesQuery(tgUser)
     const { data: activeGame, isLoading: isActiveGameLoading, isError: isActiveGameError } = useGetActiveGameQuery(tgUser)
+    const {data: bonusData, isLoading: isBonusDataLoading} = useGetBonusQuery(tgUser)
     const [setRefPartner, {data, isLoading}] = useSetRefPartnerMutation()
 
     async function setRef (ref) {
@@ -65,7 +66,6 @@ function App({
     useEffect(() => {
         if (!isInitLoading) {
             handleInitDataFetch(iniData)
-            console.log(iniData)
         }
     }, [iniData])
 
@@ -79,9 +79,7 @@ function App({
     useEffect(() => {
         if (iniData && activeGame && !isActiveGameLoading) {
             updateActiveGame(activeGame)
-            console.log(activeGame)
             if (activeGame.result_history) {
-                console.log(activeGame.result_history)
                 updateHash1(activeGame.hash1)
                 setPlayedGame(activeGame.result_history)
             }

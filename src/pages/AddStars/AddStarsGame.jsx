@@ -10,9 +10,11 @@ import { useTelegram } from "../../hooks/useTelegram";
 import greenStar from '../../assets/img/icons/game/bet_star_green.svg'
 
 const AddStarsGame = ({
-    pickedAddStarValue
+    pickedAddStarValue,
+    changePrizePercent
 }) => {
     const [pickedStarBet, setPickedStarBet] = useState(0)
+    const [btnText, setBtnText] = useState('Tap & Win Bonus')
     const { isVisibleBonus } = useSelector(state => state.addStar)
     const { user: tgUser, sendAlert, hideTgButton } = useTelegram()
     const [saveBonusGame, {data: bonusGamePost, isLoading: isBonusGamePostLoading}] = useSaveBonusGameMutation()
@@ -47,10 +49,28 @@ const AddStarsGame = ({
 
     }, [bonusData, isBonusDataLoading])
 
-    useEffect(() => {console.log(activeBonusGame, pickedStarBet)}, [activeBonusGame, pickedStarBet])
+    useEffect(() => {
+        if (isBonusGameFinished && !isBonusDataLoading) {
+            changePrizePercent(activeBonusGame.filter(item => item.id === pickedStar)[0]['value'] + "%")
+            if (pickedAddStarValue) {
+                setBtnText(`Add ${pickedAddStarValue + (pickedAddStarValue * activeBonusGame.filter(item => item.id === pickedStar)[0]['value'] / 100)} Stars`)
+            } else {
+                setBtnText('Add stars')
+            }
+        } else {
+            setBtnText('Tap & Win Bonus')
+        }
+        if (bonusData?.bonus?.error) {
+            if (pickedAddStarValue) {
+                setBtnText(`Add ${pickedAddStarValue} Stars`)
+            } else {
+                setBtnText('Add Stars')
+            }
+        }
+    }, [isBonusGameFinished, isBonusDataLoading, pickedAddStarValue, activeBonusGame, pickedStar, bonusData])
 
     const revealBonus = async () => {
-        if (!isBonusGameFinished) {
+        if (!isBonusGameFinished && !bonusData?.bonus?.error) {
             await saveBonusGame({
                 tg_id: tgUser,
                 picked_star: pickedStarBet,
@@ -58,10 +78,24 @@ const AddStarsGame = ({
             })
             dispatch(revealBonusResult(pickedStarBet))
         } else {
-            addStarsWithBonusHandler()
+            if (bonusData?.bonus?.error) {
+                addStarsNoBonusHandler()
+            } else {
+                addStarsWithBonusHandler()
+            }
         }
     }
 
+    const addStarsNoBonusHandler = async () => {
+        await addStarsClick({
+            tg_id: tgUser,
+            amount: pickedAddStarValue,
+            type: 'DEF',
+            a_type: 'A',
+        })
+        sendAlert(`Your balance has been charged on ${pickedAddStarValue} Stars`)
+        dispatch(resetBonus())
+    }
     const addStarsWithBonusHandler = async () => {
         if (!isAddStarsLoading && pickedStarBet) {
             await addStarsClick({
@@ -73,7 +107,7 @@ const AddStarsGame = ({
                     bonus_multiply: pickedStarBet
                 }
             })
-            sendAlert(`Баланс пополнен на ${pickedAddStarValue * (pickedStarBet + 1)} Stars`)
+            sendAlert(`Your balance has been charged on ${pickedAddStarValue * (pickedStarBet + 1)} Stars`)
             dispatch(resetBonus())
         }
     }
@@ -110,7 +144,7 @@ const AddStarsGame = ({
             <div className="s5-game__text">
                 {!isBonusGameFinished 
                     ?
-                    <p>Find the Bonus</p>
+                    <p>Find the bonus up to <b>500%</b></p>
                     :
                     <p>You won bonus 
                         <strong style={{marginLeft: '1rem'}}>
@@ -123,12 +157,13 @@ const AddStarsGame = ({
                 }
             </div>
             <RequestButton 
-                className={"s5-game__btn" + ((pickedStarBet && !isBonusGameFinished) || (isBonusGameFinished && pickedStar && pickedAddStarValue) ? ' _active' : '')} 
+                className={"s5-game__btn" + ((pickedStarBet && !isBonusGameFinished) || (isBonusGameFinished && pickedStar && pickedAddStarValue) || (bonusData?.bonus?.error && pickedAddStarValue) ? ' _active' : '')} 
                 onClick={revealBonus}
                 isloading={!bonusData?.bonus || isBonusDataLoading}
+                disabled={bonusData?.bonus?.error && !pickedAddStarValue}
             >
-                <div>{isBonusGameFinished && !isBonusDataLoading ? (pickedAddStarValue ? `ADD ${pickedAddStarValue + (pickedAddStarValue * activeBonusGame.filter(item => item.id === pickedStar)[0]['value'] / 100)} STARS` : 'ADD STARS') : 'TAP & WIN BONUS'}</div>
-                <span className={(!isBonusGameFinished) || (!pickedAddStarValue) ? "_hidden" : ''}>
+                <div>{btnText}</div>
+                <span className={(!isBonusGameFinished) || (!pickedAddStarValue) || bonusData?.bonus?.error? "_hidden" : ''}>
                     <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.83401 0.439639C6.09948 -0.146547 6.90052 -0.146546 7.16599 0.43964L8.55758 3.51234C8.6646 3.74867 8.87989 3.91196 9.12877 3.9456L12.3576 4.38201C12.9725 4.46511 13.2194 5.25373 12.7698 5.6981L10.3976 8.04239C10.2165 8.22134 10.1348 8.48364 10.1807 8.73915L10.7824 12.0908C10.8966 12.7268 10.2492 13.2149 9.70432 12.9035L6.85435 11.2746C6.63366 11.1485 6.36635 11.1485 6.14565 11.2746L3.29568 12.9035C2.75084 13.2149 2.10336 12.7268 2.21756 12.0908C2.39945 11.0631 2.53616 10.1778 2.78159 9.58162C3.47699 8.517 7.19942 7.11169 7.0318 6.88987C7.0767 6.68584 2.69978 7.70788 1.96348 7.28203L1.55442 7.02652L0.230238 5.6981C-0.21942 5.25373 0.0275324 4.46511 0.642364 4.38201L3.87123 3.9456C4.12011 3.91196 4.3354 3.74867 4.44243 3.51234L5.83401 0.439639Z" fill="white"/>
                     </svg>
