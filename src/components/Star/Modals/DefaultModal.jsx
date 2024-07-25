@@ -92,7 +92,6 @@ const DefaultModal = ({
                 </div></li>
                 <li onClick={handleResetUserData}><div>RESET</div></li>
                 <li onClick={setZeroBalance}><div>Zero Balance</div></li>
-                {!prizeId && <li onClick={createPrize}><div>Get prize</div></li>}
             </ul>
         </Modal>
     );
