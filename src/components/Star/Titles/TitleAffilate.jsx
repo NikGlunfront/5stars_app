@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import QRCode from "react-qr-code";
 import airdropCoin from '../../../assets/img/icons/airdrop_coin.svg';
 import { useApp } from "../../../hooks/useApp";
 import { useTelegram } from "../../../hooks/useTelegram";
 import { useGetReferralQuery } from "../../../store/services/starsGame";
 import BoxWrapper from "../../Wrappers/BoxWrapper";
+import svg64 from 'svg64'
+import { copyImageToClipboard } from "copy-image-clipboard";
 
 const TitleAffilate= ({}) => {
     const {
@@ -13,10 +15,29 @@ const TitleAffilate= ({}) => {
     } = useApp()
     const { sendAlert, user: tgUser, tg } = useTelegram()
     const {data: refData, isLoading: isRefDataLoading, refetch: refetchRefQuery} = useGetReferralQuery(tgUser)
+    const [qr64, setQr64] = useState(null)
+    const qrCodeRef = useRef(null)
 
+
+    const refLink = `https://t.me/gl_pl_bot/starsdevapp?startapp=${refHash}`
+
+    const handleCopy = async () => {
+        const svg = qrCodeRef.current; // Получаем SVG код
+        const base64fromSVG = svg64(svg);
+        const base64Image = `${base64fromSVG}`;
+
+        copyImageToClipboard(base64Image)
+        .then(() => {
+            sendAlert('Your referral link was copied.');
+        })
+        .catch(err => {
+            sendAlert('Failed to copy');
+        });
+    }
+ 
     const copyRefLink = () => {
-        navigator.clipboard.writeText(`https://t.me/gl_pl_bot/starsdevapp?startapp=${refHash}`).then(() => {
-            sendAlert('Реферальная ссылка скопирована');
+        navigator.clipboard.writeText(refLink).then(() => {
+            sendAlert('Your referral link was copied.');
         /* Resolved - text copied to clipboard successfully */
         },() => {
             sendAlert('Failed to copy');
@@ -25,7 +46,7 @@ const TitleAffilate= ({}) => {
     }
 
     const shareLink = () => {
-        tg.openTelegramLink(`https://t.me/share/url?url=https://t.me/gl_pl_bot/starsdevapp?startapp=${refHash}&text=Share your referral link`)
+        tg.openTelegramLink(`https://t.me/share/url?url=${refLink}&text=Share your referral link`)
     }
 
     return (
@@ -39,10 +60,12 @@ const TitleAffilate= ({}) => {
             <BoxWrapper className={'title-affilate__qr'}>
                 <div className="title-affilate__qrcode">
                     <QRCode
-                        value={`https://t.me/gl_pl_bot/starsdevapp?startapp=${refHash}`}
+                        ref={qrCodeRef}
+                        value={refLink}
                     />
+                    {/* <img src={qrCodeImg} ref={qrCodeRef} alt="" /> */}
                 </div>
-                <strong>https://t.me/gl_pl_bot/starsdevapp?startapp={refHash}</strong>
+                <strong>https:/5stars.bot/{tgUser}</strong>
                 <div className="title-affilate__qr-row">
                     <div className="title-affilate__qr-copy" onClick={copyRefLink}>
                         <svg width="19" height="17" viewBox="0 0 19 17" fill="none" xmlns="http://www.w3.org/2000/svg">

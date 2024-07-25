@@ -38,16 +38,6 @@ const Affilate= ({}) => {
         if (isShow !== isBtmBtnsVisible) setIsBtmBtnsVisible(isShow)
     }, [isBtmBtnsVisible])
 
-    useEffect(() => {
-        console.log(window.scrollY)
-    }, [window.scrollY])
-
-    useEffect(() => {
-        if (refData && !isRefDataLoading) {
-            console.log(refData)
-        }
-    }, [refData, isRefDataLoading])
-
     const navigateToSwapStars = () => {
         if (activePartnerBalance === 'star') {
             navigate('/withdraw')
