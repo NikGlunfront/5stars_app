@@ -58,13 +58,13 @@ const PremiumPartnerModal = ({
                     {activePartnerBalance === 'usdt' && 
                         <div>
                             <img src={usdt} alt="" />
-                            {partnershipBalanceUsdt}
+                            {partnershipBalanceUsdt.toLocaleString()}
                         </div>
                     }
                     {activePartnerBalance === 'coin' && 
                         <div>
                             <img src={coinImg} alt="" />
-                            {partnershipBalanceAirdrop}
+                            {partnershipBalanceAirdrop.toLocaleString()}
                         </div>
                     }
                 </li>

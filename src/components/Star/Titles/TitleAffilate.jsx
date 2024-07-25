@@ -1,20 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
+import QRCode from "react-qr-code";
 import airdropCoin from '../../../assets/img/icons/airdrop_coin.svg';
-import qrCodeImg from '../../../assets/img/qrcode.png';
 import { useApp } from "../../../hooks/useApp";
 import { useTelegram } from "../../../hooks/useTelegram";
 import { useGetReferralQuery } from "../../../store/services/starsGame";
 import BoxWrapper from "../../Wrappers/BoxWrapper";
-
-const telegramId = 658318611
 
 const TitleAffilate= ({}) => {
     const {
         referralsCount,
         ref: refHash
     } = useApp()
-
-    const { sendAlert, user: tgUser } = useTelegram()
+    const { sendAlert, user: tgUser, tg } = useTelegram()
     const {data: refData, isLoading: isRefDataLoading, refetch: refetchRefQuery} = useGetReferralQuery(tgUser)
 
     const copyRefLink = () => {
@@ -26,18 +23,25 @@ const TitleAffilate= ({}) => {
         /* Rejected - text failed to copy to the clipboard */
         });
     }
+
+    const shareLink = () => {
+        tg.openTelegramLink(`https://t.me/share/url?url=https://t.me/gl_pl_bot/starsdevapp?startapp=${refHash}&text=Share your referral link`)
+    }
+
     return (
         <div className='title-affilate'>
-            <div className="intro-star-topper__subtitle">Affiliate program</div>
-            <div className="title-affilate__percent">Your cut 50%</div>
+            <div className="intro-star-topper__subtitle">Partnership</div>
             <div className="title-affilate__text">
-                To know how this program works and how to increase your cut up to 
-                <span>50%</span> 
-                please 
+                Share this link and get 50% from any income of the service.
+                To know how it works please
                 <div>read this rules</div>.
             </div>
             <BoxWrapper className={'title-affilate__qr'}>
-                <img src={qrCodeImg} alt="qrCode" />
+                <div className="title-affilate__qrcode">
+                    <QRCode
+                        value={`https://t.me/gl_pl_bot/starsdevapp?startapp=${refHash}`}
+                    />
+                </div>
                 <strong>https://t.me/gl_pl_bot/starsdevapp?startapp={refHash}</strong>
                 <div className="title-affilate__qr-row">
                     <div className="title-affilate__qr-copy" onClick={copyRefLink}>
@@ -47,7 +51,7 @@ const TitleAffilate= ({}) => {
                         </svg>
                         Copy
                     </div>
-                    <div className="title-affilate__qr-share">
+                    <div className="title-affilate__qr-share" target="_blank" onClick={shareLink}>
                         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M13.4615 8.76564V9.68161C13.4615 11.9299 11.9626 13.4288 9.71431 13.4288H5.21773C2.96944 13.4288 1.47058 11.9299 1.47058 9.68161V8.76564" stroke="black" strokeLinecap="square" strokeLinejoin="round"/>
                             <path d="M4.33191 4.35401L7.07249 1.61343C7.275 1.41092 7.60275 1.41092 7.8046 1.61343L10.5452 4.35401" stroke="black" strokeLinecap="square" strokeLinejoin="round"/>
@@ -66,7 +70,7 @@ const TitleAffilate= ({}) => {
                 </div>
                 <div>
                     <img src={airdropCoin} alt="airdrop" />
-                    {Math.floor(refData?.totals?.add_sum).toLocaleString()}
+                    {Math.floor(refData?.totals?.add_sum / 2).toLocaleString()}
                 </div>
                 <div>
                     <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">

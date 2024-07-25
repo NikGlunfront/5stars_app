@@ -18,6 +18,7 @@
     }
 }
 .history-list {
+    padding: 1rem;
 
     &__empty {
         padding: 5rem 1rem;
@@ -127,7 +128,7 @@
     }
 
     &__topper {
-        margin-bottom: 0.6rem;
+        margin-bottom: 1rem;
 
         & > span {
             transform: translate(0, 0.1rem);
@@ -153,7 +154,7 @@
 
     &__changes {
         @include flex_row;
-        margin-bottom: 0.4rem;
+        margin-bottom: 1rem;
         flex-wrap: wrap;
         align-items: center;
         font-size: 1.2rem;
@@ -386,7 +387,7 @@
 }
 
 .affilate-page {
-    padding: 0 1.5rem;
+    padding: 0 1.5rem 10rem;
 
     & > .request-btn {
         margin-top: 0;
@@ -486,7 +487,7 @@
 }
 .s5-box-wrapper {
     & + .history-list-title {
-        margin-top: 2rem;
+        margin-top: 2.5rem;
     }
 }
 

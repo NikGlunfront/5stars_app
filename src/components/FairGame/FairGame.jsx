@@ -98,7 +98,7 @@ const FairGame = ({
                 </div>
                 <div className="box-btn__text">Airdrop</div>
                 <div className="box-btn__subinfo">
-                    {airdropBalance}
+                    {airdropBalance.toLocaleString()}
                     <img src={greenCoin} alt="" />
 
                 </div>
@@ -106,11 +106,11 @@ const FairGame = ({
 
             <BoxWrapper className={'box-btn box-btn_partnership'} linkPath={'/affilate'}>
                 <div className={"box-btn__img _green" + (isPremium ? ' _purple' : '')}>
-                    <img src={isPremium ? premiumPartnership : greenPartnership} alt="" />
+                    <img src={isPremium ? premiumPartnership.toLocaleString() : greenPartnership.toLocaleString()} alt="" />
                 </div>
                 <div className="box-btn__text">{isPremium ? "Premium Partner" : "Partnership"}</div>
                 <div className={"box-btn__subinfo" + (referralsCount === 0 ? " _empty" : '')}>
-                    {isPremium ? partnershipBalanceUsdt : partnershipBalance}
+                    {isPremium ? partnershipBalanceUsdt.toLocaleString() : partnershipBalance.toLocaleString()}
                     <img src={isPremium ? usdtIcon : greenStar} alt="" />
                 </div>
             </BoxWrapper>

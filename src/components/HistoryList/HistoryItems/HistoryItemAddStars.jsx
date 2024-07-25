@@ -25,19 +25,19 @@ const HistoryItemAddStars= ({
                     <div className="history-item__changes">
                         <div className="history-item__spend">
                             <div className={"history-game-result-star _active _win" + (isPrize ? " _bonus" : "")}></div>
-                            {amount}
+                            {amount.toLocaleString()}
                         </div>
                         {bonus_multiply > 0 &&
                             <div className="history-item__affilate-profit ">
                                 <div className="history-game-result-star _active _green"></div>
-                                <span>{parseInt(bonus_multiply) * parseInt(amount)}</span>
+                                <span>{(parseInt(bonus_multiply) * parseInt(amount)).toLocaleString()}</span>
                             </div>
                         }
                     </div>
                     <div className="history-item__date">{date}</div>
                 </div>
                 <div className="history-item__right">
-                    <div className="history-item__win">+{parseInt(bonus_multiply) ? parseInt(amount) * (parseInt(bonus_multiply) + 1) : amount}</div>
+                    <div className="history-item__win">+{parseInt(bonus_multiply) ? (parseInt(amount) * (parseInt(bonus_multiply) + 1)).toLocaleString() : amount.toLocaleString()}</div>
                 </div>
             </div>
         </div>

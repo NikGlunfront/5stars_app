@@ -24,6 +24,12 @@ const defGameObj = {
     partnerProfit: 0, 
     partnerAmount: 0
 }
+const defSwapObj = {id: 1, type: 'swap',  amount: 0, date: 'Today'}
+
+const defWithDraw = {id: 1, type: 'withdraw', status: 'completed', amount: 0, date: 'Today'}
+const defWithDrawUsdt = {id: 2, type: 'withdrawUsdt', status: 'completed', amount: 0, date: 'Today'}
+const defWithDrawPending = {id: 3, type: 'withdraw', status: 'pending', amount: 0, date: 'Today'}
+const defWithDrawUsdtPending = {id: 4, type: 'withdrawUsdt', status: 'pending', amount: 0, date: 'Today'}
 
 const AffilateTodayList = ({
     refData = null
@@ -34,7 +40,7 @@ const AffilateTodayList = ({
 
     useEffect(() => {
         if (refData !== null) {
-            let gamesObj, addSObj
+            let gamesObj, addSObj, swapObj, withdObj, withUsdtObj, withdPendingObj, withUsdtPendingObj
             let refGames = Object.keys(refData.todayGames).length ? refData.todayGames : null
             let refAddStars = Object.keys(refData.todayAddStars).length ? refData.todayAddStars : null
             if (refGames !== null) {
@@ -49,12 +55,23 @@ const AffilateTodayList = ({
                 addSObj = 
                 isPremium 
                     ? {id: 1, type: 'add', amount: refAddStars.totalSum, profit: refAddStars.totalSum / 2, date: 'Today'}
-                    : {id: 1, type: 'add', amount: refAddStars.totalSum, profit: refAddStars.airdrop, date: 'Today'}
+                    : {id: 1, type: 'add', amount: refAddStars.totalSum, profit: refAddStars.airdrop / 2, date: 'Today'}
                     
             } else {
                 addSObj = {id: 1, type: 'add', status: 'completed', amount: 0, peopleAmount: 0, fee: 0, profit: 0, date: 'Today'}
             }
-            setTrans([gamesObj, addSObj])
+            if (!isPremium) {
+                swapObj = {id: 1, type: 'swap',  amount: refData.todaySwap.swap_sum ? parseInt(refData.todaySwap.swap_sum) : 0, date: 'Today'}
+                withdObj = defWithDraw
+                withdPendingObj = defWithDrawPending
+                setTrans([gamesObj, addSObj, swapObj, withdObj, withdPendingObj])
+            } else {
+                withdObj = defWithDraw
+                withdPendingObj = defWithDrawPending
+                withUsdtObj = defWithDrawUsdt
+                withUsdtPendingObj = defWithDrawUsdtPending
+                setTrans([gamesObj, addSObj, withdObj, withdPendingObj, withUsdtObj, withUsdtPendingObj])
+            }
         }
     }, [refData])
 

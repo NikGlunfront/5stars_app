@@ -169,6 +169,57 @@
     }
 }
 
+.btm-fixed-btns {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 10;
+    transform: translate(calc(100% + 1.5rem), 0);
+    transition: $transition;
+
+    &._visible {
+        transform: translate(0);
+    }
+}
+
+.return-btm-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    text-align: center;
+    color: var(--s5-black-color);
+    font-weight: 400;
+    padding: 0 1rem;
+    border-radius: 2rem;
+    line-height: 3.4rem;
+    font-size: 1.6rem;
+    background-color: var(--s5-white-color);
+    width: 10rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    box-shadow: var(--s5-box-shadow);
+    position: relative;
+    cursor: pointer;
+
+    &_return {
+        &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 1.5rem;
+            transform: translate(0, -50%);
+            display: inline-block;
+            width: 0.5rem;
+            height: 0.9rem;
+            background-image: url('../assets/img/icons/expand_left.svg');
+            background-repeat: no-repeat;
+            background-size: contain;
+            margin-right: 1rem;
+        }
+    }
+}
+
 .request-btn {
     width: 100%;
     line-height: 5rem;

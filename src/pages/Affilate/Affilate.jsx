@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import AffilateList from "../../components/AffilateList/AffilateList";
 import { useApp } from "../../hooks/useApp";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -7,6 +7,7 @@ import AffilateTodayList from "../../components/AffilateList/AffilateTodayList";
 import { useGetReferralQuery } from "../../store/services/starsGame";
 import { useTelegram } from "../../hooks/useTelegram";
 import RequestButton from "../../components/UI/RequestButton/RequestButton";
+import { useScrollPosition } from "../../hooks/useScrollPosition";
 
 const Affilate= ({}) => {
     const {
@@ -15,12 +16,12 @@ const Affilate= ({}) => {
         partnershipBalance,
         activePartnerBalance
     } = useApp()
-
+    const [isBtmBtnsVisible, setIsBtmBtnsVisible] = useState(false)
     const {user: tgUser, hideTgButton} = useTelegram()
     const navigate = useNavigate()
     const {data: refData, isLoading: isRefDataLoading, refetch: refetchRefQuery} = useGetReferralQuery(tgUser)
 
-    const { scrollTop } = useScroll()
+    const { scrollTop, scrollTopSmooth } = useScroll()
     const location = useLocation()
     useEffect(() => {
         scrollTop()
@@ -31,6 +32,15 @@ const Affilate= ({}) => {
         hideTgButton()
         refetchRefQuery()
     }, [])
+
+    useScrollPosition(({prevPos, currPos}) => {
+        const isShow = currPos.y < prevPos.y
+        if (isShow !== isBtmBtnsVisible) setIsBtmBtnsVisible(isShow)
+    }, [isBtmBtnsVisible])
+
+    useEffect(() => {
+        console.log(window.scrollY)
+    }, [window.scrollY])
 
     useEffect(() => {
         if (refData && !isRefDataLoading) {
@@ -50,6 +60,10 @@ const Affilate= ({}) => {
 
     return (
         <div className={"affilate-page" + (isPremium ? " _premium" : '')}>
+            <div className={"btm-fixed-btns" + (isBtmBtnsVisible ? " _visible" : "")}>
+                <div className="return-btm-btn" onClick={() => scrollTopSmooth()}>Top</div>
+                <div className="return-btm-btn return-btm-btn_return" onClick={() => navigate(-1)}>Back</div>
+            </div>
             <RequestButton
                 onClick={navigateToSwapStars}
                 disabled={partnershipBalance === 0 ? true : false}

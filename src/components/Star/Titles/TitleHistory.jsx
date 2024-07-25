@@ -37,9 +37,9 @@ const TitleHistory= ({}) => {
                 <div>read this rules</div>.
             </div> */}
             <div className="title-history__stars">
-                <div><div className="title-history__starimg"></div>{globalHistoryData.bets}</div>
-                <div><div className="title-history__starimg"></div>{globalHistoryData.profit}</div>
-                <div><div className="title-history__starimg"></div>{globalHistoryData.airdrop}</div>
+                <div><div className="title-history__starimg"></div>{globalHistoryData.bets.toLocaleString()}</div>
+                <div><div className="title-history__starimg"></div>{globalHistoryData.profit.toLocaleString()}</div>
+                <div><div className="title-history__starimg"></div>{globalHistoryData.airdrop.toLocaleString()}</div>
             </div>
             <div className="title-history__ton_btn">Connect TON Space</div>
         </div>

@@ -8,6 +8,9 @@ export function useScroll() {
     const scrollTop = () => {
         document.querySelector("html").scrollTo(0, 0);
     }
+    const scrollTopSmooth = () => {
+        document.querySelector("html").scrollIntoView({block: 'start', behavior: "smooth"});
+    }
     const scrollBottom = () => {
         document.querySelector('#root').scrollTo(0, document.querySelector('#root').scrollHeight);
     }
@@ -16,5 +19,6 @@ export function useScroll() {
         scrollTop,
         scrollBottom,
         scrollToRef,
+        scrollTopSmooth
     }
 };

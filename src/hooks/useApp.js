@@ -66,7 +66,7 @@ export function useApp() {
         changeAirdropBalance(balanceObject.airdrop_balance|0)
         changePartnershipBalance(balanceObject.partnership_balance|0)
         changePAirdropBalance(balanceObject.partnership_balance_airdrop|0)
-        changePartnershipBalanceUsdt(parseFloat(balanceObject.partnership_balance_usdt))
+        changePartnershipBalanceUsdt(parseFloat(balanceObject.partnership_balance_usdt).toFixed(2))
         changeRefNum(balanceObject.referals_count)
     }
 

@@ -57,22 +57,21 @@ const PartnerModal = ({
             <ul>
                 <li className='balance-popup__balance'>
                     {activePartnerBalance === 'star' && 
-                        <div>
-                            <img src={greenStar} alt="" />
-                            {partnershipBalance}
+                        <div onClick={changeBalance}>
+                            <img src={coinImg} alt="" />
+                            {partnershipBalanceAirdrop.toLocaleString()}
                         </div>
                     }
                     {activePartnerBalance === 'coin' && 
-                        <div>
-                            <img src={coinImg} alt="" />
-                            {partnershipBalanceAirdrop}
+                        <div onClick={changeBalance}>
+                            <img src={greenStar} alt="" />
+                            {partnershipBalance.toLocaleString()}
                         </div>
                     }
                 </li>
                 <li onClick={handleChangePremium}>
                     <div>Change partnership</div>
                 </li>
-                <li onClick={changeBalance}><div>Change Balance</div></li>
                 {activePartnerBalance === "star" &&
                     <li onClick={navigateToWithDraw}><div>
                     <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
