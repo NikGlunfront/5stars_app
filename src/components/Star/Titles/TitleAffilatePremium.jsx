@@ -5,13 +5,14 @@ import airdropCoin from '../../../assets/img/icons/airdrop_coin.svg';
 import { useTelegram } from "../../../hooks/useTelegram";
 import { useGetReferralQuery } from "../../../store/services/starsGame";
 import { useApp } from "../../../hooks/useApp";
+import QRCode from "react-qr-code";
 
 const TitleAffilatePremium= ({}) => {
     const {
         referralsCount,
         ref: refHash
     } = useApp()
-    const {user: tgUser, sendAlert} = useTelegram()
+    const {user: tgUser, sendAlert, tg} = useTelegram()
     const {data: refData, isLoading: isRefDataLoading, refetch: refetchRefQuery} = useGetReferralQuery(tgUser)
 
     const copyRefLink = () => {
@@ -24,6 +25,10 @@ const TitleAffilatePremium= ({}) => {
         });
     }
 
+    const shareLink = () => {
+        tg.openTelegramLink(`https://t.me/share/url?url=https://t.me/gl_pl_bot/starsdevapp?startapp=${refHash}&text=Share your referral link`)
+    }
+
     return (
         <div className='title-affilate'>
             <div className="intro-star-topper__subtitle">Premium partner</div>
@@ -33,7 +38,11 @@ const TitleAffilatePremium= ({}) => {
                 <div>read this rules</div>.
             </div>
             <BoxWrapper className={'title-affilate__qr'}>
-                <img src={qrCodeImg} alt="qrCode" />
+             <div className="title-affilate__qrcode">
+                    <QRCode
+                        value={`https://t.me/gl_pl_bot/starsdevapp?startapp=${refHash}`}
+                    />
+                </div>
                 <strong>https://t.me/gl_pl_bot/starsdevapp?startapp={refHash}</strong>
                 <div className="title-affilate__qr-row">
                     <div className="title-affilate__qr-copy" onClick={copyRefLink}>
@@ -43,7 +52,7 @@ const TitleAffilatePremium= ({}) => {
                         </svg>
                         Copy
                     </div>
-                    <div className="title-affilate__qr-share">
+                    <div className="title-affilate__qr-share" onClick={shareLink}>
                         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M13.4615 8.76564V9.68161C13.4615 11.9299 11.9626 13.4288 9.71431 13.4288H5.21773C2.96944 13.4288 1.47058 11.9299 1.47058 9.68161V8.76564" stroke="black" strokeLinecap="square" strokeLinejoin="round"/>
                             <path d="M4.33191 4.35401L7.07249 1.61343C7.275 1.41092 7.60275 1.41092 7.8046 1.61343L10.5452 4.35401" stroke="black" strokeLinecap="square" strokeLinejoin="round"/>
