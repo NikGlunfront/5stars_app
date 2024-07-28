@@ -124,3 +124,9 @@
         color: var(--s5-white-color);
     }
 }
+
+.add-star-game_prize._expired  {
+    .stars-s5-game {
+        pointer-events: none !important;
+    }
+}

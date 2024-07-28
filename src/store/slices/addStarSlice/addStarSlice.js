@@ -28,6 +28,7 @@ const initialState = {
     isGamePrizeFinished: false,
     isVisiblePrize: true,
     prizeId: null,
+    bonus_id: null
 }
 
 export const addStarSlice = createSlice({
@@ -78,7 +79,8 @@ export const addStarSlice = createSlice({
                 ...state,
                 pickedStar: action.payload.pickedStar,
                 activeBonusGame: [...action.payload.activeBonus],
-                isBonusGameFinished: true
+                bonus_id: action.payload.id,
+                isBonusGameFinished: action.payload.pickedStar !== 0 ? true : false
             }
         },
         setPrizesFromHistory: (state, action) => {
