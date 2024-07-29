@@ -168,6 +168,7 @@ const AddStarsGame = ({
                     <AddStarsBet 
                         pickedStar={pickedStarBet}
                         betAmount={1}
+                        isExpired={isExpired}
                         handleBet={setPickedStarBet}
                     />
                 }

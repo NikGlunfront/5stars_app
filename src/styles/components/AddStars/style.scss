@@ -23,7 +23,7 @@
         @include flex_row;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 2.2rem;
+        margin-bottom: 3rem;
         padding: 0 1rem;
 
         & > span {
@@ -38,16 +38,23 @@
         flex-grow: 0;
         flex-shrink: 0;
         flex-basis: calc((100% - 4rem) / 3);
-        border-radius: 0.5rem;
-        background-color: #EFEEF4;
-        color: rgba(0, 0, 0, 0.4);
+        border-radius: 1.2rem;
+        background-color: #2DAEFE;
+        color: var(--s5-white-color);
         font-weight: 500;
         font-size: 2.4rem;
-        line-height: 3.4rem;
-        padding: 0 1rem;
+        line-height: 4rem;
+        padding: 0 1.5rem 0 0.5rem;
         display: flex;
         align-items: center;
         justify-content: center;
+        box-shadow: 0.1rem 0.1rem 0.1rem 0 #1C82C1;
+
+        img {
+            width: 4rem;
+            height: 4rem;
+            object-fit: contain;
+        }
     }
 
     &.add-star-game_prize {
@@ -96,6 +103,40 @@
                             fill: #31B545;
                         }
                     }
+                }
+            }
+        }
+    }
+
+    &._expired,
+    &._disabled {
+        .add-star-game__timer {
+            color: rgba($color: #000000, $alpha: 0.4);
+            background-color: #EFEEF4;
+            box-shadow: 0.1rem 0.1rem 0.1rem 0 #9592A0;
+
+            img {
+                filter: grayscale(1);
+            }
+        }
+
+        .stars-s5-game__star_bonus {
+            &._active {
+                position: relative;
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 50%;
+                    background-image: url('../../../assets/img/icons/game/bets/fire_expired.svg');
+                    background-position: center;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    width: 4rem;
+                    height: 4rem;
+                    transform: translate(-50%, -50%);
+                    z-index: 10;
+                    opacity: 0.8;
                 }
             }
         }

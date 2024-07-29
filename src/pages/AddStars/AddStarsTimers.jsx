@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setIsVisibleBonus } from "../../store/slices/addStarSlice/addStarSlice";
 import { useGetBonusQuery } from "../../store/services/starsGame";
 import { useTelegram } from "../../hooks/useTelegram";
+import timerIco from '../../assets/img/icons/bonus_timer.svg'
 
 const AddStarsTimers = ({
     activeTime,
@@ -41,7 +42,9 @@ const AddStarsTimers = ({
     
     useEffect(() => {
         if (timerTime === 0) {
-            refetchBonus()
+            setTimeout(() => {
+                refetchBonus()
+            }, 1500);
         }
     }, [timerTime])
 
@@ -56,6 +59,7 @@ const AddStarsTimers = ({
 
     return (
         <div className="add-star-game__timer">
+            <img src={timerIco} alt="" />
             {timerTime === 0
                 ? "00:00"
                 : <span>{Math.floor(timerTime / 60) > 9 ? Math.floor(timerTime / 60) : `0${Math.floor(timerTime / 60)}`}:{timerTime % 60 > 9 ? timerTime % 60 : `0${timerTime % 60}`}</span>

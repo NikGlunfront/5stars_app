@@ -13,7 +13,7 @@
         background-color: #FEF9E6;
         border-radius: 0.8rem;
         padding: 0.8rem 7.6rem 0.8rem 1.3rem;
-        background-image: url('../../../assets/img/logo/5s_hash_star.png');
+        background-image: url('../../../assets/img/icons/game/bets/star_item_orange.png');
         background-repeat: no-repeat;
         background-size: 6.2rem 6.2rem;
         background-position: calc(100% - 1.2rem) center;
@@ -26,10 +26,11 @@
             height: 3rem;
             border-radius: 50%;
             top: 50%;
-            right: 2.9rem;
+            right: 2.8rem;
+            line-height: 3rem;
             transform: translate(0, -41%);
             background-color: #ffffff;
-            box-shadow: inset 0 0.5rem 0.5rem rgba($color: #898080, $alpha: 0.25);
+            box-shadow: 0px 0.2rem 0px 0px #BA6703 inset;
             font-weight: 700;
             align-items: center;
             justify-content: center;
