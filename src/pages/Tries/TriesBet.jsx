@@ -6,7 +6,7 @@ import starPicked from '../../assets/img/icons/game/bets/star_item_pick.png'
 import starWin from '../../assets/img/icons/game/bets/star_item_green.png'
 import starExpired from '../../assets/img/icons/game/bets/star_item_red.png'
 
-const AddStarsBet = ({
+const TriesBet = ({
     pickedStar,
     handleBet,
     isExpired = false
@@ -14,7 +14,7 @@ const AddStarsBet = ({
     const { 
         activeBonusGame,
         isBonusGameFinished
-    } = useSelector(state => state.addStar)
+    } = useSelector(state => state.attempts)
 
     const betClick = (value) => {
         if (!isBonusGameFinished) {
@@ -55,4 +55,4 @@ const AddStarsBet = ({
     )
 };
 
-export default AddStarsBet;
+export default TriesBet;

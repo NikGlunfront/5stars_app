@@ -1,33 +1,33 @@
 import React, { useEffect, useState } from "react";
 import RequestButton from "../../components/UI/RequestButton/RequestButton";
 import BoxWrapper from "../../components/Wrappers/BoxWrapper";
-import AddStarsBet from "./AddStarsBet";
-import AddStarsTimers from "./AddStarsTimers";
 import { useDispatch, useSelector } from "react-redux";
-import { resetBonus, revealBonusResult, setBonusFromHistory, setIsVisibleBonus, shuffleBonuses } from "../../store/slices/addStarSlice/addStarSlice";
-import { useAddStarsMutation, useGetBonusQuery, useSaveBonusGameMutation } from "../../store/services/starsGame";
+import { useAddStarsMutation, useAddTriesMutation, useGetAttemptsQuery, useGetBonusQuery, useSaveAttBonusGameMutation, useSaveBonusGameMutation } from "../../store/services/starsGame";
 import { useTelegram } from "../../hooks/useTelegram";
 import greenStar from '../../assets/img/icons/game/bet_star_green.svg'
+import { resetAttBonus, revealAttBonusResult, setAttBonusFromHistory } from "../../store/slices/attemptsSlice/attemptsSlice";
+import TriesTimers from "./TriesTimers";
+import TriesBet from "./TriesBet";
 
-const AddStarsGame = ({
-    pickedAddStarValue,
+const TriesGame = ({
+    pickedAddStarValue = 50,
     changePrizePercent
 }) => {
     const [pickedStarBet, setPickedStarBet] = useState(0)
     const [isExpired, setIsExpired] = useState(false)
     const [btnText, setBtnText] = useState('Tap & Win Bonus')
-    const { isVisibleBonus } = useSelector(state => state.addStar)
     const { user: tgUser, sendAlert, hideTgButton } = useTelegram()
-    const [saveBonusGame, {data: bonusGamePost, isLoading: isBonusGamePostLoading}] = useSaveBonusGameMutation()
-    const [addStarsClick, { data: addStarsData, isLoading: isAddStarsLoading, error: isAddStarsError}] = useAddStarsMutation()
-    const {data: bonusData, isLoading: isBonusDataLoading} = useGetBonusQuery(tgUser)
+    const [saveBonusGame, {data: bonusGamePost, isLoading: isBonusGamePostLoading}] = useSaveAttBonusGameMutation()
+    const [addTriesClick, { data: addTriesData, isLoading: isAddTriesLoading, error: isAddTriesError}] = useAddTriesMutation()
+    const {data: bonusData, isLoading: isBonusDataLoading} = useGetAttemptsQuery(tgUser)
     const dispatch = useDispatch()
     const { 
         activeBonusGame,
         isBonusGameFinished,
         pickedStar,
+        isVisibleBonus,
         bonus_id
-    } = useSelector(state => state.addStar)
+    } = useSelector(state => state.attempts)
 
     function hasMoreThan10MinutesPassed(timestampString,  currentDate) {
         // Преобразование строки в объект Date
@@ -50,7 +50,7 @@ const AddStarsGame = ({
     useEffect(() => {
 
         if (bonusData?.bonus && !isBonusDataLoading && !bonusData?.bonus?.new) {
-            dispatch(setBonusFromHistory({
+            dispatch(setAttBonusFromHistory({
                 pickedStar: parseInt(bonusData?.bonus.picked_star),
                 activeBonus: bonusData?.bonus.bonuses,
                 id: parseInt(bonusData.bonus.id)
@@ -75,23 +75,23 @@ const AddStarsGame = ({
 
     useEffect(() => {
         if (isBonusGameFinished && !isBonusDataLoading) {
-            changePrizePercent(activeBonusGame.filter(item => item.id === pickedStar)[0]['value'] + "%")
+            // changePrizePercent(activeBonusGame.filter(item => item.id === pickedStar)[0]['value'] + "%")
             if (pickedAddStarValue) {
-                setBtnText(`ADD ${pickedAddStarValue + (pickedAddStarValue * activeBonusGame.filter(item => item.id === pickedStar)[0]['value'] / 100)} STARS`)
+                setBtnText(`ADD ${pickedAddStarValue + (activeBonusGame.filter(item => item.id === pickedStar)[0]['value'])} TRIES`)
             } else {
-                setBtnText('ADD STARS')
+                setBtnText('ADD TRIES')
             }
         } else {
             setBtnText('TAP & WIN BONUS')
         }
         if (isExpired) {
             if (pickedAddStarValue) {
-                setBtnText(`ADD ${pickedAddStarValue} STARS`)
+                setBtnText(`ADD ${pickedAddStarValue} TRIES`)
             } else {
-                setBtnText('ADD STARS')
+                setBtnText('ADD TRIES')
             }
         }
-    }, [isBonusGameFinished, isBonusDataLoading, pickedAddStarValue, activeBonusGame, pickedStar, bonusData])
+    }, [isBonusGameFinished, isBonusDataLoading, pickedAddStarValue, activeBonusGame, pickedStar, bonusData, isExpired])
 
     const revealBonus = async () => {
         if (!isBonusGameFinished && !isExpired) {
@@ -101,63 +101,57 @@ const AddStarsGame = ({
                 bonus_id: bonus_id,
                 bonuses: activeBonusGame
             })
-            dispatch(revealBonusResult(pickedStarBet))
+            dispatch(revealAttBonusResult(pickedStarBet))
         } else {
             if (isExpired) {
-                addStarsNoBonusHandler()
+                addTriesNoBonusHandler()
             } else {
-                addStarsWithBonusHandler()
+                addTriesWithBonusHandler()
             }
         }
     }
 
-    const addStarsNoBonusHandler = async () => {
-        await addStarsClick({
+    const addTriesNoBonusHandler = async () => {
+        await addTriesClick({
             tg_id: tgUser,
-            amount: pickedAddStarValue,
-            type: 'DEF',
-            a_type: 'A',
-            params: {
-                bonus_id: bonus_id,
-                picked_bonus: pickedStar
-            }
+            bonus_id: bonus_id,
+            picked_star: pickedStar,
+            type: "B",
+            value: pickedAddStarValue,
         })
-        sendAlert(`Your balance has been charged on ${pickedAddStarValue} Stars`)
-        dispatch(resetBonus())
+        sendAlert(`Your profile has been charged on ${pickedAddStarValue} Tries`)
+        dispatch(resetAttBonus())
     }
-    const addStarsWithBonusHandler = async () => {
+    const addTriesWithBonusHandler = async () => {
+        let isAddStarsLoading = false
         if (!isAddStarsLoading && pickedStarBet) {
-            await addStarsClick({
+            await addTriesClick({
                 tg_id: tgUser,
-                amount: pickedAddStarValue,
-                type: 'BON',
-                a_type: 'A',
-                params: {
-                    bonus_multiply: pickedStarBet,
-                    bonus_id: bonus_id,
-                    picked_bonus: pickedStar
-                }
+                bonus_id: bonus_id,
+                picked_star: pickedStar,
+                type: "B",
+                value: pickedAddStarValue + activeBonusGame.filter(item => item.id === pickedStar)[0]['value'],
             })
-            sendAlert(`Your balance has been charged on ${pickedAddStarValue * (pickedStarBet + 1)} Stars`)
-            dispatch(resetBonus())
+            sendAlert(`Your profile has been charged on ${pickedAddStarValue + (activeBonusGame.filter(item => item.id === pickedStar)[0]['value'])} Tries`)
+            dispatch(resetAttBonus())
         }
     }
 
-    useEffect(() => {
-        if (!isAddStarsLoading && addStarsData) {
-            isAddStarsError ? sendAlert('Произошла ошибка при пополнении баланса') : sendAlert(`Баланс успешно пополнен на \n${addStarsData.amount * (pickedStarBet + 1)} Stars`)
-        }
-    }, [isAddStarsLoading]) 
+    // useEffect(() => {
+    //     if (!isAddStarsLoading && addStarsData) {
+    //         isAddStarsError ? sendAlert('Произошла ошибка при пополнении баланса') : sendAlert(`Баланс успешно пополнен на \n${addStarsData.amount * (pickedStarBet + 1)} Stars`)
+    //     }
+    // }, [isAddStarsLoading]) 
 
     if (!isVisibleBonus || !bonusData?.bonus) {
         return
     }
 
     return (
-        <BoxWrapper className={'s5-game add-star-game' + (isExpired ? " _disabled" : "")}>
+        <BoxWrapper className={'s5-game add-star-game add-star-game_tries' + (isExpired ? " _disabled" : "")}>
             <div className="add-star-game__topper">
                 <span>Bonus Time</span>
-                <AddStarsTimers activeTime={bonusData?.bonus?.created} />
+                <TriesTimers activeTime={bonusData?.bonus?.created} />
             </div>
             <div className="stars-s5-game">
                 {false
@@ -165,7 +159,7 @@ const AddStarsGame = ({
                     // <StarsResult />
                     <div></div>
                     :
-                    <AddStarsBet 
+                    <TriesBet 
                         pickedStar={pickedStarBet}
                         betAmount={1}
                         isExpired={isExpired}
@@ -178,12 +172,12 @@ const AddStarsGame = ({
                 <div className="s5-game__text">
                     {!isBonusGameFinished 
                         ?
-                        <p>Find the bonus up to <b>500%</b></p>
+                        <p>Find the bonus up to <b>250</b> tries</p>
                         :
                         <p>You won bonus 
                             <strong style={{marginLeft: '1rem'}}>
                                 {activeBonusGame.length && pickedStar
-                                    ? <span>{activeBonusGame.filter(item => item.id === pickedStar)[0]['value'] + "%"}</span>
+                                    ? <span>{activeBonusGame.filter(item => item.id === pickedStar)[0]['value']} tries</span>
                                     : ""
                                 }
                             </strong>
@@ -196,6 +190,7 @@ const AddStarsGame = ({
                         <strong style={{marginLeft: '1rem', marginRight: '1rem'}}>
                             <span>{pickedStar === 0 ? "500" : activeBonusGame.filter(item => item.id === pickedStar)[0]['value']}</span>
                         </strong>
+                        tries
                     </p>
                 </div>
 
@@ -207,15 +202,15 @@ const AddStarsGame = ({
                 disabled={isExpired && !pickedAddStarValue}
             >
                 <div>{btnText}</div>
-                <span className={(!isBonusGameFinished) || (!pickedAddStarValue) || isExpired ? "_hidden" : ''}>
+                <span className={(!isBonusGameFinished) ? "_hidden" : ''}>
                     <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.83401 0.439639C6.09948 -0.146547 6.90052 -0.146546 7.16599 0.43964L8.55758 3.51234C8.6646 3.74867 8.87989 3.91196 9.12877 3.9456L12.3576 4.38201C12.9725 4.46511 13.2194 5.25373 12.7698 5.6981L10.3976 8.04239C10.2165 8.22134 10.1348 8.48364 10.1807 8.73915L10.7824 12.0908C10.8966 12.7268 10.2492 13.2149 9.70432 12.9035L6.85435 11.2746C6.63366 11.1485 6.36635 11.1485 6.14565 11.2746L3.29568 12.9035C2.75084 13.2149 2.10336 12.7268 2.21756 12.0908C2.39945 11.0631 2.53616 10.1778 2.78159 9.58162C3.47699 8.517 7.19942 7.11169 7.0318 6.88987C7.0767 6.68584 2.69978 7.70788 1.96348 7.28203L1.55442 7.02652L0.230238 5.6981C-0.21942 5.25373 0.0275324 4.46511 0.642364 4.38201L3.87123 3.9456C4.12011 3.91196 4.3354 3.74867 4.44243 3.51234L5.83401 0.439639Z" fill="white"/>
                     </svg>
-                    {pickedAddStarValue && isBonusGameFinished ? pickedAddStarValue : ''}
+                    {100}
                 </span>
             </RequestButton>
         </BoxWrapper>
     )
 };
 
-export default AddStarsGame;
+export default TriesGame;

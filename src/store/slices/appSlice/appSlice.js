@@ -13,7 +13,8 @@ const initialState = {
     gamesLeft: 0,
     referralsCount: 0,
     activePartnerBalance: 'star',
-    ref: ''
+    ref: '',
+    isLogoLoading: true
 }
 
 export const appSlice = createSlice({
@@ -23,6 +24,11 @@ export const appSlice = createSlice({
         setIsApplicationLoaded: (state, action) => {
             return {
                 ...state, isLoaded: action.payload
+            }
+        },
+        setIsLogoLoadingFalse: (state, action) => {
+            return {
+                ...state, isLogoLoading: false
             }
         },
         setIsWithdrawPage: (state, action) => {
@@ -86,6 +92,7 @@ export const {
     setIsWithdrawPage,
     setIsApplicationLoaded,
     setMainBalance,
+    isLogoLoading,
     setAirdropBalance,
     setPartnershipBalance,
     setGamesLeft,
@@ -95,7 +102,8 @@ export const {
     setPBalanceAirdrop,
     setRefString,
     setPartnershipBalanceUsdt,
-    setIsMainBalanceLoading
+    setIsMainBalanceLoading,
+    setIsLogoLoadingFalse
 } = appSlice.actions
 
 export default appSlice.reducer

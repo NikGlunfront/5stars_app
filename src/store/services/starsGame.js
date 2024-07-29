@@ -9,7 +9,7 @@ const gamePath = "game/"
 export const starsApi = createApi({
     reducerPath: "starsApi",
     baseQuery: fetchBaseQuery({baseUrl: baseUrl}),
-    tagTypes: ['Balance', 'Game', 'History', 'Bonus', 'Prize'],
+    tagTypes: ['Balance', 'Game', 'History', 'Bonus', 'Prize', 'Attempts'],
     endpoints: (builder) => ({
         loginUser: builder.query({
             query: (telegramId) => `${userPath}?dispatch=login&tg_id=${telegramId}`,
@@ -37,7 +37,7 @@ export const starsApi = createApi({
                 method: 'POST',
                 body: {...gameData, method: 'calculate'}
             }),
-            invalidatesTags: ['Game', 'Balance', 'History', 'Bonus']
+            invalidatesTags: ['Game', 'Balance', 'History', 'Bonus', 'Attempts']
         }),
         createNewGame: builder.mutation({
             query: (newGameData) => ({
@@ -78,7 +78,7 @@ export const starsApi = createApi({
                 method: "POST",
                 body: {...resetData, method: 'reset'}
             }),
-            invalidatesTags: ['Balance', 'Game', 'History']
+            invalidatesTags: ['Balance', 'Game', 'History', 'Bonus', 'Attempts']
         }),
         changePp: builder.mutation({
             query: (userData) => ({
@@ -110,9 +110,20 @@ export const starsApi = createApi({
                 body: {...bonusData, method: 'save_bonusgame'}
             })
         }),
+        saveAttBonusGame: builder.mutation({
+            query: (bonusData) => ({
+                url: userPath,
+                method: "POST",
+                body: {...bonusData, method: 'save_a_bonusgame'}
+            })
+        }),
         getBonus: builder.query({
             query: (tgId) => `${balancePath}?dispatch=get_bonus&tg_id=${tgId}`,
             providesTags: result => ['Bonus']
+        }),
+        getAttempts: builder.query({
+            query: (tgId) => `${userPath}?dispatch=get_attempts&tg_id=${tgId}`,
+            providesTags: result => ['Attempts']
         }),
         getPrize: builder.query({
             query: (tgId) => `${balancePath}?dispatch=get_prize&tg_id=${tgId}`,
@@ -134,6 +145,22 @@ export const starsApi = createApi({
             }),
             invalidatesTags: ['Bonus']
         }),
+        saveAttemptsPrizeWin: builder.mutation({
+            query: (prizeData) => ({
+                url: userPath,
+                method: "POST",
+                body: {...prizeData, method: 'update_a_prize'}
+            }),
+            invalidatesTags: ['Attempts']
+        }),
+        addTries: builder.mutation({
+            query: (triesData) => ({
+                url: userPath,
+                method: "POST",
+                body: {...triesData, method: 'add_tries'}
+            }),
+            invalidatesTags: ['Attempts']
+        }),
     })
 })
 
@@ -153,9 +180,13 @@ export const {
     useSetRefPartnerMutation,
     useSaveBonusGameMutation,
     useGetBonusQuery,
+    useSaveAttBonusGameMutation,
+    useGetAttemptsQuery,
     useGetHistoryTotalsQuery,
     useCreatePrizeGameMutation,
     useGetPrizeQuery,
     useSavePrizeWinMutation,
+    useAddTriesMutation,
+    useSaveAttemptsPrizeWinMutation,
     useSetZeroBalanceMutation
 } = starsApi

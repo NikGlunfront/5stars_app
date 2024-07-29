@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import QRCode from "react-qr-code";
-import airdropCoin from '../../../assets/img/icons/airdrop_coin.svg';
+import airdropCoin from '../../../assets/img/icons/airdrop_coin.png';
 import { useApp } from "../../../hooks/useApp";
 import { useTelegram } from "../../../hooks/useTelegram";
 import { useGetReferralQuery } from "../../../store/services/starsGame";

@@ -34,7 +34,7 @@
 
     &_withdraw {
         .history-item__right > div:not(.history-item__airdrop).history-item__lose::after {
-            background-image: url(../../../assets/img/icons/airdrop_coin.svg);
+            background-image: url(../../../assets/img/icons/airdrop_coin.png);
             background-repeat: no-repeat;
             background-size: contain;
             background-position: center;
@@ -215,7 +215,7 @@
             width: 1.2rem;
             height: 1.2rem;
             margin-left: 0.2rem;
-            background-image: url('../../../assets/img/icons/airdrop_coin.svg');
+            background-image: url('../../../assets/img/icons/airdrop_coin.png');
             background-repeat: no-repeat;
             background-size: contain;
             background-position: center;
@@ -268,7 +268,7 @@
             &._coin {
                 color: var(--s5-black-color);
                 &::after {
-                    background-image: url('../../../assets/img/icons/airdrop_coin.svg');
+                    background-image: url('../../../assets/img/icons/airdrop_coin.png');
                     background-repeat: no-repeat;
                     background-size: contain;
                     background-position: center;
@@ -365,7 +365,7 @@
     height: 1.4rem;
     flex: 0 0 1.4rem;
     margin-right: 0.3rem;
-    background-image: url('../../../assets/img/icons/airdrop_coin.svg');
+    background-image: url('../../../assets/img/icons/airdrop_coin.png');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;

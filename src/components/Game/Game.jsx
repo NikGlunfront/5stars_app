@@ -3,7 +3,7 @@ import BoxWrapper from '../Wrappers/BoxWrapper';
 import StarsBet from './Stars/StarsBet';
 import { useStarGame } from '../../hooks/useStarGame';
 import StarsResult from './Stars/StarsResult';
-import airdropCoin from '../../assets/img/icons/airdrop_coin.svg'
+import airdropCoin from '../../assets/img/icons/airdrop_coin.png'
 import { useCalculateGameMutation, useCreateNewGameMutation } from '../../store/services/starsGame';
 import { useTelegram } from '../../hooks/useTelegram';
 import RequestButton from '../UI/RequestButton/RequestButton';

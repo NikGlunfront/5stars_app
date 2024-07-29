@@ -10,7 +10,7 @@ import CheckWinNumber from './pages/CheckWinNumber/CheckWinNumber';
 import History from './pages/History/History';
 import Home from './pages/Home/Home';
 import Withdraw from './pages/Withdraw/Withdraw';
-import { useGetActiveGameQuery, useGetBalancesQuery, useGetBonusQuery, useLoginUserQuery, useSetRefPartnerMutation } from './store/services/starsGame';
+import { useGetActiveGameQuery, useGetAttemptsQuery, useGetBalancesQuery, useGetBonusQuery, useLoginUserQuery, useSetRefPartnerMutation } from './store/services/starsGame';
 import { useStarGame } from './hooks/useStarGame';
 
 const routes = [
@@ -33,7 +33,9 @@ function App({
         isWithdrawPage,
         updateAllBalances,
         updateActiveGame,
-        mainBalance
+        setGamesLeftCount,
+        mainBalance,
+        gamesLeft
     } = useApp();
 
     const { setPlayedGame, updateHash1 } = useStarGame()
@@ -42,6 +44,7 @@ function App({
     const { data: balancesData, isLoading: isBalanceDataLoading, isError: isBalanceDataError } = useGetBalancesQuery(tgUser)
     const { data: activeGame, isLoading: isActiveGameLoading, isError: isActiveGameError } = useGetActiveGameQuery(tgUser)
     const {data: bonusData, isLoading: isBonusDataLoading} = useGetBonusQuery(tgUser)
+    const {data: attemptsData, isLoading: isAttemptsDataLoading} = useGetAttemptsQuery(tgUser)
     const [setRefPartner, {data, isLoading}] = useSetRefPartnerMutation()
 
     async function setRef (ref) {
@@ -87,7 +90,13 @@ function App({
     }, [isActiveGameLoading, activeGame, iniData])
 
     useEffect(() => {
-        if (mainBalance >= 10) {
+        if (attemptsData && !isAttemptsDataLoading) {
+            setGamesLeftCount(attemptsData.count)
+        }
+    }, [attemptsData, isAttemptsDataLoading])
+
+    useEffect(() => {
+        if (mainBalance >= 10 && gamesLeft > 0) {
             hideTgButton()
         }
     }, [mainBalance])

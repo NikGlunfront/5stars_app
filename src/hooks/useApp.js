@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setActivePartnerBalance, setAirdropBalance, setGamesLeft, setIsApplicationLoaded, setIsMainBalanceLoading, setIsPremium, setIsWithdrawPage, setMainBalance, setPartnershipBalance, setPartnershipBalanceUsdt, setPBalanceAirdrop, setReferralsCount, setRefString } from "../store/slices/appSlice/appSlice";
+import { setActivePartnerBalance, setAirdropBalance, setGamesLeft, setIsApplicationLoaded, setIsLogoLoadingFalse, setIsMainBalanceLoading, setIsPremium, setIsWithdrawPage, setMainBalance, setPartnershipBalance, setPartnershipBalanceUsdt, setPBalanceAirdrop, setReferralsCount, setRefString } from "../store/slices/appSlice/appSlice";
 import { setGameId, setHash2 } from "../store/slices/gameSlice/gameSlice";
 
 export function useApp() {
@@ -9,6 +9,7 @@ export function useApp() {
         isWithdrawPage,
         mainBalance,
         airdropBalance,
+        isLogoLoading,
         partnershipBalance,
         partnershipBalanceUsdt,
         referralsCount,
@@ -61,6 +62,10 @@ export function useApp() {
         dispatch(setPartnershipBalance(value))
     }
 
+    const setGamesLeftCount = (count) => {
+        dispatch(setGamesLeft(count))
+    }
+
     const updateAllBalances = (balanceObject) => {
         changeMainBalance(balanceObject.balance|0)
         changeAirdropBalance(balanceObject.airdrop_balance|0)
@@ -73,12 +78,12 @@ export function useApp() {
     const updateActiveGame = (gameObj) => {
         dispatch(setHash2(gameObj.hash2))
         dispatch(setGameId(gameObj.game_id))
-        dispatch(setGamesLeft(gameObj.games_left))
     }
 
     const handleInitDataFetch = (iniData) => {
         dispatch(setIsPremium(parseInt(iniData.is_premium) ? true : false))
         setRefHash(iniData.ref)
+        dispatch(setIsLogoLoadingFalse())
         setTimeout(() => {
             dispatch(setIsApplicationLoaded(true))
         }, 1500);
@@ -102,11 +107,13 @@ export function useApp() {
         partnershipBalanceUsdt,
         activePartnerBalance,
         partnershipBalanceAirdrop,
+        isLogoLoading,
         setIsAppLoaded,
         setIsWithDraw,
         changeMainBalance,
         changeAirdropBalance,
         changePartnershipBalance,
+        setGamesLeftCount,
         updateAllBalances,
         handleInitDataFetch,
         updateActiveGame,

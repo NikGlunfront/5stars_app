@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import BoxWrapper from '../Wrappers/BoxWrapper';
 import { useStarGame } from '../../hooks/useStarGame';
-import greenCoin from '../../assets/img/icons/airdrop_coin.svg'
+import greenCoin from '../../assets/img/icons/airdrop_coin.png'
 import { useApp } from '../../hooks/useApp';
 import greenPartnership from '../../assets/img/icons/green_partnership.svg'
 import premiumPartnership from '../../assets/img/icons/purple_partner.svg'
@@ -43,7 +43,8 @@ const FairGame = ({
         isPremium,
         referralsCount,
         partnershipBalanceUsdt,
-        mainBalance
+        mainBalance,
+        gamesLeft
     } = useApp()
 
     useEffect(() => {
@@ -66,7 +67,7 @@ const FairGame = ({
 
     return (
         <div className='fair-game'>
-            {mainBalance >= 10 &&
+            {mainBalance >= 10 && gamesLeft !== 0 &&
                 <div>
                     <div className="fair-game__title">FAIR GAME</div>
                     <BoxWrapper className={'hash-box'} linkPath={isGameFinished ? '/check-win-num' : null}>

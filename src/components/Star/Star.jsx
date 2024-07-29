@@ -75,10 +75,16 @@ const Star = ({
                             <TitleAddStars />
                         </>
                     }
-                    {location.pathname === '/' &&
+                    {location.pathname === '/' && !isLoaded &&
                         <>
-                            <img src={isLoaded ? starImageDef : eyeLogo} alt="5star" />
+                            <img src={eyeLogo} alt="5star" />
                             <p>Airdrop: <span>Lucky Star Token (LST)</span></p>
+                        </>
+                    }
+                    {location.pathname === '/' && isLoaded &&
+                        <>
+                            <img src={starImageDef} alt="5star" />
+                            <p style={{fontWeight: "500"}}>Airdrop: <span>Lucky Star Token (LST)</span></p>
                         </>
                     }
                 </div>

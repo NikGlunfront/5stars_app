@@ -56,15 +56,15 @@ const PremiumPartnerModal = ({
             <ul>
                 <li className='balance-popup__balance'>
                     {activePartnerBalance === 'usdt' && 
-                        <div>
-                            <img src={usdt} alt="" />
-                            {partnershipBalanceUsdt.toLocaleString()}
+                        <div onClick={changeBalance}>
+                            <img src={coinImg} alt="" />
+                            {partnershipBalanceAirdrop.toLocaleString()}
                         </div>
                     }
                     {activePartnerBalance === 'coin' && 
-                        <div>
-                            <img src={coinImg} alt="" />
-                            {partnershipBalanceAirdrop.toLocaleString()}
+                        <div onClick={changeBalance}>
+                            <img src={usdt} alt="" />
+                            {partnershipBalanceUsdt.toLocaleString()}
                         </div>
                     }
                 </li>

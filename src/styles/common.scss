@@ -36,7 +36,7 @@
             & > img {
                 margin: auto;
                 object-fit: contain;
-                width: 85%;
+                width: calc(100% - 0.8rem);
             }
 
             &._orange {
@@ -44,7 +44,13 @@
                 background-color: #FFF1CD;
             }
             &._grey {
-                background-color: var(--s5-dark-grey-color);
+                background-color: #ECEAF6;
+
+                & ~ .box-btn__subinfo {
+                    img {
+                        transform: translate(0, 0);
+                    }
+                }
             }
             &._green {
                 background-color: #CBFFD3;
@@ -63,6 +69,8 @@
             @include flex_row;
             font-weight: 700;
             align-items: center;
+            font-size: 1.6rem;
+            line-height: 1.8rem;
 
             &._empty {
                 filter: grayscale(1);
@@ -76,7 +84,7 @@
                 transform: translate(0, -0.1rem);
             }
             & > img {
-                transform: translate(0, -0.2rem);
+                transform: translate(0, 0);
                 display: block;
                 width: 1.8rem;
                 height: 1.8rem;
@@ -174,8 +182,10 @@
     bottom: 1.5rem;
     right: 1.5rem;
     z-index: 10;
-    transform: translate(calc(100% + 1.5rem), 0);
+    transform: translate(0, calc(100% + 1.5rem));
     transition: $transition;
+    @include flex_row;
+    flex-direction: row-reverse;
 
     &._visible {
         transform: translate(0);
@@ -201,6 +211,25 @@
     box-shadow: var(--s5-box-shadow);
     position: relative;
     cursor: pointer;
+    width: 3.4rem;
+    height: 3.4rem;
+    flex: 0 0 3.4rem;
+    margin-left: 1rem;
+    
+    &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 1.5rem;
+        transform: translate(0, -50%) rotate(90deg);
+        display: inline-block;
+        width: 0.5rem;
+        height: 0.9rem;
+        background-image: url('../assets/img/icons/expand_left.svg');
+        background-repeat: no-repeat;
+        background-size: contain;
+        margin-right: 1rem;
+    }
 
     &_return {
         &::before {

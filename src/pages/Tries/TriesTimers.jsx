@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react"
-import { useInterval } from "../../hooks/useInterval";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsVisibleBonus } from "../../store/slices/addStarSlice/addStarSlice";
-import { useGetBonusQuery } from "../../store/services/starsGame";
+import timerIco from '../../assets/img/icons/bonus_timer.png';
+import { useInterval } from "../../hooks/useInterval";
 import { useTelegram } from "../../hooks/useTelegram";
-import timerIco from '../../assets/img/icons/bonus_timer.png'
+import { useGetAttemptsQuery } from "../../store/services/starsGame";
+import { setIsVisibleBonus } from "../../store/slices/addStarSlice/addStarSlice";
 
-const AddStarsTimers = ({
+const TriesTimers = ({
     activeTime,
     expired = false
 }) => {
@@ -14,7 +14,7 @@ const AddStarsTimers = ({
     const { user: tgUser } = useTelegram()
     const dispatch = useDispatch()
     const { isVisibleBonus } = useSelector(state => state.addStar)
-    const {data: bonusData, isLoading: isBonusDataLoading, refetch: refetchBonus} = useGetBonusQuery(tgUser)
+    const {data: bonusData, isLoading: isBonusDataLoading, refetch: refetchBonus} = useGetAttemptsQuery(tgUser)
 
     function getDaysDifference(dateString) {
         // Преобразуем строку в объект Date
@@ -68,4 +68,4 @@ const AddStarsTimers = ({
     )
 };
 
-export default AddStarsTimers;
+export default TriesTimers;

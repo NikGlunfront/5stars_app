@@ -11,6 +11,8 @@ import AddStarsGamePrize from '../AddStars/AddStarsGamePrize';
 import Modal from '../../components/UI/Modal/Modal';
 import RequestButton from '../../components/UI/RequestButton/RequestButton';
 import { useAddStarsMutation, useGetBonusQuery, useLazyAddStarsQuery } from "../../store/services/starsGame";
+import TriesGame from '../Tries/TriesGame';
+import TriesGamePrize from '../Tries/TriesGamePrize';
 
 const Home = ({
 
@@ -19,12 +21,14 @@ const Home = ({
     const {
         setIsWithDraw,
         isLoaded,
-        mainBalance
+        mainBalance,
+        gamesLeft
     } = useApp()
 
 
     const { isVisibleBonus } = useSelector(state => state.addStar)
     const [isModalActive, setIsModalActive] = useState(false)
+    const [isGamesLeftModalActive, setIsGamesLeftModalActive] = useState(false)
     const { hideTgButton, user: tgUser } = useTelegram()
     const { scrollTop } = useScroll()
     const location = useLocation()
@@ -48,6 +52,14 @@ const Home = ({
     }, [mainBalance])
 
     useEffect(() => {
+        if (gamesLeft === 0) {
+            setIsGamesLeftModalActive(true)
+        } else {
+            setIsGamesLeftModalActive(false)
+        }
+    }, [gamesLeft])
+
+    useEffect(() => {
         if (bonusData && !isBonusDataLoading && isModalActive) {
             setIsModalActive(false)
         }
@@ -63,8 +75,10 @@ const Home = ({
             {isLoaded &&
                 <div className="s5-app__content">
                     {<AddStarsGamePrize />}
+                    <TriesGame />
+                    <TriesGamePrize />
                     {(mainBalance < 10) && <AddStars />}
-                    {(mainBalance >= 10) && <Game />}
+                    {(mainBalance >= 10 && gamesLeft !== 0) && <Game />}
                 
                     <Modal 
                         isActive={isModalActive}
@@ -77,6 +91,19 @@ const Home = ({
                             isloading={isBonusDataLoading}
                         >
                             Add stars
+                        </RequestButton>
+                    </Modal>
+                    <Modal 
+                        isActive={isGamesLeftModalActive}
+                        setActive={() => {}}
+                        className={'addstars-modal'}
+                    >
+                        <p>No tries left.</p>
+                        <RequestButton
+                            onClick={() => setIsGamesLeftModalActive(false)}
+                            isloading={false}
+                        >
+                            Add tries
                         </RequestButton>
                     </Modal>
                     <FairGame />

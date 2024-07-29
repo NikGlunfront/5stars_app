@@ -69,7 +69,7 @@
         &._airdrop {
             & > span {
                 &::before {
-                    background-image: url('../../../assets/img/icons/airdrop_coin.svg');
+                    background-image: url('../../../assets/img/icons/airdrop_coin.png');
                     background-size: contain;
                     background-repeat: no-repeat;
                     transform: translate(0, 0.2rem);
@@ -89,7 +89,7 @@
             &._affilate_coin {
                 & > span {
                     &::before {
-                        background-image: url('../../../assets/img/icons/airdrop_coin.svg');
+                        background-image: url('../../../assets/img/icons/airdrop_coin.png');
                         background-size: contain;
                         background-repeat: no-repeat;
                         transform: translate(0, 0.2rem);
@@ -109,7 +109,7 @@
             &._affilate_coin {
                 & > span {
                     &::before {
-                        background-image: url('../../../assets/img/icons/airdrop_coin.svg');
+                        background-image: url('../../../assets/img/icons/airdrop_coin.png');
                         background-size: contain;
                         background-repeat: no-repeat;
                         transform: translate(0, 0.2rem);
@@ -400,7 +400,7 @@
             }
             &:nth-child(3) {
                 .title-history__starimg {
-                    background-image: url('../../../assets/img/icons/airdrop_coin.svg');
+                    background-image: url('../../../assets/img/icons/airdrop_coin.png');
                     background-repeat: no-repeat;
                     background-size: contain;
                     background-position: left top;

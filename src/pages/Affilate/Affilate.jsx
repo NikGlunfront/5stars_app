@@ -51,8 +51,8 @@ const Affilate= ({}) => {
     return (
         <div className={"affilate-page" + (isPremium ? " _premium" : '')}>
             <div className={"btm-fixed-btns" + (isBtmBtnsVisible ? " _visible" : "")}>
-                <div className="return-btm-btn" onClick={() => scrollTopSmooth()}>Top</div>
-                <div className="return-btm-btn return-btm-btn_return" onClick={() => navigate(-1)}>Back</div>
+                <div className="return-btm-btn" onClick={() => scrollTopSmooth()}></div>
+                <div className="return-btm-btn return-btm-btn_return" onClick={() => navigate(-1)}></div>
             </div>
             <RequestButton
                 onClick={navigateToSwapStars}
