@@ -58,7 +58,7 @@ const AddStarsGamePrize = ({
                 prizes: bonusData?.prize?.prizes,
                 id: parseInt(bonusData?.prize?.id)
             }))
-            if (hasMoreThan10MinutesPassed(bonusData.prize.created, bonusData.prize.current_time)) {
+            if (hasMoreThan10MinutesPassed(bonusData.prize.created, bonusData.prize.curtime)) {
                 setIsExpired(true)
                 if (bonusData.prize.picked_star === "0") {
                     setPickedStarBet(0)
@@ -113,7 +113,7 @@ const AddStarsGamePrize = ({
         <BoxWrapper className={'s5-game add-star-game add-star-game_prize' + (bonusData?.prize?.error ? " _disabled" : "") + (isExpired ? ' _expired' : "")}>
             <div className="add-star-game__topper">
                 <span>Bonus Time</span>
-                <AddStarsTimers activeTime={(bonusData?.prize?.created)} />
+                <AddStarsTimers activeTime={(bonusData?.prize?.created)} currentTime={(bonusData?.prize?.curtime)} />
             </div>
             <div className="stars-s5-game">
                 {false
@@ -143,7 +143,6 @@ const AddStarsGamePrize = ({
                                     : ""
                                 }
                             </strong>
-                            Free stars
                         </p>
                     }
                 </div>

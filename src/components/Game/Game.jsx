@@ -50,6 +50,14 @@ const Game = ({
     }, [])
 
     useEffect(() => {
+        if (isGameFinished) {
+            setBtnText('TRY AGAIN')
+        } else {
+            setBtnText('TAP & WIN')
+        }
+    }, [isGameFinished])
+
+    useEffect(() => {
         if (!isNewGameLoading && calculatedGameData?.error) {
             sendAlert(calculatedGameData.error)
         }

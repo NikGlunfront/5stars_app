@@ -8,9 +8,11 @@ import timerIco from '../../assets/img/icons/bonus_timer.png'
 
 const AddStarsTimers = ({
     activeTime,
+    currentTime,
     expired = false
 }) => {
-    const [timerTime, setTimerTime] = useState(0)
+    const [timerTime, setTimerTime] = useState(null)
+    const [isExpired, setIsExpired] = useState(false)
     const { user: tgUser } = useTelegram()
     const dispatch = useDispatch()
     const { isVisibleBonus } = useSelector(state => state.addStar)
@@ -19,11 +21,10 @@ const AddStarsTimers = ({
     function getDaysDifference(dateString) {
         // Преобразуем строку в объект Date
         const targetDate = new Date(dateString); 
-        targetDate.setHours(targetDate.getHours() + 2);
         targetDate.setMinutes(targetDate.getMinutes() + 10);
       
         // Получаем текущую дату
-        const currentDate = new Date();
+        const currentDate = new Date(currentTime);
       
         // Вычисляем разницу в миллисекундах
         const secondsDifference = (targetDate - currentDate) / 1000;
@@ -41,12 +42,11 @@ const AddStarsTimers = ({
     }, [activeTime])
     
     useEffect(() => {
-        if (timerTime === 0) {
-            setTimeout(() => {
-                refetchBonus()
-            }, 1500);
+        if (timerTime === 0 && bonusData && !isExpired) {
+            refetchBonus()
+            setIsExpired(true)
         }
-    }, [timerTime])
+    }, [timerTime, bonusData, isExpired])
 
     useInterval(() => {
         if (timerTime > 0) {

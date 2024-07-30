@@ -57,7 +57,7 @@ const AddStarsGame = ({
             }))
             setPickedStarBet(parseInt(bonusData?.bonus.picked_star))
 
-            if (hasMoreThan10MinutesPassed(bonusData.bonus.created, bonusData.bonus.current_time)) {
+            if (hasMoreThan10MinutesPassed(bonusData.bonus.created, bonusData.bonus.curtime)) {
                 setIsExpired(true)
                 if (bonusData.bonus.picked_star === "0") {
                     setPickedStarBet(0)
@@ -157,7 +157,7 @@ const AddStarsGame = ({
         <BoxWrapper className={'s5-game add-star-game' + (isExpired ? " _disabled" : "")}>
             <div className="add-star-game__topper">
                 <span>Bonus Time</span>
-                <AddStarsTimers activeTime={bonusData?.bonus?.created} />
+                <AddStarsTimers activeTime={bonusData?.bonus?.created} currentTime={(bonusData?.bonus?.curtime)} />
             </div>
             <div className="stars-s5-game">
                 {false
