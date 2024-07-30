@@ -321,18 +321,18 @@
         padding: 1rem;
         position: relative;
 
-        &::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 7rem;
-            height: 7rem;
-            background-image: url('../../../assets/img/logo/5s_eye_big_logo.png');
-            background-repeat: no-repeat;
-            background-size: contain;
-            transform: translate(-50%, -50%);
-        }
+        // &::after {
+        //     content: "";
+        //     position: absolute;
+        //     top: 50%;
+        //     left: 50%;
+        //     width: 7rem;
+        //     height: 7rem;
+        //     background-image: url('../../../assets/img/logo/5s_eye_big_logo.png');
+        //     background-repeat: no-repeat;
+        //     background-size: contain;
+        //     transform: translate(-50%, -50%);
+        // }
 
         svg, img {
             width: 100%;

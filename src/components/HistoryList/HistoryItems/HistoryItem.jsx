@@ -3,6 +3,7 @@ import HistoryWithdrawItem from "./HistoryWithdrawItem";
 import HistoryGameResult from "./HistoryGameResult";
 import HistoryItemAddStars from "./HistoryItemAddStars";
 import HistoryItemSwap from "./HistoryItemSwap";
+import HistoryItemTries from "./HistoryItemTries";
 
 const HistoryItem= ({
     historyItem,
@@ -39,6 +40,10 @@ const HistoryItem= ({
     
         case 'S':
             return <HistoryItemSwap swapData={{...historyItem, created: formatDate(historyItem.created)}} />
+            
+    
+        case 'tries':
+            return <HistoryItemTries tries={{...historyItem, amount: historyItem.value, date: formatDate(historyItem.created)}} />
             
     
         default:

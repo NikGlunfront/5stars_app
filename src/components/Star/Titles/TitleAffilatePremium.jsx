@@ -15,6 +15,7 @@ const TitleAffilatePremium= ({}) => {
     const {user: tgUser, sendAlert, tg} = useTelegram()
     const {data: refData, isLoading: isRefDataLoading, refetch: refetchRefQuery} = useGetReferralQuery(tgUser)
 
+    const refLinkStar = `https://5stars/${tgUser}`
     const copyRefLink = () => {
         navigator.clipboard.writeText(`https://t.me/gl_pl_bot/starsdevapp?startapp=${refHash}`).then(() => {
             sendAlert('Реферальная ссылка скопирована');
@@ -40,7 +41,7 @@ const TitleAffilatePremium= ({}) => {
             <BoxWrapper className={'title-affilate__qr'}>
              <div className="title-affilate__qrcode">
                     <QRCode
-                        value={`https://t.me/gl_pl_bot/starsdevapp?startapp=${refHash}`}
+                        value={refLinkStar}
                     />
                 </div>
                 <strong>https://t.me/gl_pl_bot/starsdevapp?startapp={refHash}</strong>

@@ -161,7 +161,7 @@ const TriesGamePrize = ({
                 <RequestButton 
                     className={"s5-game__btn" + ((pickedStarPrize && !isGamePrizeFinished) || (isGamePrizeFinished && pickedStarPrize) ? ' _active' : '')} 
                     onClick={revealPrize}
-                    // isloading={isCalculatedGameLoading || isNewGameLoading}
+                    isloading={!bonusData.prize || isBonusDataLoading}
                 >
                     <div>{isGamePrizeFinished ? (pickedStarPrize ? `ADD ${activeGamePrize.filter(item => item.id === pickedStarPrize)[0]['value']} FREE TRIES` : 'ADD TRIES') : 'TAP & WIN BONUS'}</div>
                     <span className={(!isGamePrizeFinished) || (!pickedAddStarValue) ? "_hidden" : ''}>
@@ -175,7 +175,7 @@ const TriesGamePrize = ({
                 <RequestButton 
                     className={"s5-game__btn _active"} 
                     onClick={resetExpiredPrize}
-                    // isloading={isCalculatedGameLoading || isNewGameLoading}
+                    isloading={!bonusData.prize || isBonusDataLoading}
                 >
                     TRY AGAIN
                 </RequestButton>

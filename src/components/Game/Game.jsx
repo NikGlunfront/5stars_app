@@ -23,6 +23,7 @@ const Game = ({
     } = useStarGame()
     const { user: tgUser, sendAlert } = useTelegram()
     const [btnText, setBtnText] = useState('TAP & WIN')
+    const [isTryAgainBtn, setIsTryAgainBtn] = useState(false)
     const [calculateCurrentGame, { data: calculatedGameData , isLoading: isCalculatedGameLoading, isError: isCalculatedGameError}] = useCalculateGameMutation()
     const [createNewGame, {data: newGameData, isLoading: isNewGameLoading, error: newGameError}] = useCreateNewGameMutation()
     const {
@@ -34,6 +35,7 @@ const Game = ({
         initWinNum,
         betMultiply,
         gameResult,
+        hash_2,
         startNewGame,
         setGameFinishedTrue
     } = useStarGame()
@@ -50,12 +52,12 @@ const Game = ({
     }, [])
 
     useEffect(() => {
-        if (isGameFinished) {
+        if (isGameFinished && isTryAgainBtn) {
             setBtnText('TRY AGAIN')
         } else {
             setBtnText('TAP & WIN')
         }
-    }, [isGameFinished])
+    }, [isGameFinished, isTryAgainBtn])
 
     useEffect(() => {
         if (!isNewGameLoading && calculatedGameData?.error) {
@@ -69,7 +71,7 @@ const Game = ({
                 tg_id: tgUser
             })
             startNewGame()
-            setBtnText('TAP & WIN')
+            setIsTryAgainBtn(false)
         } else {
             if (!isNewGameLoading && !isCalculatedGameLoading) {
                 setMainBalanceLoading(true)
@@ -78,8 +80,8 @@ const Game = ({
                     picked_stars: pickedStars,
                     bet_amount: betAmount
                 })
-                setBtnText('TRY AGAIN')
             }
+            setIsTryAgainBtn(true)
         }
     }
 
@@ -125,7 +127,7 @@ const Game = ({
             <RequestButton 
                 className={"s5-game__btn" + (pickedStars.length ? ' _active' : '')} 
                 onClick={playButtonHandler}
-                isloading={isCalculatedGameLoading || isNewGameLoading}
+                isloading={isCalculatedGameLoading || isNewGameLoading || (!isGameFinished && isTryAgainBtn)}
             >
                 <div>{btnText}</div>
                 <span className={!betAmount || isGameFinished || !pickedStars.length || btnText === 'TRY AGAIN' ? "_hidden" : ''}>

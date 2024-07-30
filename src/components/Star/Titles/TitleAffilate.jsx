@@ -20,6 +20,7 @@ const TitleAffilate= ({}) => {
 
 
     const refLink = `https://t.me/gl_pl_bot/starsdevapp?startapp=${refHash}`
+    const refLinkStar = `https://5stars/${tgUser}`
 
     const handleCopy = async () => {
         const svg = qrCodeRef.current; // Получаем SVG код
@@ -60,8 +61,9 @@ const TitleAffilate= ({}) => {
             <BoxWrapper className={'title-affilate__qr'}>
                 <div className="title-affilate__qrcode">
                     <QRCode
+                        ty
                         ref={qrCodeRef}
-                        value={refLink}
+                        value={refLinkStar}
                     />
                     {/* <img src={qrCodeImg} ref={qrCodeRef} alt="" /> */}
                 </div>

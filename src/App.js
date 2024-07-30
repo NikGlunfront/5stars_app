@@ -85,6 +85,8 @@ function App({
             if (activeGame.result_history) {
                 updateHash1(activeGame.hash1)
                 setPlayedGame(activeGame.result_history)
+            } else {
+                updateHash1('')
             }
         }
     }, [isActiveGameLoading, activeGame, iniData])

@@ -294,6 +294,13 @@
 
     &__win {
         color: #65CFA2;
+
+        &._tries {
+            &::after {
+                background-image: url('../../../assets/img/icons/game/bets/tries.svg') !important;
+                transform: translate(0, -0.1rem) !important;
+            }
+        }
     }
     
     &__lose {
@@ -370,6 +377,21 @@
     background-size: contain;
     background-position: center;
     position: relative;
+}
+.history-game-result-try {
+    @include flex_row;
+    align-items: center;
+    justify-content: center;
+    width: 1.4rem;
+    height: 1.4rem;
+    flex: 0 0 1.4rem;
+    margin-right: 0.3rem;
+    background-image: url('../../../assets/img/icons/game/bets/tries.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    position: relative;
+    top: -0.1rem;
 }
 .history-game-result-usdt {
     @include flex_row;

@@ -219,8 +219,10 @@
             display: none;
             position: absolute;
             transform: translate(-50%, -50%);
-            top: 55%;
-            left: 49%;
+            top: 54%;
+            left: 51%;
+            padding: 0.2rem 0 0 0.1rem;
+            line-height: 2.6rem;
             width: 2.6rem;
             height: 2.6rem;
             border-radius: 50%;
@@ -288,7 +290,9 @@
 
                 }
                 &:not(._active) {
-                    opacity: 0.5;
+                    img {
+                        opacity: 0.4;
+                    }
                 }
             }
         }
