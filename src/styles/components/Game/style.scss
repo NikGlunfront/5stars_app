@@ -237,8 +237,10 @@
         }
 
         svg, img {
-            width: 100%;
-            max-width: 90%;
+            // width: 100%;
+            // max-width: 90%;
+            width: 5.8rem;
+            height: 5.6rem;
             object-fit: contain;
         }
 
