@@ -49,6 +49,9 @@ const Game = ({
         if (!resultNumber) {
             initWinNum()
         }
+        if (isGameFinished) {
+            setIsTryAgainBtn(true)
+        }
     }, [])
 
     useEffect(() => {

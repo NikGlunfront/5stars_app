@@ -108,9 +108,9 @@ const TriesGamePrize = ({
     }
 
     return (
-        <BoxWrapper className={'s5-game add-star-game add-star-game_prize' + (bonusData?.prize?.error ? " _disabled" : "") + (isExpired ? ' _expired' : "")}>
+        <BoxWrapper className={'s5-game add-star-game add-star-game_tries ' + (bonusData?.prize?.error ? " _disabled" : "") + (isExpired ? ' _expired' : "")}>
             <div className="add-star-game__topper">
-                <span>Bonus Time</span>
+                <span>Prize Time</span>
                 <TriesTimers activeTime={bonusData?.prize?.created} currentTime={bonusData?.prize?.curtime} />
             </div>
             <div className="stars-s5-game">
@@ -132,7 +132,7 @@ const TriesGamePrize = ({
                 <div className="s5-game__text">
                     {!isGamePrizeFinished 
                         ?
-                        <p>Find the bonus up to <b>500%</b></p>
+                        <p>Find the prize up to <b>250</b> tries</p>
                         :
                         <p>You won prize 
                             <strong style={{marginLeft: '1rem', marginRight: '1rem'}}>
@@ -141,7 +141,6 @@ const TriesGamePrize = ({
                                     : ""
                                 }
                             </strong>
-                            Free tries
                         </p>
                     }
                 </div>

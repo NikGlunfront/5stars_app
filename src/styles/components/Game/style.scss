@@ -56,7 +56,7 @@
             width: 2.5rem;
             height: 2.5rem;
             flex: 0 0 2.5rem;
-            background-image: url('../../../assets/img/icons/game/bets/bet_star_orange.png');
+            background-image: url('../../../assets/img/icons/game/bets/bet_star_orange.svg');
             background-repeat: no-repeat;
             background-size: contain;
             transform: translate(0, -0.1rem);
@@ -320,6 +320,12 @@
         filter: none;
         
     }
+}
+.add-star-game_prize .stars-s5-game__star_bonus span {
+    background-color: #CB7CED;
+}
+.add-star-game_tries .stars-s5-game__star_bonus span {
+    background-color: #CB7CED;
 }
 .add-star-game.add-star-game_prize .s5-game__text p span {
     margin-left: 0;
