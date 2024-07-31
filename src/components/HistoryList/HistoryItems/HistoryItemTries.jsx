@@ -27,23 +27,24 @@ const HistoryItemTries= ({
                             <div className={"history-game-result-try _active _win" }></div>
                             {(50).toLocaleString()} {tries.bonus_type === 'P' ? " Prize" : ''}
                         </div>
-                        {tries.bonus_type !== 'P' &&
-                        <div className="history-item__affilate-profit ">
-                            <div className="history-game-result-star _active _win"></div>
-                            <span>{100}</span>
-                        </div>
-                        }
                         {tries.bonus_type === 'B' &&
-                        <div className="history-item__affilate-profit " style={{marginLeft:"0.6rem"}}>
+                        <div className="history-item__affilate-profit " style={{marginRight:"0.6rem"}}>
                             <div className="history-game-result-try _active _win"></div>
                             <span>{(amount - 50).toLocaleString()} Bonus</span>
                         </div>
                         }
+                        {/* {tries.bonus_type !== 'P' &&
+                        <div className="history-item__affilate-profit ">
+                            <div className="history-game-result-star _active _win"></div>
+                            <span>{100}</span>
+                        </div>
+                        } */}
                     </div>
                     <div className="history-item__date">{date}</div>
                 </div>
                 <div className="history-item__right">
                     <div className="history-item__win _tries">+{amount.toLocaleString()}</div>
+                    <div className="history-item__tgstar">{(100).toLocaleString()}</div>
                 </div>
             </div>
         </div>

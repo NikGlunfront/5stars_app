@@ -43,7 +43,7 @@ function App({
     const { data: iniData, isLoading: isInitLoading, isError } = useLoginUserQuery(tgUser)
     const { data: balancesData, isLoading: isBalanceDataLoading, isError: isBalanceDataError } = useGetBalancesQuery(tgUser)
     const { data: activeGame, isLoading: isActiveGameLoading, isError: isActiveGameError } = useGetActiveGameQuery(tgUser)
-    const {data: bonusData, isLoading: isBonusDataLoading} = useGetBonusQuery(tgUser)
+    const {data: bonusData, isLoading: isBonusDataLoading, refetch: refetchBonus} = useGetBonusQuery(tgUser)
     const {data: attemptsData, isLoading: isAttemptsDataLoading} = useGetAttemptsQuery(tgUser)
     const [setRefPartner, {data, isLoading}] = useSetRefPartnerMutation()
 
@@ -57,8 +57,15 @@ function App({
     useEffect(() => {
         tg.ready()
         tg.expand()
+        tg.disableVerticalSwipes()
         tg.enableClosingConfirmation()
     }, [])
+
+    useEffect(() => {
+        if (tg.isExpanded) {
+            refetchBonus()
+        }
+    }, [tg.isExpanded])
 
     useEffect(() => {
         if (tg.initDataUnsafe?.start_param) {

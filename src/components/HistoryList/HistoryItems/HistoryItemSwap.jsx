@@ -34,7 +34,7 @@ const HistoryItemSwap = ({swapData}) => {
                     <div className="history-item__date">{created}</div>
                 </div>
                 <div className="history-item__right">
-                    <div className="history-item__lose _green">-{amount.toLocaleString()}</div>
+                    <div className="history-item__win">+{amount.toLocaleString()}</div>
                 </div>
             </div>
         </div>

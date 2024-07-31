@@ -1,10 +1,10 @@
 import React from "react"
 import StarItem from "../../components/Game/Stars/StarItem";
 import { useSelector } from "react-redux";
-import starGrey from '../../assets/img/icons/game/bets/star_item_grey.png'
-import starPicked from '../../assets/img/icons/game/bets/star_item_pick.png'
-import starWin from '../../assets/img/icons/game/bets/star_item_green.png'
-import starExpired from '../../assets/img/icons/game/bets/star_item_red.png'
+import starGrey from '../../assets/img/icons/game/bets/star_item_grey.svg'
+import starPicked from '../../assets/img/icons/game/bets/star_item_pick.svg'
+import starWin from '../../assets/img/icons/game/bets/star_item_green.svg'
+import starExpired from '../../assets/img/icons/game/bets/star_item_red.svg'
 
 const TriesBet = ({
     pickedStar,

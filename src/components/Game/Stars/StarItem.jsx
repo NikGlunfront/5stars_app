@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useStarGame } from '../../../hooks/useStarGame';
 import { useTelegram } from '../../../hooks/useTelegram';
-import starGrey from '../../../assets/img/icons/game/bets/star_item_grey.png'
-import starPicked from '../../../assets/img/icons/game/bets/star_item_pick.png'
+import starGrey from '../../../assets/img/icons/game/bets/star_item_grey.svg'
+import starPicked from '../../../assets/img/icons/game/bets/star_item_pick.svg'
 
 const StarItem = ({
     starId
