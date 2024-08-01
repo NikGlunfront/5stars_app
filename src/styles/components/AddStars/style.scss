@@ -166,6 +166,71 @@
     }
 }
 
+.tries-vars {
+    margin-bottom: 2.3rem;
+    & > p {
+        font-size: 1.6rem;
+        margin-bottom: 2.3rem;
+        text-align: center;
+    }
+}
+
+.tries-item-pick {
+    flex: 100%;
+    width: 100%;
+    white-space: nowrap;
+    position: relative;
+    padding: 0 1.5rem;
+    line-height: 4rem;
+    border-radius: 0.8rem;
+    margin-bottom: 1.8rem;
+    background-color: var(--s5-white-color);
+    font-size: 1.5rem;
+    font-weight: 500;
+    @include flex_row;
+    align-items: center;
+    justify-content: space-between;
+
+    span {
+        display: flex;
+        align-items: center;
+
+        &:first-child {
+            &::before {
+                content: "";
+                display: block;
+                flex: 0 0 1.8rem;
+                height: 1.8rem;
+                width: 1.8rem;
+                background-image: url('../../../assets/img/icons/game/bets/tries.svg');
+                background-repeat: no-repeat;
+                background-size: contain;
+                margin-right: 0.6rem;
+            }
+        }
+        &:last-child {
+            &::before {
+                content: "";
+                display: block;
+                flex: 0 0 1.8rem;
+                height: 1.8rem;
+                width: 1.8rem;
+                background-image: url('../../../assets/img/icons/game/bets/star_item_orange.png');
+                background-repeat: no-repeat;
+                background-size: contain;
+                margin-right: 0.6rem;
+                position: relative;
+                top: -0.1rem;
+            }
+        }
+    }
+
+    &._active {
+        background-color: var(--s5-blue-color);
+        color: var(--s5-white-color);
+    }
+}
+
 .add-star-game_prize._expired  {
     .stars-s5-game {
         pointer-events: none !important;

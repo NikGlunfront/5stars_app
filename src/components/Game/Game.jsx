@@ -3,7 +3,7 @@ import BoxWrapper from '../Wrappers/BoxWrapper';
 import StarsBet from './Stars/StarsBet';
 import { useStarGame } from '../../hooks/useStarGame';
 import StarsResult from './Stars/StarsResult';
-import airdropCoin from '../../assets/img/icons/airdrop_coin.png'
+import airdropCoin from '../../assets/img/icons/airdrop_coin.svg'
 import { useCalculateGameMutation, useCreateNewGameMutation } from '../../store/services/starsGame';
 import { useTelegram } from '../../hooks/useTelegram';
 import RequestButton from '../UI/RequestButton/RequestButton';
@@ -123,7 +123,7 @@ const Game = ({
                     <p>You won 
                         <span className={gameResult > 0 ? '_win' : ''}>{gameResult}</span> 
                         <span><img src={airdropCoin} alt="" />{gameResult + betAmount * pickedStars.length}</span>
-                        {gameResult > 0 && <strong className='fee'>{betAmount * 5 * 0.04} stars - Service fee</strong>}
+                        {(gameResult > 0 || pickedStars.length === 5) && <strong className='fee'>{betAmount * 5 * 0.04} stars - Service fee</strong>}
                     </p>
                 }
             </div>

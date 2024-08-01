@@ -415,6 +415,19 @@
     background-position: center;
     position: relative;
     top: -0.1rem;
+
+    &._prize {
+        background-image: url('../../../assets/img/icons/game/bets/tries_purple.svg');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+    }
+    &._bonus {
+        background-image: url('../../../assets/img/icons/game/bets/tries_green.svg');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+    }
 }
 .history-game-result-usdt {
     @include flex_row;

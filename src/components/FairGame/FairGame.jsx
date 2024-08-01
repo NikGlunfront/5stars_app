@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import BoxWrapper from '../Wrappers/BoxWrapper';
 import { useStarGame } from '../../hooks/useStarGame';
-import greenCoin from '../../assets/img/icons/airdrop_coin.png'
+import greenCoin from '../../assets/img/icons/airdrop_coin.svg'
 import { useApp } from '../../hooks/useApp';
 import greenPartnership from '../../assets/img/icons/green_partnership.svg'
 import premiumPartnership from '../../assets/img/icons/purple_partner.svg'
@@ -107,7 +107,7 @@ const FairGame = ({
 
             <BoxWrapper className={'box-btn box-btn_partnership'} linkPath={'/affilate'}>
                 <div className={"box-btn__img _green" + (isPremium ? ' _purple' : '')}>
-                    <img src={isPremium ? premiumPartnership.toLocaleString() : greenPartnership.toLocaleString()} alt="" />
+                    <img src={isPremium ? premiumPartnership : greenPartnership} alt="" />
                 </div>
                 <div className="box-btn__text">{isPremium ? "Premium Partner" : "Partnership"}</div>
                 <div className={"box-btn__subinfo" + (referralsCount === 0 ? " _empty" : '')}>

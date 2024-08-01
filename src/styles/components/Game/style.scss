@@ -109,10 +109,10 @@
                         width: 1.6rem;
                         height: 1.6rem;
                         margin-right: 0.2rem;
-                        background-image: url('../../../assets/img/icons/game/bet_active.png');
+                        background-image: url('../../../assets/img/icons/game/bet_star_orange.svg');
                         background-repeat: no-repeat;
                         background-size: contain;
-                        transform: translate(0, 0.2rem);
+                        transform: translate(0, 0.1rem);
                     }
                 }
 
@@ -122,7 +122,7 @@
                         margin-right: 0.5rem;
                         width: 1.8rem;
                         height: 1.8rem;
-                        transform: translate(0, 0.2rem);
+                        transform: translate(0, 0.1rem);
                     }
                 }
 
@@ -324,7 +324,7 @@
 .add-star-game_prize .stars-s5-game__star_bonus span {
     background-color: #CB7CED;
 }
-.add-star-game_tries .stars-s5-game__star_bonus span {
+.add-star-game_tries_prize .stars-s5-game__star_bonus span {
     background-color: #CB7CED;
 }
 .add-star-game.add-star-game_prize .s5-game__text p span {
@@ -341,12 +341,27 @@
     margin-left: 0;
 
     &:first-child::before {
-        background-image: url('../../../assets/img/icons/game/bets/tries.svg');
+        background-image: url('../../../assets/img/icons/game/bets/tries_green.svg');
         background-repeat: no-repeat;
         background-size: contain;
         background-position: left center;
         filter: none;
     }
+}
+.add-star-game.add-star-game_tries.add-star-game_tries_prize .s5-game__text p span {
+    margin-left: 0;
+
+    &:first-child::before {
+        background-image: url('../../../assets/img/icons/game/bets/tries_purple.svg');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: left center;
+        filter: none;
+    }
+}
+
+.add-star-game._disabled + div > p {
+    display: none;
 }
 
 .add-star-game._expired .s5-game__text p span,

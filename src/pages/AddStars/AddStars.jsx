@@ -101,20 +101,18 @@ const AddStars= ({
     return (
         <div className="addstars-page">
 
-            <div className="addstars-page__game">
-                <AddStarsGame 
-                    pickedAddStarValue={pickedVal}
-                    changePrizePercent={setPercentInfo}
-                />
-            </div>
+            <AddStarsGame 
+                pickedAddStarValue={pickedVal}
+                changePrizePercent={setPercentInfo}
+            />
 
             {((bonusData?.bonus && isBonusGameFinished) || (bonusData?.bonus?.error)) &&
             <div>
-                <p style={{textAlign: 'center'}}>Choose an amount and get the bonus <b>{percentInfo}</b>, <br />till timer is counting down.</p>
+                <p style={{textAlign: 'center', fontSize: '1.6rem'}}>Choose an amount and get the bonus <b>{percentInfo}</b>, <br />till timer is counting down.</p>
                 <div className="addstars-page__content">
                     {starVars.map(starItem => (
                         <div key={starItem.id} className={"addstars-item" + (starItem.val === pickedVal ? ' _active' : '')} onClick={() => handlePickStarAmount(starItem.val)}>
-                            {starItem.val} stars
+                            {starItem.val.toLocaleString()} stars
                         </div>
                     ))}
                 </div>
