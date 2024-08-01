@@ -81,7 +81,7 @@ const TriesGame = ({
         if (isBonusGameFinished && !isBonusDataLoading) {
             // changePrizePercent(activeBonusGame.filter(item => item.id === pickedStar)[0]['value'] + "%")
             if (pickedAddStarValue) {
-                setBtnText(`ADD ${pickedTryVar + (activeBonusGame.filter(item => item.id === pickedStar)[0]['value'] * pickedTryVar / 100)} TRIES`)
+                setBtnText(`ADD ${(pickedTryVar + (activeBonusGame.filter(item => item.id === pickedStar)[0]['value'] * pickedTryVar / 100)).toLocaleString()} TRIES`)
             } else {
                 setBtnText('ADD TRIES')
             }
@@ -90,7 +90,7 @@ const TriesGame = ({
         }
         if (isExpired) {
             if (pickedAddStarValue) {
-                setBtnText(`ADD ${pickedTryVar} TRIES`)
+                setBtnText(`ADD ${pickedTryVar.toLocaleString()} TRIES`)
             } else {
                 setBtnText('ADD TRIES')
             }

@@ -159,7 +159,7 @@ export const starsApi = createApi({
                 method: "POST",
                 body: {...triesData, method: 'add_tries'}
             }),
-            invalidatesTags: ['Attempts']
+            invalidatesTags: ['Attempts', 'History']
         }),
     })
 })

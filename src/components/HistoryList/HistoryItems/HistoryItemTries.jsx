@@ -46,7 +46,7 @@ const HistoryItemTries= ({
                 </div>
                 <div className="history-item__right">
                     <div className="history-item__win _tries">
-                        +{tries.bonus_type === 'P' ? amount.toLocaleString() : tries.bonus_multiply > 1 ? tries.value * (parseInt(tries.bonus_multiply) + 1) : tries.value}
+                        +{tries.bonus_type === 'P' ? amount.toLocaleString() : tries.bonus_multiply > 1 ? (tries.value * (parseInt(tries.bonus_multiply) + 1)).toLocaleString() : tries.value.toLocaleString()}
                     </div>
                     {tries.bonus_type !== 'P' &&
                         <div className="history-item__tgstar">{(tries.stars_cost).toLocaleString()}</div>
