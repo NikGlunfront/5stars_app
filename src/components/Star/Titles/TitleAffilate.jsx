@@ -65,7 +65,6 @@ const TitleAffilate= ({}) => {
                         ref={qrCodeRef}
                         value={refLinkStar}
                     />
-                    {/* <img src={qrCodeImg} ref={qrCodeRef} alt="" /> */}
                 </div>
                 <strong>https:/5stars.bot/{tgUser}</strong>
                 <div className="title-affilate__qr-row">

@@ -145,6 +145,14 @@ export const starsApi = createApi({
             }),
             invalidatesTags: ['Bonus']
         }),
+        withdraw: builder.mutation({
+            query: (prizeData) => ({
+                url: balancePath,
+                method: "POST",
+                body: {...prizeData, method: 'withdraw'}
+            }),
+            invalidatesTags: ['Balance', 'History']
+        }),
         saveAttemptsPrizeWin: builder.mutation({
             query: (prizeData) => ({
                 url: userPath,
@@ -184,6 +192,7 @@ export const {
     useGetAttemptsQuery,
     useGetHistoryTotalsQuery,
     useCreatePrizeGameMutation,
+    useWithdrawMutation,
     useGetPrizeQuery,
     useSavePrizeWinMutation,
     useAddTriesMutation,

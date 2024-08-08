@@ -62,15 +62,39 @@ const AffilateTodayList = ({
             }
             if (!isPremium) {
                 swapObj = {id: 1, type: 'swap',  amount: refData.todaySwap.swap_sum ? parseInt(refData.todaySwap.swap_sum) : 0, date: 'Today'}
-                withdObj = defWithDraw
-                withdPendingObj = defWithDrawPending
-                setTrans([gamesObj, addSObj, swapObj, withdObj, withdPendingObj])
+                withdObj = {...defWithDraw, amount: refData.todayWd?.sum_lst ? refData.todayWd.sum_lst : 0}
+                withdPendingObj = {...defWithDrawPending, amount: refData.todayWdPending?.sum_lst_pending ? refData.todayWdPending.sum_lst_pending : 0}
+                let minusObject = []
+                if (swapObj.amount > 0) {
+                    minusObject = [...minusObject, swapObj]
+                }
+                if (withdObj.amount > 0) {
+                    minusObject = [...minusObject, withdObj]
+                }
+                if (withdPendingObj.amount > 0) {
+                    minusObject = [...minusObject, withdPendingObj]
+                }
+                setTrans([gamesObj, addSObj, ...minusObject])
             } else {
-                withdObj = defWithDraw
-                withdPendingObj = defWithDrawPending
-                withUsdtObj = defWithDrawUsdt
-                withUsdtPendingObj = defWithDrawUsdtPending
-                setTrans([gamesObj, addSObj, withdObj, withdPendingObj, withUsdtObj, withUsdtPendingObj])
+                withdObj = {...defWithDraw, amount: refData.todayWd?.sum_lst ? refData.todayWd.sum_lst : 0}
+                withdPendingObj = {...defWithDrawPending, amount: refData.todayWdPending?.sum_lst_pending ? refData.todayWdPending.sum_lst_pending : 0}
+                withUsdtObj = {...defWithDrawUsdt, amount: refData.todayWd?.sum_usdt ? refData.todayWd.sum_usdt : 0}
+                withUsdtPendingObj = {...defWithDrawUsdtPending, amount: refData.todayWdPending?.sum_usdt_pending ? refData.todayWdPending.sum_usdt_pending : 0}
+                console.log(withUsdtObj, withUsdtPendingObj)
+                let minusObject = []
+                if (withdObj.amount > 0) {
+                    minusObject = [...minusObject, withdObj]
+                }
+                if (withdPendingObj.amount > 0) {
+                    minusObject = [...minusObject, withdPendingObj]
+                }
+                if (withUsdtObj.amount > 0) {
+                    minusObject = [...minusObject, withUsdtObj]
+                }
+                if (withUsdtPendingObj.amount > 0) {
+                    minusObject = [...minusObject, withUsdtPendingObj]
+                }
+                setTrans([gamesObj, addSObj, ...minusObject])
             }
         }
     }, [refData])

@@ -203,7 +203,7 @@ const AddStarsGame = ({
             <RequestButton 
                 className={"s5-game__btn" + ((pickedStarBet && !isBonusGameFinished) || (isBonusGameFinished && pickedStar && pickedAddStarValue) || (isExpired && pickedAddStarValue) ? ' _active' : '')} 
                 onClick={revealBonus}
-                isloading={!bonusData?.bonus || isBonusDataLoading}
+                isloading={!bonusData?.bonus || isBonusDataLoading || isAddStarsLoading}
                 disabled={isExpired && !pickedAddStarValue}
             >
                 <div>{btnText}</div>

@@ -24,9 +24,6 @@ const PremiumPartnerModal = ({
 
     const [changePremium, {data, isLoading}] = useChangePpMutation()
     
-    const navigateToWithDraw = () => {
-        console.log('Withdraw')
-    }
     const changeBalance = () => {
         if (activePartnerBalance === 'usdt') {
             changeActivePartnerBalance('coin')
@@ -71,7 +68,6 @@ const PremiumPartnerModal = ({
                 <li onClick={handleChangePremium}>
                     <div>Change partnership</div>
                 </li>
-                <li onClick={changeBalance}><div>Change Balance</div></li>
                 {/* <li onClick={navigateToWithDraw}><div>
                     <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path fillRule="evenodd" clipRule="evenodd" d="M13.7886 4.59622C16.3272 7.13486 16.3272 11.25 13.7886 13.7886C11.2499 16.3272 7.13482 16.3272 4.59619 13.7886C2.05756 11.25 2.05756 7.13486 4.59619 4.59622C7.13482 2.05759 11.2499 2.05759 13.7886 4.59622Z" stroke="black" strokeLinecap="round" strokeLinejoin="round"/>

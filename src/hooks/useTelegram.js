@@ -4,7 +4,7 @@ export function useTelegram() {
     const devTelegramId = 658318611
     // const devTelegramId = 13430154;
     // const devTelegramId = 132033;
-
+    
     const onClose = () => {
         tg.close()
     }
